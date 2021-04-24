@@ -1,0 +1,449 @@
+<template>
+    <div class="main-content" id="panel">
+        <!-- Topnav -->
+        <Header></Header>
+      <div class="product">
+    <div class="pro_header">
+      <h1>Danh sách sản phẩm</h1>
+    </div>
+      <div class="header_pro">
+        <input class="form-control" type="text" v-model="search" placeholder=" Nhập tên sản phẩm ....." />
+        <p></p>
+        <a href="#open-modal"
+              >Thêm sản phẩm</a
+            >
+      </div>
+      <div class="main__product" v-for="product in showProducts" :key="product.id">
+        <div class="card_pro0">
+          <img :src="product.img" id="img" alt="image" />
+        </div>
+        <div class="card_pro2">
+          <span class="font-bold text-title"><h2>{{ product.name }}</h2></span>
+          <p> <b>Mô tả :</b> {{ product.desciption }}</p>
+          <span class="price_discount">
+            <p><b>Giá :</b> {{ product.price }} đ</p>
+            <p class="discount">- {{ product.discount }}%</p>
+          </span>
+        </div>
+        <div class="card_pro3">
+          <div class="action">
+            <div class="edit-dele">
+              <a href="#open-modal">
+              <!-- <button @click.prevent="editProduct(product)">
+                <i class="fas fa-edit"> </i>
+              </button> -->
+            </a>
+             <!-- <a @click.prevent="deleteProduct(product.id)">
+              <i class="fas fa-trash-alt"></i>
+            </a> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    <div id="navigation">
+      <ul class="pagination">
+        <li class="page-item">
+          <button
+            type="button"
+            class="page-link"
+            v-if="page != 1"
+            @click="page--"
+          >
+            Previous
+          </button>
+        </li>
+        <!-- <li class="page-item">
+          <button
+            type="button"
+            class="page-link"
+            v-for="pageNumber in pages.slice(page - 1, page + 5)"
+            @click="page = pageNumber"
+          >
+            {{ pageNumber }}
+          </button>
+        </li> -->
+        <li class="page-item">
+          <button
+            type="button"
+            @click="page++"
+            v-if="page < pages.length"
+            class="page-link"
+          >
+            Next
+          </button>
+        </li>
+      </ul>
+    </div>
+    <div id="open-modal" class="modal-window-product">
+      <div class="form">
+        <a href="#" title="Close" class="modal-close">Close</a>
+        <center>
+          <h2>{{ contentForm }}</h2>
+        </center>
+        <!-- @submit.prevent="addProduct" -->
+        <form  >
+          <div id="formAdd">
+            <div class="item_input">
+              <label for="input" class="Input-label">Tên sản phẩm </label>
+              <input
+                type="text"
+                id="input"
+                class="Input-text"
+                placeholder="Tên sản phẩm"
+                v-model="newproduct.name"
+              />
+            </div>
+            <div class="item_input">
+              <label >Hình ảnh</label><br />
+              <input type="text" placeholder="Link ảnh" name="image" id="img" v-model="newproduct.img" />
+            </div>
+            <div class="item_input">
+              <label for="type">Loại sản phẩm</label><br />
+              <input
+                type="text"
+                name="type"
+                v-model="newproduct.type"
+                id="type"
+                hplaceholder=" Nhập loại sản phẩm"
+              />
+            </div>
+            <div class="item_input">
+              <label for="quantity"> Số lượng</label><br />
+              <input
+                type="number"
+                name="quantity"
+                v-model="newproduct.quantity"
+                id="quantity"
+                min="1"
+                max="10000"
+                hplaceholder=" Số lượng sản phẩm"
+              />
+            </div>
+            <div class="item_input">
+              <label for="dis">Giá</label><br />
+              <input
+                type="number"
+                name="price"
+                v-model="newproduct.price"
+                id="price"
+                min="100000"
+                max="1000000"
+                hplaceholder=" Giá của sản phẩm"
+              />
+            </div>
+            <div class="item_input">
+              <label for="dis">Giảm giá</label><br />
+              <input
+                type="number"
+                name="discount"
+                v-model="newproduct.discount"
+                id="discount"
+                min="1"
+                max="100"
+                hplaceholder=" Giám giá "
+              />
+            </div>
+            <div class="item_input">
+              <label for="des"> Mô tả</label><br />
+              <textarea
+                name="description"
+                id=""
+                cols="40"
+                rows="8"
+                v-model="newproduct.desciption"
+                hplaceholder=" Mô tả cho sản phẩm"
+              ></textarea>
+            </div>
+          </div>
+          <div class="add_resest">
+            <button type="submit">{{ buttonAdd }}</button>
+            <!-- @click.prevent="clearData" -->
+            <button type="submit"  >Xóa dữ liệu </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+        <!-- Page content -->
+        <div class="container-fluid mt--6">
+            <Footer></Footer>
+        </div>
+    </div>
+</template>
+<script>
+import Footer from './Footer.vue'
+import Header from './Header.vue'
+export default {
+    components:{
+         Footer,
+         Header
+    },
+};
+</script>
+ 
+<style lang="scss">
+.product{
+    width: 100%;
+}
+.main__product {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr;
+    gap: 30px;
+    margin: 10px 0;
+    border-left: 5px solid rebeccapurple;
+    border-right: 5px solid rgb(77, 218, 119);
+    background:white;
+    /* background: cadetblue; */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 20px;
+    .card_pro0 {
+      padding-top: 10px;
+
+      img {
+        width: 160px;
+        height: 150px;
+        margin-left: 3%;
+      }
+    }
+     .card_pro2{
+       .price_discount{
+         display: flex;
+         .discount{
+           padding: 0 10px;
+           color: red;
+           font-weight: bold;
+         }
+       }
+     }
+    .card_pro3 {
+      height: auto;
+
+      .action {
+        float: right;
+
+        .edit-dele {
+          margin-bottom: 1px;
+          a {
+            background-color: crimson;
+            /* Màu của Quản trị mạng ^^ */
+            border: none;
+            color: white;
+            padding: 13px 18px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 100px 2px 0px 0px;
+            -webkit-transition-duration: 0.4s;
+            /* Safari */
+            transition-duration: 0.4s;
+            cursor: pointer;
+            border-radius: 15px;
+          }
+
+          a:hover {
+            background-color: seagreen;
+          }
+        }
+      }
+    }
+  }
+
+  .header_pro {
+    display: grid;
+    grid-template-columns: 2fr 1.5fr 1fr;
+    margin-bottom: 3%;
+
+    a {
+      background-color: crimson;
+      /* Màu của Quản trị mạng ^^ */
+      border: none;
+      color: white;
+      padding: 13px 18px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      -webkit-transition-duration: 0.4s;
+      /* Safari */
+      transition-duration: 0.4s;
+      cursor: pointer;
+      outline: none;
+      border-radius: 25px;
+    }
+
+    button:hover {
+      background-color: seagreen;
+    }
+
+    input {
+      padding-left: 1%;
+      outline: none;
+      border-radius: 20px;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+  }
+.pro_header {
+  display: flex;
+}
+.pro_header button {
+  float: right;
+}
+.form h2 {
+  margin-bottom: 4%;
+}
+
+div#formAdd {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-row-gap: 30px;
+}
+
+.add_resest{
+  display: flex;
+  justify-content: center ;
+  >button{
+    margin-left: 1%;
+  }
+}
+form button {
+  margin-top: 5%;
+  background-color: crimson; /* Màu của Quản trị mạng ^^ */
+  border: none;
+  color: white;
+  padding: 13px 18px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.item_input label {
+  top: 2%;
+  bottom: 2%;
+}
+.item_input input {
+  border-radius: 0.4rem;
+  height: 75%;
+  width: 85%;
+  padding: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 10px 10px 0 rgba(0, 0, 0, 0.19);
+}
+.item_input textarea {
+  border-radius: 0.4rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 10px 10px 0 rgba(0, 0, 0, 0.19);
+}
+.modal-window-product {
+  position: fixed;
+  background-color: rgba(255, 255, 255, 0.25);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s;
+  &:target {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+  }
+  & > div {
+    width: 60%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 80%;
+    overflow: auto;
+    border-radius: 0.4rem;
+    transform: translate(-50%, -50%);
+    padding: 2em;
+    background-image: linear-gradient(to right, #f2709c, #ff9472);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+      0 20px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  header {
+    font-weight: bold;
+  }
+  h1 {
+    font-size: 150%;
+    margin: 0 0 15px;
+  }
+}
+.modal-close {
+  color: #aaa;
+  line-height: 50px;
+  font-size: 80%;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 0;
+  width: 70px;
+  text-decoration: none;
+  &:hover {
+    color: black;
+  }
+}
+
+///// PAGINATION
+ul li {
+  list-style: none;
+}
+.page-item {
+  padding: 10px;
+}
+.pagination {
+  display: flex;
+  padding: 20px;
+}
+
+#navigation {
+  margin-left: 30%;
+  display: flex;
+}
+.pagination {
+  margin-top: 5%;
+  width: 50%;
+  transform: translate(-50%, -50%);
+  margin-left: 50px;
+  padding: 10px;
+  li {
+    display: flex;
+    list-style: none;
+  }
+  button {
+    display: block;
+    width: 100px;
+    height: 40px;
+    line-height: 40px;
+    background-color: #fff;
+    text-align: center;
+    text-decoration: none;
+    color: #252525;
+    border-radius: 4px;
+    font-size: 17px;
+    margin: 5px;
+    box-shadow: inset 0 5px 10px rgba(0, 0, 0, 0.1),
+      0 2px 5px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+    &:hover,
+    &.active {
+      color: white;
+      background-color: yellow;
+    }
+  }
+  &:first-child button {
+    border-radius: 30px;
+  }
+
+  &:last-child button {
+    border-radius: 30px;
+  }
+}
+</style>
