@@ -1,0 +1,73 @@
+
+<script>
+import { Bar } from "vue-chartjs";
+
+export default {
+  extends: Bar,
+  props:{
+     listDay: {
+         type: Array
+     }
+  },
+    data() {
+    return {
+      gradient: null,
+      gradient2: null,
+      found:[]
+    };
+  },
+    methods: {
+
+    },
+  mounted() {
+    let yeu = document.createElement('button');
+    yeu.innerText = " Add";
+    yeu.innerHTML;
+    yeu.style.color="red";
+    console.log( yeu.innerText);
+    this.gradient = this.$refs.canvas
+      .getContext("2d")
+      .createLinearGradient(0, 0, 0, 450);
+
+    this.gradient.addColorStop(0, "rgba(255, 99, 71, 0.8)");
+    this.gradient.addColorStop(0.5, "rgba(255, 99, 71, 0.6)");
+    this.gradient.addColorStop(1, "rgba(255, 99, 71, 0.4)");
+
+    fetch('https://damp-woodland-88343.herokuapp.com/api/weekChart')
+      .then((response) => response.json())
+      .then((data) => {
+        const order_week = data;
+        var storedNames = JSON.parse(localStorage.getItem("date"));
+
+            let quantity=[];
+            for(var i=0; i< order_week.length; i++){
+                if(storedNames.indexOf(order_week[i].date) != -1){
+                    quantity.push(order_week[i].date);
+                }
+            }
+        this.renderChart(
+          {
+            labels:storedNames,
+            datasets: [
+              {
+                label: "Đơn hàng",
+                backgroundColor: this.gradient,
+                data: quantity,
+              },
+            ],
+          },
+          { responsive: true, maintainAspectRatio: false },
+
+        );
+      });
+  },
+  method(){
+
+  }
+};
+</script>
+<style lang="scss">
+   #bar-chart{
+       width: 400px;
+   }
+</style>
