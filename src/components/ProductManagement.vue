@@ -29,13 +29,13 @@
           <div class="action">
             <div class="edit-dele">
               <a href="#open-modal">
-              <!-- <button @click.prevent="editProduct(product)">
+              <button @click.prevent="editProduct(product)">
                 <i class="fas fa-edit"> </i>
-              </button> -->
+              </button>
             </a>
-             <!-- <a @click.prevent="deleteProduct(product.id)">
+             <a @click.prevent="deleteProduct(product.id)">
               <i class="fas fa-trash-alt"></i>
-            </a> -->
+            </a>
             </div>
           </div>
         </div>
@@ -80,8 +80,7 @@
         <center>
           <h2>{{ contentForm }}</h2>
         </center>
-        <!-- @submit.prevent="addProduct" -->
-        <form  >
+        <form  @submit.prevent="addProduct">
           <div id="formAdd">
             <div class="item_input">
               <label for="input" class="Input-label">Tên sản phẩm </label>
@@ -157,8 +156,7 @@
           </div>
           <div class="add_resest">
             <button type="submit">{{ buttonAdd }}</button>
-            <!-- @click.prevent="clearData" -->
-            <button type="submit"  >Xóa dữ liệu </button>
+            <button type="submit" @click.prevent="clearData"  >Xóa dữ liệu </button>
           </div>
         </form>
       </div>
@@ -180,7 +178,124 @@ export default {
     },
 };
 </script>
- 
+ <script>
+export default {
+  data() {
+    return {
+      products: [],
+      newproduct: {
+           img : null,
+          imageUrl: null
+      },
+      pageSize: 5,
+      currentPage: 1,
+      page: 1,
+      perPage: 4,
+      pages: [],
+      search: null,
+      edit: false,
+      buttonAdd: "Thêm",
+      contentForm: "Thêm sản phẩm mới",
+    };
+  },
+  created() {
+    this.getData();
+  },
+  methods: {
+    onChange(e) {
+      const file = e.target.files[0]
+      this.img= file
+      this.newproduct.img = URL.createObjectURL(file)
+
+      console.log(file);
+      alert(this.newproduct.img);
+    },
+    getData() {
+          fetch('https://damp-woodland-88343.herokuapp.com/api/products')
+        .then((response) => response.json())
+        .then((data) => (this.products = data));
+    },
+    deleteProduct(id) {
+      axios.delete('https://damp-woodland-88343.herokuapp.com/api/products/'+id);
+      this.getData();
+    },
+
+    addProduct() {
+      if (this.edit == false) {
+        axios.post('https://damp-woodland-88343.herokuapp.com/api/products', this.newproduct);
+        alert(" Insert product success");
+        this.getData();
+      } else {
+        axios.put('https://damp-woodland-88343.herokuapp.com/api/products/'+this.newproduct.id,this.newproduct);
+        alert(" Update product success");
+        this.getData();
+        this.edit ==false;
+      }
+    },
+    editProduct(product) {
+      this.edit = true;
+      this.buttonAdd = "Cập nhật";
+      this.contentForm = "Cập nhật sản phẩm";
+      this.newproduct.id = product.id;
+      this.newproduct.name = product.name;
+      this.newproduct.img = product.img;
+      this.newproduct.desciption = product.desciption;
+      this.newproduct.type = product.type;
+      this.newproduct.price = product.price;
+      this.newproduct.quantity = product.quantity;
+      this.newproduct.heart = product.heart;
+      this.newproduct.discount = product.discount;
+    },
+    setPages() {
+      let numberOfPages = Math.ceil(this.products.length / this.perPage);
+      for (let index = 1; index <= numberOfPages; index++) {
+        this.pages.push(index);
+      }
+    },
+    clearData() {
+      this.newproduct.name = "";
+      this.newproduct.img = "";
+      this.newproduct.desciption = "";
+      this.newproduct.type = "";
+      this.newproduct.quantity = "";
+      this.newproduct.price = "";
+      this.newproduct.discount = "";
+      this.newproduct.heart = 0;
+    },
+    paginate(products) {
+      let page = this.page;
+      let perPage = this.perPage;
+      let from = page * perPage - perPage;
+      let to = page * perPage;
+      return products.slice(from, to);
+    },
+  },
+  computed: {
+    showProducts() {
+      if (this.search) {
+        return this.products.filter((item) => {
+          return this.search
+            .toLowerCase()
+            .split(" ")
+            .every((v) => item.name.toLowerCase().includes(v));
+        });
+      } else {
+        return this.paginate(this.products);
+      }
+    },
+  },
+  watch: {
+    products() {
+      this.setPages();
+    },
+  },
+  filters: {
+    trimWords(value) {
+      return value.split(" ").splice(0, 20).join(" ") + "...";
+    },
+  },
+};
+</script>
 <style lang="scss">
 .product{
     width: 100%;
