@@ -22,11 +22,8 @@
         var $dropdownMenu = $this.find('.dropdown-menu');
 
         $dropdownMenu.addClass('close');
-
-    	setTimeout(function() {
-    		$dropdownMenu.removeClass('close');
-    	}, 200);
-	}
+	setTimeout(function() {		$dropdownMenu.removeClass('close'); 	}, 200);
+}
 
 
 	// Events
@@ -55,6 +52,7 @@
 
 	// Variables
 
+	// eslint-disable-next-line no-unused-vars
 	var $nav = $('.navbar-nav'),
 		$collapse = $('.navbar .navbar-custom-collapse');
 

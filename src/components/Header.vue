@@ -34,10 +34,10 @@
                             </a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="ni ni-bell-55"></i>
+                            <a class="nav-link" href="#!" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <i class="fas fa-bell"></i>
                             </a>
-                            <div class="dropdown-menu dropdown-menu-xl  dropdown-menu-right  py-0 overflow-hidden">
+                            <div class="dropdown-menu dropdown-menu-xl  dropdown-menu-right  py-0 overflow-hidden" >
                                 <!-- Dropdown header -->
                                 <div class="px-3 py-3">
                                     <h6 class="text-sm text-muted m-0">You have <strong class="text-primary">13</strong> notifications.</h6>
@@ -64,7 +64,7 @@
                                         </div>
                                     </a>
                                     <a href="#!" class="list-group-item list-group-item-action">
-                                        <div class="row align-items-center">
+                                        <div class="row align-items-center" id="">
                                             <div class="col-auto">
                                                 <!-- Avatar -->
                                                 <img alt="Image placeholder" src="../assets/img/theme/team-2.jpg" class="avatar rounded-circle">
@@ -146,7 +146,7 @@
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="ni ni-ungroup"></i>
+                                <i class="fas fa-comment"></i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-dark bg-default  dropdown-menu-right ">
                                 <div class="row shortcuts px-4">

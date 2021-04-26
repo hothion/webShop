@@ -37,7 +37,7 @@
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="ni ni-bell-55"></i>
+                                <i class="fas fa-bell"></i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-xl  dropdown-menu-right  py-0 overflow-hidden">
                                 <!-- Dropdown header -->
@@ -148,7 +148,7 @@
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="ni ni-ungroup"></i>
+                          <i class="fas fa-comment"></i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-dark bg-default  dropdown-menu-right ">
                                 <div class="row shortcuts px-4">
@@ -198,14 +198,6 @@
                                     <i class="ni ni-settings-gear-65"></i>
                                     <span>Settings</span>
                                 </a>
-                                <a href="#!" class="dropdown-item">
-                                    <i class="ni ni-calendar-grid-58"></i>
-                                    <span>Activity</span>
-                                </a>
-                                <a href="#!" class="dropdown-item">
-                                    <i class="ni ni-support-16"></i>
-                                    <span>Support</span>
-                                </a>
                                 <div class="dropdown-divider"></div>
                                 <a href="#!" class="dropdown-item">
                                     <i class="ni ni-user-run"></i>
@@ -224,7 +216,7 @@
                             <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                                     <li class="breadcrumb-item"><router-link to="/dashboard"><i class="fas fa-home"></i></router-link></li>
-                                    <li class="breadcrumb-item"><router-link to="/order">Quản lý đơn hàng</router-link></li>
+                                    <li class="breadcrumb-item"><router-link to="/product">Quản lý đơn hàng</router-link></li>
                                 </ol>
                             </nav>
                         </div>
@@ -378,6 +370,7 @@
         </form>
       </div>
     </div>
+    <router-view></router-view>
   </div>
         <!-- Page content -->
         <div class="container-fluid mt--6">

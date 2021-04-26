@@ -5,7 +5,7 @@
             <!-- Brand -->
             <div class="sidenav-header  align-items-center">
                 <a class="navbar-brand" href="javascript:void(0)">
-                    <img src="logo.png" class="navbar-brand-img" alt="...">
+                    <img src="https://www.enic.it/wp-content/uploads/2019/11/gilo-Logo.png" class="navbar-brand-img" alt="...">
                 </a>
             </div>
             <div class="navbar-inner">

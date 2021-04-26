@@ -152,3 +152,14 @@
     
 </div>
 </template>
+<style lang ="css">
+.bg-secondary{
+   background-color: #f7fafc !important
+}
+.container.mt--8{
+    background-color: #8965e0!important;
+}
+.row.justify-content-center{
+    margin: 0;
+}
+</style>

@@ -66,6 +66,7 @@
                 </div>
             </div>
            <Footer></Footer>
+           <router-view></router-view>
     </div>
 </template>
 <script>
