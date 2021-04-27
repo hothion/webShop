@@ -108,13 +108,13 @@
                             <div class="text-center text-muted mb-4">
                                 <small>Or sign in with credentials</small>
                             </div>
-                            <form role="form">
+                            <form role="form" @submit.prevent="onSubmit" method="post">
                                 <div class="form-group mb-3">
                                     <div class="input-group input-group-merge input-group-alternative">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                                         </div>
-                                        <input class="form-control" placeholder="Email" type="email">
+                                        <input class="form-control" v-model="account" required placeholder="Nhập tên" type="email">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -122,7 +122,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                                         </div>
-                                        <input class="form-control" placeholder="Password" type="password">
+                                        <input class="form-control" v-model="password" required placeholder="Mật khẩu" type="password">
                                     </div>
                                 </div>
                                 <div class="custom-control custom-control-alternative custom-checkbox">
@@ -132,7 +132,7 @@
                   </label>
                                 </div>
                                 <div class="text-center">
-                                    <button type="button" class="btn btn-primary my-4">Sign in</button>
+                                    <button type="submit" class="btn btn-primary my-4">Sign in</button>
                                 </div>
                             </form>
                         </div>
@@ -152,6 +152,46 @@
     
 </div>
 </template>
+<script>
+import axios from "axios";
+
+export default {
+  name: 'LoginAdmin',
+  data () {
+    return {
+      account: "",
+      password: ""
+    
+    }
+  },
+  
+  methods: {
+        onSubmit(){
+        const data = {
+            account: this.account,
+            password: this.password,
+        }
+        // `${process.env.MIX_GIFS_API_HOST}/api/product_chart`
+        axios.post('http://127.0.0.1:8000/api/loginAdmin/', data).then(response => {
+            if(response.status === 200)
+            {
+                console.log("login sucessfully");
+                    localStorage.setItem("data",response.data.idToken);
+                    const remember_token = JSON.parse(localStorage.getItem("data"));
+                    if(remember_token==1){
+                            alert("Đăng nhập thành công vào admin.");
+                            this.$router.push({ path : '/navigation' });
+                                window.location.reload();
+                            }else{
+                            alert("Đăng nhập thất bại.");
+                        }
+            }
+        });       
+            }
+                }
+}
+     
+</script>
 <style lang ="css">
 .bg-secondary{
    background-color: #f7fafc !important

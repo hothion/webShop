@@ -13,7 +13,7 @@
           <div class="col-lg-7 col-md-10">
             <h1 class="display-2 text-white">Hello Jesse</h1>
             <p class="text-white mt-0 mb-5">This is your profile page. You can see the progress you've made with your work and manage your projects or assigned tasks</p>
-            <a href="#!" class="btn btn-neutral">Edit profile</a>
+            <!-- <a href="#!" class="btn btn-neutral">Edit profile</a> -->
           </div>
         </div>
       </div>
@@ -80,7 +80,8 @@
             <div class="card-header">
               <div class="row align-items-center">
                 <div class="col-8">
-                  <h3 class="mb-0">Edit profile </h3>
+                  <!-- <h3 class="mb-0">Edit profile </h3> -->
+                  <button @click.prevent="updateInfo" type="submit" class="btn btn-neutral">Update</button>
                 </div>
                 <div class="col-4 text-right">
                   <a href="#!" class="btn btn-sm btn-primary">Settings</a>
@@ -88,34 +89,34 @@
               </div>
             </div>
             <div class="card-body">
-              <form>
+              <form @submit.prevent="updateInfo">
                 <h6 class="heading-small text-muted mb-4">User information</h6>
                 <div class="pl-lg-4">
                   <div class="row">
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <label class="form-control-label" for="input-username">Username</label>
-                        <input type="text" id="input-username" class="form-control" placeholder="Username" value="lucky.jesse">
+                        <label class="form-control-label" for="input-username">Tên tài khoản</label>
+                        <input type="text" id="input-username" class="form-control" placeholder="Tên tài khoản" v-model="itemDatas.account">
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <label class="form-control-label" for="input-email">Email address</label>
-                        <input type="email" id="input-email" class="form-control" placeholder="jesse@example.com">
+                        <label class="form-control-label" for="input-email"> Địa chỉ Email</label>
+                        <input type="email" id="input-email" class="form-control" v-model="itemDatas.email" placeholder="Tên email">
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <label class="form-control-label" for="input-first-name">First name</label>
-                        <input type="text" id="input-first-name" class="form-control" placeholder="First name" value="Lucky">
+                        <label class="form-control-label" for="input-first-name">Họ</label>
+                        <input type="text" id="input-first-name" class="form-control" placeholder="Họ" v-model="itemDatas.firstName">
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <label class="form-control-label" for="input-last-name">Last name</label>
-                        <input type="text" id="input-last-name" class="form-control" placeholder="Last name" value="Jesse">
+                        <label class="form-control-label" for="input-last-name">Tên</label>
+                        <input type="text" id="input-last-name" class="form-control" placeholder="Tên" v-model="itemDatas.lastName">
                       </div>
                     </div>
                   </div>
@@ -127,41 +128,27 @@
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
-                        <label class="form-control-label" for="input-address">Address</label>
-                        <input id="input-address" class="form-control" placeholder="Home Address" value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09" type="text">
+                        <label class="form-control-label" for="input-address">Địa chỉ thường trú</label>
+                        <input id="input-address" class="form-control" placeholder="Địa chỉ" v-model="itemDatas.address" type="text">
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-lg-4">
                       <div class="form-group">
-                        <label class="form-control-label" for="input-city">City</label>
-                        <input type="text" id="input-city" class="form-control" placeholder="City" value="New York">
+                        <label class="form-control-label" for="input-city">Số điện thoại</label>
+                        <input type="text" id="input-phone" class="form-control" placeholder="số đt" v-model="itemDatas.phone">
                       </div>
                     </div>
                     <div class="col-lg-4">
                       <div class="form-group">
-                        <label class="form-control-label" for="input-country">Country</label>
-                        <input type="text" id="input-country" class="form-control" placeholder="Country" value="United States">
-                      </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-country">Postal code</label>
-                        <input type="number" id="input-postal-code" class="form-control" placeholder="Postal code">
+                        <label class="form-control-label" for="input-country">Giới tính</label>
+                        <input type="text" id="input-gender" class="form-control" placeholder="Giới tính" v-model="itemDatas.gender">
                       </div>
                     </div>
                   </div>
                 </div>
                 <hr class="my-4" />
-                <!-- Description -->
-                <h6 class="heading-small text-muted mb-4">About me</h6>
-                <div class="pl-lg-4">
-                  <div class="form-group">
-                    <label class="form-control-label">About Me</label>
-                    <textarea rows="4" class="form-control" placeholder="A few words about you ...">A beautiful Dashboard for Bootstrap 4. It is Free and Open Source.</textarea>
-                  </div>
-                </div>
               </form>
             </div>
           </div>
@@ -173,12 +160,105 @@
   </div>
 </template>
 <script>
-import Footer from './Footer.vue'
-import Header from './Header.vue'
+import Footer from './Footer.vue';
+import Header from './Header.vue';
+import axios from "axios";
+import firebase from "firebase/app";
+import "firebase/storage";
+import datetime from 'vuejs-datetimepicker';
 export default {
-    components:{
-         Footer,
-         Header  
+    components:{Footer,Header  
+    },
+    name: 'ProfileAdmin',
+ data () {
+      return {
+        itemDatas:{
+            account:'',
+            firstName:'',
+            lastName:'',
+            email:'',
+            phone:'',
+            address:'',
+            password:'',
+            birthday:'',
+            gender: '',
+            remember_token:'',
+            images:'',
+            caption : '',
+            img1: ''
+        },
+        imageData: null
+        }
+    },
+    created(){
+        this.getData()
+        const firebaseConfig = {
+            apiKey: "AIzaSyB3WwnhfTjCOshHFIxmJgqJOImS6_EhmJc",
+            authDomain: "gilo-25373.firebaseapp.com",
+            projectId: "gilo-25373",
+            storageBucket: "gilo-25373.appspot.com",
+            messagingSenderId: "1057644567623",
+            appId: "1:1057644567623:web:d86b37fee334a1a0206562",
+            measurementId: "G-D1CL3L7CSX"
+        };
+        firebase.initializeApp(firebaseConfig);
+    },
+  
+  methods:{
+        updateInfo(){
+        console.log(this.itemDatas)
+     
+
+        const itemid = JSON.parse(localStorage.getItem("data"));
+        axios.patch('http://127.0.0.1:8000/api/updateProfile/'+ itemid, this.itemDatas).then(response =>(
+                console.log("success"),
+                this.itemDatas=response.data,
+                    // console.log(this.formData),
+                    this.getData()
+            )).catch(error => console.log(error))
+    },
+
+    updateProfile(e){
+        let imagesAdmin = e.target.files[0];
+        let reader = new FileReader();
+        reader.readAsDataURL(imagesAdmin);
+        reader.onload = e => {
+        this.itemDatas.images = e.target.result;
+        console.log(e.target.result);
+        }
+        this.imageData = e.target.files[0];
+        this.onUpload()
+    },
+
+    getData(){
+    const itemDatas = JSON.parse(localStorage.getItem("data"));
+    axios.get('http://127.0.0.1:8000/api/profileAdmin/'+  itemDatas)
+    .then(response =>(
+        console.log(response),
+         this.itemDatas = response.data
+         
+    ))
+    },
+
+    onUpload(){
+        this.img1=null;
+        const storageRef=firebase.storage().ref(`${this.imageData.name}`).put(this.imageData);
+        this.itemDatas.images=this.imageData.name;
+        // console.log(this.imageData.name);
+        console.log(storageRef);
+        storageRef.on(`state_changed`,snapshot=>{
+        this.uploadValue = (snapshot.bytesTransferred/snapshot.totalBytes)*100;
+            }, error=>{console.log(error.message)},
+        ()=>{this.uploadValue=100;
+            storageRef.snapshot.ref.getDownloadURL().then((url)=>{
+                this.img1 =url;
+                this.itemDatas.images=url;
+                console.log(this.img1)
+                });
+            }      
+            );
+        },
     }
+
 }
 </script>
