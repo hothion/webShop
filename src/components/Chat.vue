@@ -28,107 +28,17 @@
 		</div>
 		<div id="search">
 			<label for=""><i class="fa fa-search" aria-hidden="true"></i></label>
-			<input type="text" placeholder="Search contacts..." />
+			<input type="text" v-model="searchText" @keyup="search()" placeholder="Tìm kiếm trên chat...">
 		</div>
 		<div id="contacts">
 			<ul>
-				<li class="contact">
-					<div class="wrap">
+				<li class="contact" v-for="user in users" :key="user.id" v-on:click="sendselect(user.id_user)">
+					<div class="wrap" v-if="user.id_user!=1">
 						<span class="contact-status online"></span>
-						<img src="http://emilcarlsson.se/assets/louislitt.png" alt="" />
+            <img :src="user.images">
 						<div class="meta">
-							<p class="name">Louis Litt</p>
-							<p class="preview">You just got LITT up, Mike.</p>
-						</div>
-					</div>
-				</li>
-				<li class="contact active">
-					<div class="wrap">
-						<span class="contact-status busy"></span>
-						<img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-						<div class="meta">
-							<p class="name">Harvey Specter</p>
-							<p class="preview">Wrong. You take the gun, or you pull out a bigger one. Or, you call their bluff. Or, you do any one of a hundred and forty six other things.</p>
-						</div>
-					</div>
-				</li>
-				<li class="contact">
-					<div class="wrap">
-						<span class="contact-status away"></span>
-						<img src="http://emilcarlsson.se/assets/rachelzane.png" alt="" />
-						<div class="meta">
-							<p class="name">Rachel Zane</p>
-							<p class="preview">I was thinking that we could have chicken tonight, sounds good?</p>
-						</div>
-					</div>
-				</li>
-				<li class="contact">
-					<div class="wrap">
-						<span class="contact-status online"></span>
-						<img src="http://emilcarlsson.se/assets/donnapaulsen.png" alt="" />
-						<div class="meta">
-							<p class="name">Donna Paulsen</p>
-							<p class="preview">Mike, I know everything! I'm Donna..</p>
-						</div>
-					</div>
-				</li>
-				<li class="contact">
-					<div class="wrap">
-						<span class="contact-status busy"></span>
-						<img src="http://emilcarlsson.se/assets/jessicapearson.png" alt="" />
-						<div class="meta">
-							<p class="name">Jessica Pearson</p>
-							<p class="preview">Have you finished the draft on the Hinsenburg deal?</p>
-						</div>
-					</div>
-				</li>
-				<li class="contact">
-					<div class="wrap">
-						<span class="contact-status"></span>
-						<img src="http://emilcarlsson.se/assets/haroldgunderson.png" alt="" />
-						<div class="meta">
-							<p class="name">Harold Gunderson</p>
-							<p class="preview">Thanks Mike! :)</p>
-						</div>
-					</div>
-				</li>
-				<li class="contact">
-					<div class="wrap">
-						<span class="contact-status"></span>
-						<img src="http://emilcarlsson.se/assets/danielhardman.png" alt="" />
-						<div class="meta">
-							<p class="name">Daniel Hardman</p>
-							<p class="preview">We'll meet again, Mike. Tell Jessica I said 'Hi'.</p>
-						</div>
-					</div>
-				</li>
-				<li class="contact">
-					<div class="wrap">
-						<span class="contact-status busy"></span>
-						<img src="http://emilcarlsson.se/assets/katrinabennett.png" alt="" />
-						<div class="meta">
-							<p class="name">Katrina Bennett</p>
-							<p class="preview">I've sent you the files for the Garrett trial.</p>
-						</div>
-					</div>
-				</li>
-				<li class="contact">
-					<div class="wrap">
-						<span class="contact-status"></span>
-						<img src="http://emilcarlsson.se/assets/charlesforstman.png" alt="" />
-						<div class="meta">
-							<p class="name">Charles Forstman</p>
-							<p class="preview">Mike, this isn't over.</p>
-						</div>
-					</div>
-				</li>
-				<li class="contact">
-					<div class="wrap">
-						<span class="contact-status"></span>
-						<img src="http://emilcarlsson.se/assets/jonathansidwell.png" alt="" />
-						<div class="meta">
-							<p class="name">Jonathan Sidwell</p>
-							<p class="preview"><span>You:</span> That's bullshit. This deal is solid.</p>
+							<p class="name"> {{user.account }}</p>
+							<p class="preview">{{user.content}}</p>
 						</div>
 					</div>
 				</li>
@@ -140,9 +50,9 @@
 		</div>
 	</div>
 	<div class="content">
-		<div class="contact-profile">
-			<img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-			<p>Harvey Specter</p>
+		<div class="contact-profile" v-if="messages.id_user==id_user ">
+      <img :src="messages.images">
+			<p>{{messages.account}}</p>
 			<div class="social-media">
 				<i class="fa fa-facebook" aria-hidden="true"></i>
 				<i class="fa fa-twitter" aria-hidden="true"></i>
@@ -150,67 +60,116 @@
 			</div>
 		</div>
 		<div class="messages">
-			<ul>
-				<li class="sent">
-					<img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
-					<p>How the hell am I supposed to get a jury to believe you when I am not even sure that I do?!</p>
+			<ul v-for="message in messages" :key="message.id">
+				<li class="sent" v-if="message.id_user==id_usser ">
+          <img :src="message.images">
+          <p>{{message.content}}</p>
 				</li>
-				<li class="replies">
-					<img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-					<p>When you're backed against the wall, break the god damn thing down.</p>
-				</li>
-				<li class="replies">
-					<img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-					<p>Excuses don't win championships.</p>
-				</li>
-				<li class="sent">
-					<img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
-					<p>Oh yeah, did Michael Jordan tell you that?</p>
-				</li>
-				<li class="replies">
-					<img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-					<p>No, I told him that.</p>
-				</li>
-				<li class="replies">
-					<img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-					<p>What are your choices when someone puts a gun to your head?</p>
-				</li>
-				<li class="sent">
-					<img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
-					<p>What are you talking about? You do what they say or they shoot you.</p>
-				</li>
-				<li class="replies">
-					<img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-					<p>Wrong. You take the gun, or you pull out a bigger one. Or, you call their bluff. Or, you do any one of a hundred and forty six other things.</p>
+				<li class="replies" v-else-if=" message.id_user === 1 && message.id_admin === id_ad">
+          <img :src="message.images">
+          <p>{{message.content}}</p>
 				</li>
 			</ul>
 		</div>
+    <form @submit.prevent="sendMessage">
 		<div class="message-input">
 			<div class="wrap">
-			<input type="text" placeholder="Write your message..." />
+			<input type="text" v-model="content" placeholder="Nhập tin nhắn..." />
 			<i class="fa fa-paperclip attachment" aria-hidden="true"></i>
 			<button class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
 			</div>
 		</div>
+    </form>
 	</div>
 </div>
     </div>
 </template>
+<script>
+import axios from "axios";
+export default {
+  data() {
+    return {
+      messages:[],
+      users: [],
+      id_user: "",
+      content: "",
+      form : 'false',
+      searchText: '',
+      account:''
+    }
+  },
+  created() {
+    this.loadListChat();
+    this.id_usser= localStorage.getItem("user_id");
+    this.id_ad = localStorage.getItem("data");
+  },
+  
+  methods: {
+    //all
+    loadChat(){
+        axios.get("https://damp-woodland-88343.herokuapp.com/api/chatcustomer").then((response) => {
+        this.messages = response.data;
+      })
+    },
+    //list
+    loadListChat(){
+      axios.get("https://damp-woodland-88343.herokuapp.com/api/chatadmin").then((response) => {
+      this.users = response.data;
+      });
+    },
+    sendselect(id){
+      localStorage.setItem("user_id",id);
+      this.loadChat();
+      },
+  
+    sendMessage() {
+      
+       let Mess = {
+            content: this.content,
+            id_user: localStorage.getItem('data')
+        }
+        let MessUser = JSON.stringify(Mess);
+        axios({
+          method: 'POST',
+          url: `https://damp-woodland-88343.herokuapp.com/api/chatcus`,
+          data: MessUser,
+          headers:{
+            'Accept':'application/json',
+            'Content-Type':'application/json', 
+          }
+          }).then((resp) => {
+              console.log(resp);
+              this.loadChat();
+          }
+        ).catch(error => console.log(error));  
+    },
+    search(){
+        axios.post('https://damp-woodland-88343.herokuapp.com/api/searchchat/', {
+            account: this.searchText
+        })
+        .then((response) => {
+            this.users = response.data;
+        });
+    }
+     
+  }
+}
+</script>
+
 <style class="cp-pen-styles">
 
 #frame {
-      min-height: 100vh;
+  min-height: 100vh;
   font-family: "proxima-nova", "Source Sans Pro", sans-serif;
-
-      display: flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   width: 95%;
-  min-width: 360px;
-  max-width: 1000px;
-  height: 92vh;
-  min-height: 300px;
-  max-height: 720px;
+  /* min-width: 360px; */
+  /* max-width: 1000px; */
+  /* height: 92vh; */
+  /* min-height: 300px;
+  max-height: 720px; */
   background: #E6EAEA;
 }
 @media screen and (max-width: 360px) {

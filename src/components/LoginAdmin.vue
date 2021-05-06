@@ -114,7 +114,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                                         </div>
-                                        <input class="form-control" v-model="account" required placeholder="Nhập tên" type="email">
+                                        <input class="form-control" v-model="account" required placeholder="Nhập tên" type="text">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -171,8 +171,7 @@ export default {
             account: this.account,
             password: this.password,
         }
-        // `${process.env.MIX_GIFS_API_HOST}/api/product_chart`
-        axios.post('http://127.0.0.1:8000/api/loginAdmin/', data).then(response => {
+        axios.post('https://damp-woodland-88343.herokuapp.com/api/loginShop/', data).then(response => {
             if(response.status === 200)
             {
                 console.log("login sucessfully");
@@ -187,8 +186,8 @@ export default {
                         }
             }
         });       
-            }
-                }
+        }
+        }
 }
      
 </script>
