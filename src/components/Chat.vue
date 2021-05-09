@@ -74,8 +74,7 @@
 				</li>
 			</ul>
 		</div>
-   
-		<!-- <div class="message-input" id="form">
+		<div class="message-input" id="form">
     <form @submit.prevent="sendMessage">
 			<div class="wrap">
 			<input type="text" v-model="content" placeholder="Nhập tin nhắn..." />
@@ -83,7 +82,7 @@
 			<button class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
 			</div>
       </form>
-		</div> -->
+		</div>
     
 	</div>
 </div>
@@ -135,13 +134,9 @@ export default {
   methods: {
     //all
     loadChat(){
-      this.form=false;
         axios.get("https://damp-woodland-88343.herokuapp.com/api/chatcustomer").then((response) => {
         this.messages = response.data;
-      }),
-       setTimeout(function() {
-            this.content == this.content;
-        }, 5000);
+      })
     },
     //list
     loadListChat(){
@@ -162,7 +157,7 @@ export default {
         let MessUser = JSON.stringify(Mess);
         axios({
           method: 'POST',
-          url: `http://127.0.0.1:8000/api/chatcus`,
+          url: `https://damp-woodland-88343.herokuapp.com/api/chatcus`,
           data: MessUser,
           headers:{
             'Accept':'application/json',
@@ -190,18 +185,17 @@ export default {
 <style class="cp-pen-styles">
 
 #frame {
-      min-height: 100vh;
+  min-height: 100vh;
   font-family: "proxima-nova", "Source Sans Pro", sans-serif;
-
-      display: flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   width: 95%;
-  min-width: 360px;
-  max-width: 1000px;
-  height: 92vh;
-  min-height: 300px;
-  max-height: 720px;
+  /* min-width: 360px; */
+  /* max-width: 1000px; */
+  /* height: 92vh; */
+  /* min-height: 300px;
+  max-height: 720px; */
   background: #E6EAEA;
 }
 @media screen and (max-width: 360px) {

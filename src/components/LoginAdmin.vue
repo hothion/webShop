@@ -114,7 +114,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                                         </div>
-                                        <input class="form-control" v-model="account" required placeholder="Nhập tên" type="email">
+                                        <input class="form-control" v-model="account" required placeholder="Nhập tên" type="text">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -187,8 +187,8 @@ export default {
                         }
             }
         });       
-            }
-                }
+        }
+        }
 }
      
 </script>
