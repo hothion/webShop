@@ -157,7 +157,7 @@
                         <div class="card-header bg-transparent">
                             <div class="row align-items-center">
                                 <div class="col">
-                                    <h6 class="text-uppercase text-muted ls-1 mb-1">Biểu diễn</h6>
+                                    <h6 class="text-uppercase text-muted ls-1 mb-1">Biểu di</h6>
                                     <h5 class="h3 mb-0">Sản phẩm bán chạy trong ngày</h5>
                                 </div>
                             </div>
