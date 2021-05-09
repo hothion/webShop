@@ -14,7 +14,7 @@
                     <!-- Nav items -->
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <router-link to="/dashboard" class="nav-link active">
+                            <router-link to="/" class="nav-link active">
                             <i class="fa fa-home"></i>
                                 <span class="nav-link-text">Trang quản lý</span>
                             </router-link>

@@ -65,7 +65,6 @@
                 </div>
                 </div>
             </div>
-           <Footer></Footer>
            <router-view></router-view>
     </div>
 </template>
@@ -74,11 +73,9 @@ import Vue from 'vue';
 import VueAxios from 'vue-axios';
 import axios from 'axios';
 Vue.use(VueAxios, axios);
-import Footer from './Footer.vue'
 import Header from './Header.vue'
 export default {
    components:{
-         Footer,
          Header
     },
     data() {

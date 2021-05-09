@@ -95,6 +95,10 @@ export default {
   //       console.log(storedNames);
   //       this.yeus = storedNames;
   },
+  mounted(){
+  let yeu = localStorage.getItem('date');
+  console.log(yeu);
+  },
   methods: {
     getNumberWeek() {
       this.axios.get('https://damp-woodland-88343.herokuapp.com/api/getNumber').then((response) => {
