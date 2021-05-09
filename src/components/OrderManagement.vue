@@ -157,12 +157,15 @@ export default {
 }
 
 .content .table {
-    width: 100%;
+    width: 85%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .content {
-    width: 95%;
-    margin-left: 2%;
+    width: 85%;
+     margin-left: auto;
+    margin-right: auto;
     h1 {
         margin-bottom: 10px;
         color: black;

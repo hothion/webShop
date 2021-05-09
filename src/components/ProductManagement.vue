@@ -508,7 +508,9 @@ export default {
 </script>
 <style lang="scss">
 .product{
-    width: 100%;
+    width: 85%;
+    margin-left: auto;
+    margin-right: auto;
 }
 .main__product {
     width: 100%;
