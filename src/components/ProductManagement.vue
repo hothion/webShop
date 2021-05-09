@@ -1,4 +1,3 @@
-/* eslint-disable vue/valid-v-for */
 <template>
     <div class="main-content" id="panel">
          <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
