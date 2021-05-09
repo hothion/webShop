@@ -208,16 +208,16 @@
                     </ul>
                 </div>
             </div>
-        </nav>
-        <!-- Topnav -->
-        <Header></Header>
          <div class="row align-items-center py-4">
                         <div class="col-lg-6 col-7">
                             <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                                     <li class="breadcrumb-item"><router-link to="/dashboard"><i class="fas fa-home"></i></router-link></li>
                                     <li class="breadcrumb-item"><router-link to="/product">Quản lý sản phẩm</router-link></li>
-                                </ol>
+                           
+        </nav>
+        <!-- Topnav -->
+        <Header></Header>     </ol>
                             </nav>
                         </div>
                     </div>
