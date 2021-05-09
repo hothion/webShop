@@ -33,7 +33,7 @@ const routes = [{
     },
     {
         name: 'dashboard',
-        path: '/dashboard',
+        path: '/',
         component: Dashboard
     },
     {
@@ -62,5 +62,11 @@ const routes = [{
         component: Navigation
     }
 ]
-const router = new VueRouter({ mode: 'history', routes: routes });
-new Vue(Vue.util.extend({ router }, Navigation)).$mount('#app');
+let yeu = 0;
+if(yeu==0){
+    const router = new VueRouter({ mode: 'history', routes: routes });
+    new Vue(Vue.util.extend({ router }, Navigation)).$mount('#app');
+}else{
+    const router = new VueRouter({ mode: 'history', routes: routes });
+    new Vue(Vue.util.extend({ router }, LoginAdmin)).$mount('#app');
+}

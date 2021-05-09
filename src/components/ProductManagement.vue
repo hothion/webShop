@@ -11,7 +11,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-search"></i></span>
                                 </div>
-                                <input class="form-control" placeholder="Search" v-model="search" type="text">
+                                <input class="form-control" placeholder="Tìm kiếm ..." v-model="search" type="text">
                             </div>
                         </div>
                         <button type="button" class="close" data-action="search-close" data-target="#navbar-search-main" aria-label="Close">
@@ -216,7 +216,7 @@
                             <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                                     <li class="breadcrumb-item"><router-link to="/dashboard"><i class="fas fa-home"></i></router-link></li>
-                                    <li class="breadcrumb-item"><router-link to="/product">Quản lý đơn hàng</router-link></li>
+                                    <li class="breadcrumb-item"><router-link to="/product">Quản lý sản phẩm</router-link></li>
                                 </ol>
                             </nav>
                         </div>
