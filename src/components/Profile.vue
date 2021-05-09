@@ -165,7 +165,7 @@ import Header from './Header.vue';
 import axios from "axios";
 import firebase from "firebase/app";
 import "firebase/storage";
-import datetime from 'vuejs-datetimepicker';
+// import datetime from 'vuejs-datetimepicker';
 export default {
     components:{Footer,Header  
     },
@@ -210,7 +210,7 @@ export default {
      
 
         const itemid = JSON.parse(localStorage.getItem("data"));
-        axios.patch('http://127.0.0.1:8000/api/updateProfile/'+ itemid, this.itemDatas).then(response =>(
+        axios.patch('https://damp-woodland-88343.herokuapp.com/api/updateProfile/'+ itemid, this.itemDatas).then(response =>(
                 console.log("success"),
                 this.itemDatas=response.data,
                     // console.log(this.formData),
@@ -232,7 +232,7 @@ export default {
 
     getData(){
     const itemDatas = JSON.parse(localStorage.getItem("data"));
-    axios.get('http://127.0.0.1:8000/api/profileAdmin/'+  itemDatas)
+  axios.get('https://damp-woodland-88343.herokuapp.com/api/profileAdmin/'+  itemDatas)
     .then(response =>(
         console.log(response),
          this.itemDatas = response.data
