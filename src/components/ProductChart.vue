@@ -31,7 +31,7 @@ export default {
     this.gradient2.addColorStop(0.5, "rgba(0, 231, 255, 1.5)");
     this.gradient2.addColorStop(1, "rgba(0, 231, 255, 0.1)");
 
-    fetch('https://damp-woodland-88343.herokuapp.com/api/product_chart')
+    fetch('https://api-gilo.herokuapp.com/api/product_chart')
       .then((response) => response.json())
       .then((data) => {
         const product_month = data;

@@ -92,37 +92,37 @@ export default {
     methods: {
         deleteOrder(id) {
             axios.delete(
-                'https://damp-woodland-88343.herokuapp.com/api/order/'+id
+                'https://api-gilo.herokuapp.com/api/order/'+id
             );
             alert("Delete order succes");
             this.getData();
         },
         getOrderDetail(id) {
-            let uri = 'https://damp-woodland-88343.herokuapp.com/api/order/'+id;
+            let uri = 'https://api-gilo.herokuapp.com/api/order/'+id;
             this.axios.get(uri).then((response) => {
                 this.Orderdetails = response.data;
             });           
         },
         orderConfirm() {
             this.orderbyStatus = +1;
-            fetch('https://damp-woodland-88343.herokuapp.com/api/order/' + this.orderbyStatus)
+            fetch('https://api-gilo.herokuapp.com/api/order/' + this.orderbyStatus)
                 .then((response) => response.json())
                 .then((data) => (this.orders = data));
         },
         orderFinished() {
             this.orderbyStatus = +5;
-            fetch('https://damp-woodland-88343.herokuapp.com/api/order/' +this.orderbyStatus)
+            fetch('https://api-gilo.herokuapp.com/api/order/' +this.orderbyStatus)
                 .then((response) => response.json())
                 .then((data) => (this.orders = data));
         },
         orderAll() {
-            fetch('https://damp-woodland-88343.herokuapp.com/api/order')
+            fetch('https://api-gilo.herokuapp.com/api/order')
                 .then((response) => response.json())
                 .then((data) => (this.orders = data));
         },
         getData() {
             if (this.orderbyStatus == 0) {
-                fetch('https://damp-woodland-88343.herokuapp.com/api/order')
+                fetch('https://api-gilo.herokuapp.com/api/order')
                     .then((response) => response.json())
                     .then((data) => (this.orders = data));
             }
@@ -130,7 +130,7 @@ export default {
         },
         editOrder(id) {
             axios.put(
-               'https://damp-woodland-88343.herokuapp.com/api/order/'+id
+               'https://api-gilo.herokuapp.com/api/order/'+id
             );
             this.getData();
         },

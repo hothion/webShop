@@ -18,7 +18,7 @@ export default {
     this.gradient.addColorStop(0.5, "rgba(255, 99, 71, 0.6)");
     this.gradient.addColorStop(1, "rgba(255, 99, 71, 0.4)");
 
-    fetch('https://damp-woodland-88343.herokuapp.com/api/order_barchart')
+    fetch('https://api-gilo.herokuapp.com/api/order_barchart')
       .then((response) => response.json())
       .then((data) => {
         const order_month = data;

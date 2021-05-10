@@ -312,22 +312,22 @@ export default {
       alert(this.newproduct.img);
     },
     getData() {
-          fetch('https://damp-woodland-88343.herokuapp.com/api/products')
+          fetch('https://api-gilo.herokuapp.com/api/products')
         .then((response) => response.json())
         .then((data) => (this.products = data));
     },
     deleteProduct(id) {
-      axios.delete('https://damp-woodland-88343.herokuapp.com/api/products/'+id);
+      axios.delete('https://api-gilo.herokuapp.com/api/products/'+id);
       this.getData();
     },
 
     addProduct() {
       if (this.edit == false) {
-        axios.post('https://damp-woodland-88343.herokuapp.com/api/products', this.newproduct);
+        axios.post('https://api-gilo.herokuapp.com/api/products', this.newproduct);
         alert(" Insert product success");
         this.getData();
       } else {
-        axios.put('https://damp-woodland-88343.herokuapp.com/api/products/'+this.newproduct.id,this.newproduct);
+        axios.put('https://api-gilo.herokuapp.com/api/products/'+this.newproduct.id,this.newproduct);
         alert(" Update product success");
         this.getData();
         this.edit ==false;
