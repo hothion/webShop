@@ -134,7 +134,7 @@
       </div>
       <div class="main__product" v-for="product in showProducts" :key="product.id">
         <div class="card_pro0">
-          <img :src="product.img" id="img" alt="image" />
+          <img :src="product.img" id="img1" alt="image" />
         </div>
         <div class="card_pro2">
           <span class="font-bold text-title"><h2>{{ product.name }}</h2></span>
@@ -175,7 +175,7 @@
             </button>
           </li>
           <li class="page-item">
-            <button type="button" @click="page++" v-if="page < pages.length" class="page-link"></button>
+            <button type="button" @click="page++" v-if="page < pages.length" class="page-link">
               <i class="fas fa-arrow-circle-right"></i>
             </button>
           </li>
@@ -226,7 +226,7 @@
                 />
               </div>
               <div class="item_input">
-                <label for="dis">Giá</label><br />
+                <label for="price">Giá</label><br />
                 <input
                   type="number"
                   name="price"
@@ -238,7 +238,7 @@
                 />
               </div>
               <div class="item_input">
-                <label for="dis">Giảm giá</label><br />
+                <label for="discount">Giảm giá</label><br />
                 <input
                   type="number"
                   name="discount"
@@ -250,10 +250,10 @@
                 />
               </div>
               <div class="item_input">
-                <label for="des"> Mô tả</label><br />
+                <label for="description"> Mô tả</label><br />
                 <textarea
                   name="description"
-                  id=""
+                  id="description"
                   cols="40"
                   rows="8"
                   v-model="newproduct.desciption"
