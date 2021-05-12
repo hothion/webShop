@@ -23,42 +23,21 @@
         </div>
       </div>
     </div>
-    <Footer></Footer>
-    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Footer from './Footer.vue';
-import Header from './Header.vue';
-import productChart from './ProductChart.vue';
+import productChart from "./ProductChart.vue";
+import Header from "./Header.vue";
 export default {
-  name: "order",
-  data() {
-    return {
-      selected: "",
-      counter: 0,
-      numberWeek: {},
-      getWeek: [],
-      number: 0,
-      listDay: [],
-      yeus: [],
-      currentYear: new Date().getFullYear(),
-    };
-  },
+  name: "OrderMonth",
   components: {
-    Footer,
-    Header,
-    productChart
-  },
-
-};
+    productChart,
+    Header
+  }
+}
 </script>
-<style lang="scss">
-.statistic {
-  width: 100%;
-}
-.statistic h1 {
-  box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.2), 0 0px 20px 0 rgba(0, 0, 0, 0.19);
-}
+
+<style scoped>
+
 </style>

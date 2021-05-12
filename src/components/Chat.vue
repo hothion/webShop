@@ -31,8 +31,8 @@
           </div>
         </div>
         <div id="search">
-          <label for=""><i class="fa fa-search" aria-hidden="true"></i></label>
-          <input type="text" v-model="searchText" @keyup="search()" placeholder="Tìm kiếm trên chat..."/>
+          <label for="search1"><i class="fa fa-search" aria-hidden="true"></i></label>
+          <input type="text" v-model="searchText" @keyup="search()" id="search1" placeholder="Tìm kiếm trên chat..."/>
         </div>
         <div id="contacts">
           <ul v-for="user in users" :key="user.id" v-on:click="sendselect(user.id_user)">

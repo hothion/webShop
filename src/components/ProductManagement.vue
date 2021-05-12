@@ -138,7 +138,7 @@
         </div>
         <div class="card_pro2">
           <span class="font-bold text-title"><h2>{{ product.name }}</h2></span>
-          <p> <b>Mô tả :</b> {{ product.desciption }}</p>
+          <p> <b>Mô tả :</b> {{ product.description }}</p>
           <span class="price_discount">
             <p><b>Giá :</b> {{ product.price }} đ</p>
             <p class="discount">- {{ product.discount }}%</p>
@@ -256,7 +256,7 @@
                   id="description"
                   cols="40"
                   rows="8"
-                  v-model="newproduct.desciption"
+                  v-model="newproduct.description"
                   hplaceholder=" Mô tả cho sản phẩm"
                 ></textarea>
               </div>
@@ -340,7 +340,7 @@ export default {
       this.newproduct.id = product.id;
       this.newproduct.name = product.name;
       this.newproduct.img = product.img;
-      this.newproduct.desciption = product.desciption;
+      this.newproduct.description = product.description;
       this.newproduct.type = product.type;
       this.newproduct.price = product.price;
       this.newproduct.quantity = product.quantity;
@@ -356,7 +356,7 @@ export default {
     clearData() {
       this.newproduct.name = "";
       this.newproduct.img = "";
-      this.newproduct.desciption = "";
+      this.newproduct.description = "";
       this.newproduct.type = "";
       this.newproduct.quantity = "";
       this.newproduct.price = "";

@@ -30,8 +30,8 @@
                 </div>
                 <div class="content table_content" v-for="order in orders" :key="order.id">
                     <p>{{ order.id }}</p>
-                    <p>{{ order.users[0].firstName }} {{ order.users[0].lastName }}</p>
-                    <p>{{ order.users[0].address }}</p>
+                    <p>{{ order.users.firstName }} {{ order.users.lastName }}</p>
+                    <p>{{ order.users.address }}</p>
                     <p>{{ order.created_at }}</p>
                     <p>{{order.product[0].price*order.quantity}}</p>
                     <p>
@@ -41,7 +41,7 @@
                     </p>
                     <p>
                     <a class="btn btn-danger" href="#detailOrder">
-                        <button @click.prevent="getOrderDetail(order.users[0].id)"><i class="fas fa-eye"></i></button>
+                        <button @click.prevent="getOrderDetail(order.users.id)"><i class="fas fa-eye"></i></button>
                     </a>
                     </p>
                     <p>
