@@ -86,7 +86,7 @@ export default {
   },
   methods: {
     getNumberWeek() {
-      this.axios.get('https://damp-woodland-88343.herokuapp.com/api/getNumber').then((response) => {
+      this.axios.get('https://api-gilo.herokuapp.com/api/getNumber').then((response) => {
         this.numberWeek = response.data;
       });
     },
@@ -110,7 +110,7 @@ export default {
       if (this.numberWeek != 0) {
         this.numberWeek -= 1;
         this.counter += 1;
-        let uri = 'https://damp-woodland-88343.herokuapp.com/api/getWeek/' + this.counter;
+        let uri = 'https://api-gilo.herokuapp.com/api/getWeek/' + this.counter;
         this.axios.get(uri).then((response) => {
           this.getWeek = response.data;
           for (let i = this.getWeek; i < this.getWeek + 7; i++) {
@@ -126,7 +126,7 @@ export default {
     nextWeek() {
       this.numberWeek += 1;
       this.counter -= 1;
-      let uri = 'https://damp-woodland-88343.herokuapp.com/api/getWeek/' + this.counter;
+      let uri = 'https://api-gilo.herokuapp.com/api/getWeek/' + this.counter;
       this.axios.get(uri).then((response) => {
         this.getWeek = response.data;
         for (let i = this.getWeek; i < this.getWeek + 7; i++) {

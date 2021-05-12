@@ -150,7 +150,7 @@
             <div class="card-body">
               <!-- Chart -->
               <div class="chart">
-               <orderBar />
+                <orderBar/>
               </div>
             </div>
           </div>
@@ -168,7 +168,7 @@
             <div class="card-body">
               <!-- Chart -->
               <div class="chart">
-               <orderPie />
+                <orderPie/>
               </div>
             </div>
           </div>
