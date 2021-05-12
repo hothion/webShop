@@ -25,7 +25,7 @@
               </ul>
             </div>
             <div id="expanded">
-              <label for="twitter"><i class="fa fa-facebook fa-fw" aria-hidden="true"></i></label>
+              <label for="twitter"><i class="fa fa-facebook fa-fw" aria-hidden="true" id="twitter"></i></label>
               <input name="twitter" type="text" value="mikeross" />
               <label for="twitter"><i class="fa fa-twitter fa-fw" aria-hidden="true"></i></label>
               <input name="twitter" type="text" value="ross81" />
@@ -35,8 +35,8 @@
           </div>
         </div>
         <div id="search">
-          <label for=""><i class="fa fa-search" aria-hidden="true"></i></label>
-          <input type="text" v-model="searchText" @keyup="search()" placeholder="Tìm kiếm trên chat..." />
+          <label for="search1"><i class="fa fa-search" aria-hidden="true"></i></label>
+          <input type="text" v-model="searchText" @keyup="search()" id="search1" placeholder="Tìm kiếm trên chat..." />
         </div>
         <div id="contacts">
           <ul v-for="user in users" :key="user.id" v-on:click="sendselect(user.id_user)">
@@ -99,6 +99,7 @@
 </template>
 <script>
   import axios from "axios";
+
   export default {
     data() {
       return {
@@ -119,10 +120,10 @@
       setInterval(() => {
         axios({
           method: "GET",
-          url: `https://damp-woodland-88343.herokuapp.com/api/chatcustomer/`,
+          url: `https://api-gilo.herokuapp.com/api/chatcustomer/`,
           data: null
         }).then(res => {
-          this.setState({ chat: res.data });
+          this.setState({chat: res.data});
           console.log(this.state.chat);
         }).catch(error => {
           if (error.response.status == 429) {
@@ -143,13 +144,13 @@
     methods: {
       //all
       loadChat() {
-        axios.get("https://damp-woodland-88343.herokuapp.com/api/chatcustomer").then((response) => {
+        axios.get("https://api-gilo.herokuapp.com/api/chatcustomer").then((response) => {
           this.messages = response.data;
         })
       },
       //list
       loadListChat() {
-        axios.get("https://damp-woodland-88343.herokuapp.com/api/chatadmin").then((response) => {
+        axios.get("https://api-gilo.herokuapp.com/api/chatadmin").then((response) => {
           this.users = response.data;
         });
       },
@@ -166,25 +167,25 @@
         let MessUser = JSON.stringify(Mess);
         axios({
           method: 'POST',
-          url: `https://damp-woodland-88343.herokuapp.com/api/chatcus`,
+          url: `https://api-gilo.herokuapp.com/api/chatcus`,
           data: MessUser,
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           }
         }).then((resp) => {
-          console.log(resp);
-          this.loadChat();
-        }
+              console.log(resp);
+              this.loadChat();
+            }
         ).catch(error => console.log(error));
       },
       search() {
-        axios.post('https://damp-woodland-88343.herokuapp.com/api/searchchat/', {
+        axios.post('https://api-gilo.herokuapp.com/api/searchchat/', {
           account: this.searchText
         })
-          .then((response) => {
-            this.users = response.data;
-          });
+            .then((response) => {
+              this.users = response.data;
+            });
       }
 
     }
@@ -240,10 +241,26 @@
 
   @media screen and (max-width: 735px) {
     #frame #sidepanel #profile {
-      width: 100%;
-      margin: 0 auto;
-      padding: 5px 0 0 0;
-      background: #32465a;
+      width: 80%;
+      margin: 25px auto;
+    }
+
+    @media screen and (max-width: 735px) {
+      #frame #sidepanel #profile {
+        width: 100%;
+        margin: 0 auto;
+        padding: 5px 0 0 0;
+        background: #32465a;
+      }
+    }
+
+    #frame #sidepanel #profile.expanded .wrap {
+      height: 210px;
+      line-height: initial;
+    }
+
+    #frame #sidepanel #profile.expanded .wrap p {
+      margin-top: 20px;
     }
   }
 
@@ -426,8 +443,29 @@
 
   @media screen and (max-width: 735px) {
     #frame #sidepanel #profile .wrap #status-options ul li span.status-circle {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin: 5px 0 0 0;
+    }
+
+    @media screen and (max-width: 735px) {
+      #frame #sidepanel #profile .wrap #status-options ul li span.status-circle {
+        width: 14px;
+        height: 14px;
+      }
+    }
+
+    #frame #sidepanel #profile .wrap #status-options ul li span.status-circle:before {
+      content: '';
+      position: absolute;
       width: 14px;
       height: 14px;
+      margin: -3px 0 0 -3px;
+      background: transparent;
+      border-radius: 50%;
+      z-index: 0;
     }
   }
 
@@ -574,7 +612,7 @@
 
   @media screen and (max-width: 735px) {
     #frame #sidepanel #contacts {
-      height: calc(100% - 149px);
+      height: calc(100% - 177px);
       overflow-y: scroll;
       overflow-x: hidden;
     }
@@ -631,7 +669,38 @@
 
   @media screen and (max-width: 735px) {
     #frame #sidepanel #contacts ul li.contact .wrap {
-      width: 100%;
+      width: 88%;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    @media screen and (max-width: 735px) {
+      #frame #sidepanel #contacts ul li.contact .wrap {
+        width: 100%;
+      }
+    }
+
+    #frame #sidepanel #contacts ul li.contact .wrap span {
+      position: absolute;
+      left: 0;
+      margin: -2px 0 0 -2px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 2px solid #2c3e50;
+      background: #95a5a6;
+    }
+
+    #frame #sidepanel #contacts ul li.contact .wrap span.online {
+      background: #2ecc71;
+    }
+
+    #frame #sidepanel #contacts ul li.contact .wrap span.away {
+      background: #f1c40f;
+    }
+
+    #frame #sidepanel #contacts ul li.contact .wrap span.busy {
+      background: #e74c3c;
     }
   }
 
@@ -667,7 +736,16 @@
 
   @media screen and (max-width: 735px) {
     #frame #sidepanel #contacts ul li.contact .wrap img {
-      margin-right: 0px;
+      width: 40px;
+      border-radius: 50%;
+      float: left;
+      margin-right: 10px;
+    }
+
+    @media screen and (max-width: 735px) {
+      #frame #sidepanel #contacts ul li.contact .wrap img {
+        margin-right: 0px;
+      }
     }
   }
 

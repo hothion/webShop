@@ -14,8 +14,8 @@
               </div>
             </div>
             <button type="button" class="close" data-action="search-close" data-target="#navbar-search-main"
-              aria-label="Close">
-              <span aria-hidden="true">×</span>
+                    aria-label="Close">
+              <span aria-hidden="true"> u </span>
             </button>
           </form>
           <!-- Navbar links -->
@@ -23,7 +23,7 @@
             <li class="nav-item d-xl-none">
               <!-- Sidenav toggler -->
               <div class="pr-3 sidenav-toggler sidenav-toggler-dark" data-action="sidenav-pin"
-                data-target="#sidenav-main">
+                   data-target="#sidenav-main">
                 <div class="sidenav-toggler-inner">
                   <i class="sidenav-toggler-line"></i>
                   <i class="sidenav-toggler-line"></i>
@@ -38,8 +38,8 @@
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">
-                <i class="fas fa-bell"></i>
+                 aria-expanded="false">
+                <i class="ni ni-bell-55"></i>
               </a>
               <div class="dropdown-menu dropdown-menu-xl  dropdown-menu-right  py-0 overflow-hidden">
                 <!-- Dropdown header -->
@@ -53,83 +53,7 @@
                     <div class="row align-items-center">
                       <div class="col-auto">
                         <!-- Avatar -->
-                        <img alt="Image placeholder" src="../assets/img/theme/team-1.jpg" class="avatar rounded-circle">
-                      </div>
-                      <div class="col ml--2">
-                        <div class="d-flex justify-content-between align-items-center">
-                          <div>
-                            <h4 class="mb-0 text-sm">John Snow</h4>
-                          </div>
-                          <div class="text-right text-muted">
-                            <small>2 hrs ago</small>
-                          </div>
-                        </div>
-                        <p class="text-sm mb-0">Let's meet at Starbucks at 11:30. Wdyt?</p>
-                      </div>
-                    </div>
-                  </a>
-                  <a href="#!" class="list-group-item list-group-item-action">
-                    <div class="row align-items-center">
-                      <div class="col-auto">
-                        <!-- Avatar -->
-                        <img alt="Image placeholder" src="../assets/img/theme/team-2.jpg" class="avatar rounded-circle">
-                      </div>
-                      <div class="col ml--2">
-                        <div class="d-flex justify-content-between align-items-center">
-                          <div>
-                            <h4 class="mb-0 text-sm">John Snow</h4>
-                          </div>
-                          <div class="text-right text-muted">
-                            <small>3 hrs ago</small>
-                          </div>
-                        </div>
-                        <p class="text-sm mb-0">A new issue has been reported for Argon.</p>
-                      </div>
-                    </div>
-                  </a>
-                  <a href="#!" class="list-group-item list-group-item-action">
-                    <div class="row align-items-center">
-                      <div class="col-auto">
-                        <!-- Avatar -->
-                        <img alt="Image placeholder" src="../assets/img/theme/team-3.jpg" class="avatar rounded-circle">
-                      </div>
-                      <div class="col ml--2">
-                        <div class="d-flex justify-content-between align-items-center">
-                          <div>
-                            <h4 class="mb-0 text-sm">John Snow</h4>
-                          </div>
-                          <div class="text-right text-muted">
-                            <small>5 hrs ago</small>
-                          </div>
-                        </div>
-                        <p class="text-sm mb-0">Your posts have been liked a lot.</p>
-                      </div>
-                    </div>
-                  </a>
-                  <a href="#!" class="list-group-item list-group-item-action">
-                    <div class="row align-items-center">
-                      <div class="col-auto">
-                        <!-- Avatar -->
-                        <img alt="Image placeholder" src="../assets/img/theme/team-4.jpg" class="avatar rounded-circle">
-                      </div>
-                      <div class="col ml--2">
-                        <div class="d-flex justify-content-between align-items-center">
-                          <div>
-                            <h4 class="mb-0 text-sm">John Snow</h4>
-                          </div>
-                          <div class="text-right text-muted">
-                            <small>2 hrs ago</small>
-                          </div>
-                        </div>
-                        <p class="text-sm mb-0">Let's meet at Starbucks at 11:30. Wdyt?</p>
-                      </div>
-                    </div>
-                  </a>
-                  <a href="#!" class="list-group-item list-group-item-action">
-                    <div class="row align-items-center">
-                      <div class="col-auto">
-                        <!-- Avatar -->
-                        <img alt="Image placeholder" src="../assets/img/theme/team-5.jpg" class="avatar rounded-circle">
+                        <img alt="Image placeholder" src="assets/img/theme/team-5.jpg" class="avatar rounded-circle">
                       </div>
                       <div class="col ml--2">
                         <div class="d-flex justify-content-between align-items-center">
@@ -151,28 +75,16 @@
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">
-                <i class="fas fa-comment"></i>
+                 aria-expanded="false">
+                <i class="ni ni-ungroup"></i>
               </a>
               <div class="dropdown-menu dropdown-menu-lg dropdown-menu-dark bg-default  dropdown-menu-right ">
                 <div class="row shortcuts px-4">
                   <a href="#!" class="col-4 shortcut-item">
-                    <span class="shortcut-media avatar rounded-circle bg-gradient-red">
-                      <i class="ni ni-calendar-grid-58"></i>
-                    </span>
-                    <small>Calendar</small>
-                  </a>
-                  <a href="#!" class="col-4 shortcut-item">
-                    <span class="shortcut-media avatar rounded-circle bg-gradient-orange">
-                      <i class="ni ni-email-83"></i>
-                    </span>
-                    <small>Email</small>
-                  </a>
-                  <a href="#!" class="col-4 shortcut-item">
-                    <span class="shortcut-media avatar rounded-circle bg-gradient-info">
-                      <i class="ni ni-credit-card"></i>
-                    </span>
-                    <small>Payments</small>
+                <span class="shortcut-media avatar rounded-circle bg-gradient-yellow">
+                  <i class="ni ni-basket"></i>
+                </span>
+                    <small>Shop</small>
                   </a>
                 </div>
               </div>
@@ -181,11 +93,11 @@
           <ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
             <li class="nav-item dropdown">
               <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">
+                 aria-expanded="false">
                 <div class="media align-items-center">
-                  <span class="avatar avatar-sm rounded-circle">
-                    <img alt="Image placeholder" src="../assets/img/theme/team-4.jpg">
-                  </span>
+              <span class="avatar avatar-sm rounded-circle">
+                <img alt="Image placeholder" src="assets/img/theme/team-4.jpg">
+              </span>
                   <div class="media-body  ml-2  d-none d-lg-block">
                     <span class="mb-0 text-sm  font-weight-bold">John Snow</span>
                   </div>
@@ -232,17 +144,17 @@
       <div class="header_pro">
         <p></p>
         <p></p>
-        <a href="#open-modal">Thêm sản phẩm</a>
+        <a href="#open-modal"
+        >Thêm sản phẩm</a
+        >
       </div>
       <div class="main__product" v-for="product in showProducts" :key="product.id">
         <div class="card_pro0">
-          <img :src="product.img" id="img" alt="image" />
+          <img :src="product.img" id="img1" alt="image"/>
         </div>
         <div class="card_pro2">
-          <span class="font-bold text-title">
-            <h2>{{ product.name }}</h2>
-          </span>
-          <p> <b>Mô tả :</b> {{ product.description }}</p>
+          <span class="font-bold text-title"><h2>{{ product.name }}</h2></span>
+          <p><b>Mô tả :</b> {{ product.description }}</p>
           <span class="price_discount">
             <p><b>Giá :</b> {{ product.price }} đ</p>
             <p class="discount">- {{ product.discount }}%</p>
@@ -293,40 +205,79 @@
             <div id="formAdd">
               <div class="item_input">
                 <label for="input" class="Input-label">Tên sản phẩm </label>
-                <input type="text" id="input" class="Input-text" placeholder="Tên sản phẩm" v-model="newproduct.name" />
+                <input
+                    type="text"
+                    id="input"
+                    class="Input-text"
+                    placeholder="Tên sản phẩm"
+                    v-model="newproduct.name"
+                />
               </div>
               <div class="item_input">
-                <label>Hình ảnh</label><br />
-                <input type="text" placeholder="Link ảnh" name="image" id="img" v-model="newproduct.img" />
+                <label>Hình ảnh</label><br/>
+                <input type="text" placeholder="Link ảnh" name="image" id="img" v-model="newproduct.img"/>
               </div>
               <div class="item_input">
-                <label for="type">Loại sản phẩm</label><br />
-                <input type="text" name="type" v-model="newproduct.type" id="type" hplaceholder=" Nhập loại sản phẩm" />
+                <label for="type">Loại sản phẩm</label><br/>
+                <input
+                    type="text"
+                    name="type"
+                    v-model="newproduct.type"
+                    id="type"
+                    hplaceholder=" Nhập loại sản phẩm"
+                />
               </div>
               <div class="item_input">
-                <label for="quantity"> Số lượng</label><br />
-                <input type="number" name="quantity" v-model="newproduct.quantity" id="quantity" min="1" max="10000"
-                  hplaceholder=" Số lượng sản phẩm" />
+                <label for="quantity"> Số lượng</label><br/>
+                <input
+                    type="number"
+                    name="quantity"
+                    v-model="newproduct.quantity"
+                    id="quantity"
+                    min="1"
+                    max="10000"
+                    hplaceholder=" Số lượng sản phẩm"
+                />
               </div>
               <div class="item_input">
-                <label for="dis">Giá</label><br />
-                <input type="number" name="price" v-model="newproduct.price" id="price" min="100000" max="1000000"
-                  hplaceholder=" Giá của sản phẩm" />
+                <label for="price">Giá</label><br/>
+                <input
+                    type="number"
+                    name="price"
+                    v-model="newproduct.price"
+                    id="price"
+                    min="100000"
+                    max="1000000"
+                    hplaceholder=" Giá của sản phẩm"
+                />
               </div>
               <div class="item_input">
-                <label for="dis">Giảm giá</label><br />
-                <input type="number" name="discount" v-model="newproduct.discount" id="discount" min="1" max="100"
-                  hplaceholder=" Giám giá " />
+                <label for="discount">Giảm giá</label><br/>
+                <input
+                    type="number"
+                    name="discount"
+                    v-model="newproduct.discount"
+                    id="discount"
+                    min="1"
+                    max="100"
+                    hplaceholder=" Giám giá "
+                />
               </div>
               <div class="item_input">
-                <label for="des"> Mô tả</label><br />
-                <textarea name="description" id="" cols="40" rows="8" v-model="newproduct.desciption"
-                  hplaceholder=" Mô tả cho sản phẩm"></textarea>
+                <label for="description"> Mô tả</label><br/>
+                <textarea
+                    name="description"
+                    id="description"
+                    cols="40"
+                    rows="8"
+                    v-model="newproduct.description"
+                    hplaceholder=" Mô tả cho sản phẩm"
+                ></textarea>
               </div>
             </div>
             <div class="add_resest">
               <button type="submit">{{ buttonAdd }}</button>
-              <button type="submit" @click.prevent="clearData">Xóa dữ liệu </button>
+              <button type="submit" @click.prevent="clearData">Xóa dữ liệu</button>
             </div>
           </form>
         </div>
@@ -335,114 +286,119 @@
     </div>
   </div>
 </template>
+
 <script>
-  import Vue from 'vue';
+import Vue from 'vue';
 import VueRouter from 'vue-router';
+
 Vue.use(VueRouter);
 import VueAxios from 'vue-axios';
 import axios from 'axios';
+
 Vue.use(VueAxios, axios);
-  export default {
-    data() {
-      return {
-        products: [],
-        newproduct: {
-          img: null,
-          imageUrl: null
-        },
-        pageSize: 5,
-        currentPage: 1,
-        page: 1,
-        perPage: 4,
-        pages: [],
-        search: null,
-        edit: false,
-        buttonAdd: "Thêm",
-        contentForm: "Thêm sản phẩm mới",
-      };
-    },
-    created() {
-      this.getData();
-    },
-    methods: {
-      onChange(e) {
-        const file = e.target.files[0]
-        this.img = file
-        this.newproduct.img = URL.createObjectURL(file)
+export default {
+  data() {
+    return {
+      products: [],
+      newproduct: {
+        img: null,
+        imageUrl: null
       },
-      getData() {
-        fetch('https://api-gilo.herokuapp.com/api/products')
+      pageSize: 5,
+      currentPage: 1,
+      page: 1,
+      perPage: 4,
+      pages: [],
+      search: null,
+      edit: false,
+      buttonAdd: "Thêm",
+      contentForm: "Thêm sản phẩm mới",
+    };
+  },
+  created() {
+    this.getData();
+  },
+  methods: {
+    onChange(e) {
+      const file = e.target.files[0]
+      this.img = file
+      this.newproduct.img = URL.createObjectURL(file)
+
+      console.log(file);
+      alert(this.newproduct.img);
+    },
+    getData() {
+      fetch('https://api-gilo.herokuapp.com/api/products')
           .then((response) => response.json())
           .then((data) => (this.products = data));
-      },
-      deleteProduct(id) {
-        axios.delete('https://api-gilo.herokuapp.com/api/products/' + id);
-        this.getData();
-      },
-
-      addProduct() {
-        if (this.edit == false) {
-          axios.post('https://api-gilo.herokuapp.com/api/products', this.newproduct);
-          alert(" Insert product success");
-          this.getData();
-        } else {
-          axios.put('https://api-gilo.herokuapp.com/api/products/' + this.newproduct.id, this.newproduct);
-          alert(" Update product success");
-          this.getData();
-          this.edit == false;
-        }
-      },
-      editProduct(product) {
-        this.edit = true;
-        this.buttonAdd = "Cập nhật";
-        this.contentForm = "Cập nhật sản phẩm";
-        this.newproduct.id = product.id;
-        this.newproduct.name = product.name;
-        this.newproduct.img = product.img;
-        this.newproduct.desciption = product.desciption;
-        this.newproduct.type = product.type;
-        this.newproduct.price = product.price;
-        this.newproduct.quantity = product.quantity;
-        this.newproduct.heart = product.heart;
-        this.newproduct.discount = product.discount;
-      },
-      setPages() {
-        let numberOfPages = Math.ceil(this.products.length / this.perPage);
-        for (let index = 1; index <= numberOfPages; index++) {
-          this.pages.push(index);
-        }
-      },
-      clearData() {
-        this.newproduct.name = "";
-        this.newproduct.img = "";
-        this.newproduct.desciption = "";
-        this.newproduct.type = "";
-        this.newproduct.quantity = "";
-        this.newproduct.price = "";
-        this.newproduct.discount = "";
-        this.newproduct.heart = 0;
-      },
-      paginate(products) {
-        let page = this.page;
-        let perPage = this.perPage;
-        let from = page * perPage - perPage;
-        let to = page * perPage;
-        return products.slice(from, to);
-      },
     },
-    computed: {
-      showProducts() {
-        if (this.search) {
-          return this.products.filter((item) => {
-            return this.search
+    deleteProduct(id) {
+      axios.delete('https://api-gilo.herokuapp.com/api/products/' + id);
+      this.getData();
+    },
+
+    addProduct() {
+      if (this.edit == false) {
+        axios.post('https://api-gilo.herokuapp.com/api/products', this.newproduct);
+        alert(" Insert product success");
+        this.getData();
+      } else {
+        axios.put('https://api-gilo.herokuapp.com/api/products/' + this.newproduct.id, this.newproduct);
+        alert(" Update product success");
+        this.getData();
+        this.edit == false;
+      }
+    },
+    editProduct(product) {
+      this.edit = true;
+      this.buttonAdd = "Cập nhật";
+      this.contentForm = "Cập nhật sản phẩm";
+      this.newproduct.id = product.id;
+      this.newproduct.name = product.name;
+      this.newproduct.img = product.img;
+      this.newproduct.description = product.description;
+      this.newproduct.type = product.type;
+      this.newproduct.price = product.price;
+      this.newproduct.quantity = product.quantity;
+      this.newproduct.heart = product.heart;
+      this.newproduct.discount = product.discount;
+    },
+    setPages() {
+      let numberOfPages = Math.ceil(this.products.length / this.perPage);
+      for (let index = 1; index <= numberOfPages; index++) {
+        this.pages.push(index);
+      }
+    },
+    clearData() {
+      this.newproduct.name = "";
+      this.newproduct.img = "";
+      this.newproduct.description = "";
+      this.newproduct.type = "";
+      this.newproduct.quantity = "";
+      this.newproduct.price = "";
+      this.newproduct.discount = "";
+      this.newproduct.heart = 0;
+    },
+    paginate(products) {
+      let page = this.page;
+      let perPage = this.perPage;
+      let from = page * perPage - perPage;
+      let to = page * perPage;
+      return products.slice(from, to);
+    },
+  },
+  computed: {
+    showProducts() {
+      if (this.search) {
+        return this.products.filter((item) => {
+          return this.search
               .toLowerCase()
               .split(" ")
               .every((v) => item.name.toLowerCase().includes(v));
-          });
-        } else {
-          return this.paginate(this.products);
-        }
-      },
+        });
+      } else {
+        return this.paginate(this.products);
+      }
     },
     watch: {
       products() {
@@ -454,149 +410,92 @@ Vue.use(VueAxios, axios);
         return value.split(" ").splice(0, 20).join(" ") + "...";
       },
     },
-  };
+  }
+}
 </script>
 <style lang="scss">
-  .product {
-    width: 85%;
-    margin-left: auto;
-    margin-right: auto;
+.product {
+  width: 85%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.main__product {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr;
+  gap: 30px;
+  margin: 10px 0;
+  border-left: 5px solid rebeccapurple;
+  border-right: 5px solid rgb(77, 218, 119);
+  background: white;
+  /* background: cadetblue; */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 20px;
+
+  .card_pro0 {
+    padding-top: 10px;
+
+    img {
+      width: 160px;
+      height: 150px;
+      margin-left: 3%;
+    }
   }
 
-  .main__product {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 2fr 2fr;
-    gap: 30px;
-    margin: 10px 0;
-    border-left: 5px solid rebeccapurple;
-    border-right: 5px solid rgb(77, 218, 119);
-    background: white;
-    /* background: cadetblue; */
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    border-radius: 20px;
+  .card_pro2 {
+    .price_discount {
+      display: flex;
 
-    .card_pro0 {
-      padding-top: 10px;
-
-      img {
-        width: 160px;
-        height: 150px;
-        margin-left: 3%;
+      .discount {
+        padding: 0 10px;
+        color: red;
+        font-weight: bold;
       }
     }
+  }
 
-    .card_pro2 {
-      .price_discount {
-        display: flex;
+  .card_pro3 {
+    height: auto;
 
-        .discount {
-          padding: 0 10px;
-          color: red;
-          font-weight: bold;
+    .action {
+      float: right;
+
+      .edit-dele {
+        margin-bottom: 1px;
+
+        a {
+          background-color: crimson;
+          /* Màu của Quản trị mạng ^^ */
+          border: none;
+          color: white;
+          padding: 13px 18px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          margin: 100px 2px 0px 0px;
+          -webkit-transition-duration: 0.4s;
+          /* Safari */
+          transition-duration: 0.4s;
+          cursor: pointer;
+          border-radius: 15px;
+        }
+
+        a:hover {
+          background-color: seagreen;
         }
       }
     }
-
-    .card_pro3 {
-      height: auto;
-
-      .action {
-        float: right;
-
-        .edit-dele {
-          margin-bottom: 1px;
-
-          a {
-            background-color: crimson;
-            /* Màu của Quản trị mạng ^^ */
-            border: none;
-            color: white;
-            padding: 13px 18px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 100px 2px 0px 0px;
-            -webkit-transition-duration: 0.4s;
-            /* Safari */
-            transition-duration: 0.4s;
-            cursor: pointer;
-            border-radius: 15px;
-          }
-
-          a:hover {
-            background-color: seagreen;
-          }
-        }
-      }
-    }
   }
+}
 
-  .header_pro {
-    display: grid;
-    grid-template-columns: 2fr 1.5fr 1fr;
-    margin-bottom: 3%;
+.header_pro {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1fr;
+  margin-bottom: 3%;
 
-    a {
-      background-color: crimson;
-      /* Màu của Quản trị mạng ^^ */
-      border: none;
-      color: white;
-      padding: 13px 18px;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 16px;
-      -webkit-transition-duration: 0.4s;
-      /* Safari */
-      transition-duration: 0.4s;
-      cursor: pointer;
-      outline: none;
-      border-radius: 25px;
-    }
-
-    button:hover {
-      background-color: seagreen;
-    }
-
-    input {
-      padding-left: 1%;
-      outline: none;
-      border-radius: 20px;
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    }
-  }
-
-  .pro_header {
-    display: flex;
-  }
-
-  .pro_header button {
-    float: right;
-  }
-
-  .form h2 {
-    margin-bottom: 4%;
-  }
-
-  div#formAdd {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-row-gap: 30px;
-  }
-
-  .add_resest {
-    display: flex;
-    justify-content: center;
-
-    >button {
-      margin-left: 1%;
-    }
-  }
-
-  form button {
-    margin-top: 5%;
+  a {
     background-color: crimson;
     /* Màu của Quản trị mạng ^^ */
     border: none;
@@ -610,44 +509,203 @@ Vue.use(VueAxios, axios);
     /* Safari */
     transition-duration: 0.4s;
     cursor: pointer;
+    outline: none;
+    border-radius: 25px;
+  }
+
+  button:hover {
+    background-color: seagreen;
+  }
+
+  input {
+    padding-left: 1%;
+    outline: none;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+}
+
+.pro_header {
+  display: flex;
+}
+
+.pro_header button {
+  float: right;
+}
+
+.form h2 {
+  margin-bottom: 4%;
+}
+
+div#formAdd {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-row-gap: 30px;
+}
+
+.add_resest {
+  display: flex;
+  justify-content: center;
+
+  > button {
+    margin-left: 1%;
+  }
+}
+
+form button {
+  margin-top: 5%;
+  background-color: crimson; /* Màu của Quản trị mạng ^^ */
+  border: none;
+  color: white;
+  padding: 13px 18px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.item_input label {
+  top: 2%;
+  bottom: 2%;
+}
+
+.item_input input {
+  border-radius: 0.4rem;
+  height: 75%;
+  width: 85%;
+  padding: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 10px 10px 0 rgba(0, 0, 0, 0.19);
+}
+
+.item_input textarea {
+  border-radius: 0.4rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 10px 10px 0 rgba(0, 0, 0, 0.19);
+}
+
+.modal-window-product {
+  position: fixed;
+  background-color: rgba(255, 255, 255, 0.25);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s;
+
+  &:target {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  & > div {
+    width: 60%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 80%;
+    overflow: auto;
+    border-radius: 0.4rem;
+    transform: translate(-50%, -50%);
+    padding: 2em;
+    background-image: linear-gradient(to right, #f2709c, #ff9472);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+    0 20px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+
+  header {
+    font-weight: bold;
+  }
+
+  h1 {
+    font-size: 150%;
+    margin: 0 0 15px;
+  }
+}
+
+.modal-close {
+  color: #aaa;
+  line-height: 50px;
+  font-size: 80%;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 0;
+  width: 70px;
+  text-decoration: none;
+
+  &:hover {
+    color: black;
+  }
+}
+
+///// PAGINATION
+ul li {
+  list-style: none;
+}
+
+.page-item {
+  padding: 10px;
+}
+
+.pagination {
+  display: flex;
+  padding: 20px;
+}
+
+#navigation {
+  margin-left: 30%;
+  display: flex;
+}
+
+.pagination {
+  margin-top: 5%;
+  width: 50%;
+  transform: translate(-50%, -50%);
+  margin-left: 50px;
+  padding: 10px;
+
+  li {
+    display: flex;
+    justify-content: center;
+
+    >button {
+      margin-left: 1%;
+    }
+  }
+
+  button {
+    display: block;
+    width: 100px;
+    height: 40px;
+    line-height: 40px;
+    background-color: #fff;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    -webkit-transition-duration: 0.4s;
+    /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
     border-radius: 4px;
-  }
+    font-size: 17px;
+    margin: 5px;
+    box-shadow: inset 0 5px 10px rgba(0, 0, 0, 0.1),
+    0 2px 5px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
 
-  .item_input label {
-    top: 2%;
-    bottom: 2%;
-  }
-
-  .item_input input {
-    border-radius: 0.4rem;
-    height: 75%;
-    width: 85%;
-    padding: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 10px 10px 0 rgba(0, 0, 0, 0.19);
-  }
-
-  .item_input textarea {
-    border-radius: 0.4rem;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 10px 10px 0 rgba(0, 0, 0, 0.19);
-  }
-
-  .modal-window-product {
-    position: fixed;
-    background-color: rgba(255, 255, 255, 0.25);
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 999;
-    visibility: hidden;
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.3s;
-
-    &:target {
-      visibility: visible;
-      opacity: 1;
-      pointer-events: auto;
+    &:hover,
+    &.active {
+      color: white;
+      background-color: yellow;
     }
 
     &>div {
@@ -700,14 +758,8 @@ Vue.use(VueAxios, axios);
     padding: 10px;
   }
 
-  .pagination {
-    display: flex;
-    padding: 20px;
-  }
-
-  #navigation {
-    margin-left: 30%;
-    display: flex;
+  &:first-child button {
+    border-radius: 30px;
   }
 
   .pagination {
@@ -752,5 +804,5 @@ Vue.use(VueAxios, axios);
     &:last-child button {
       border-radius: 30px;
     }
-  }
+  }}
 </style>

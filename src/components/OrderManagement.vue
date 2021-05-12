@@ -15,37 +15,31 @@
                     </ol>
                 </nav>
             </div>
-        </div>
-        <div class="content list">
-            <button @click.prevent="orderAll">Tất cả đơn hàng</button>
-            <button @click.prevent="orderConfirm"> Đơn chưa xác nhận</button>
-            <button @click.prevent="orderFinished">Hoàn thành</button>
-        </div>
-        <div class="content table">
-            <div class="content table_title">
-                <p>Id</p>
-                <p>Tên khách hàng </p>
-                <p>Địa chỉ</p>
-                <p>Ngày đặt hàng</p>
-                <p>Tổng tiền</p>
-                <p>Tình trạng</p>
-                <p>Chi tiết </p>
-                <p>Hủy đơn</p>
-            </div>
-            <div class="content table_content" v-for="order in orders" :key="order.id">
-                <p>{{ order.id }}</p>
-                <p>{{ order.users.firstName }} {{ order.users.lastName }}</p>
-                <p>{{ order.users.address }}</p>
-                <p>{{ order.created_at }}</p>
-                <p>{{order.product[0].price}}</p>
-                <p>
-                    <button type="submit" id="order_status" @click.prevent="editOrder(order.id)">
-                        <!-- {{ order.order_status.content }} --> hh
-                    </button>
-                </p>
-                <p>
+            <div class="content table">
+                <div class="content table_title">
+                    <p>Id</p>
+                    <p>Tên khách hàng </p>
+                    <p>Địa chỉ</p>
+                    <p>Ngày đặt hàng</p>
+                    <p>Tổng tiền</p>
+                    <p>Tình trạng</p>
+                    <p>Chi tiết </p>
+                    <p>Hủy đơn</p>
+                </div>
+                <div class="content table_content" v-for="order in orders" :key="order.id">
+                    <p>{{ order.id }}</p>
+                    <p>{{ order.users.firstName }} {{ order.users.lastName }}</p>
+                    <p>{{ order.users.address }}</p>
+                    <p>{{ order.created_at }}</p>
+                    <p>{{order.product[0].price*order.quantity}}</p>
+                    <p>
+                        <button type="submit" id="order_status" @click.prevent="editOrder(order.id)">
+                            {{ order.order_status[0].content }}
+                        </button>
+                    </p>
+                    <p>
                     <a class="btn btn-danger" href="#detailOrder">
-                        <button @click.prevent="getOrderDetail(order.users[0].id)"><i class="fas fa-eye"></i></button>
+                        <button @click.prevent="getOrderDetail(order.users.id)"><i class="fas fa-eye"></i></button>
                     </a>
                 </p>
                 <p>
@@ -73,75 +67,77 @@
         </div>
         <router-view></router-view>
     </div>
+    </div>
 </template>
 <script>
-    import Vue from 'vue';
-    import VueAxios from 'vue-axios';
-    import axios from 'axios';
-    Vue.use(VueAxios, axios);
-    import Header from './Header.vue'
-    export default {
-        components: {
-            Header
-        },
-        data() {
-            return {
-                orders: [],
-                Orderdetails: [],
-                currentYear: new Date().getFullYear(),
-                orderbyStatus: 0
-            };
-        },
-        created() {
+import Vue from 'vue';
+import VueAxios from 'vue-axios';
+import axios from 'axios';
+Vue.use(VueAxios, axios);
+import Header from './Header.vue'
+export default {
+   components:{
+         Header
+    },
+    data() {
+        return {
+            orders: [],
+            Orderdetails: [],
+            currentYear: new Date().getFullYear(),
+            orderbyStatus: 0
+        };
+    },
+    created() {
+        this.getData();
+    },
+    methods: {
+        deleteOrder(id) {
+            axios.delete(
+                'https://api-gilo.herokuapp.com/api/order/'+id
+            );
+            alert("Delete order succes");
             this.getData();
         },
-        methods: {
-            deleteOrder(id) {
-                axios.delete(
-                    'https://api-gilo.herokuapp.com/api/order/' + id
-                );
-                alert("Delete order succes");
-                this.getData();
-            },
-            getOrderDetail(id) {
-                let uri = 'https://api-gilo.herokuapp.com/api/order/' + id;
-                this.axios.get(uri).then((response) => {
-                    this.Orderdetails = response.data;
-                });
-            },
-            orderConfirm() {
-                this.orderbyStatus = +1;
-                fetch('https://api-gilo.herokuapp.com/api/order/' + this.orderbyStatus)
-                    .then((response) => response.json())
-                    .then((data) => (this.orders = data));
-            },
-            orderFinished() {
-                this.orderbyStatus = +5;
-                fetch('https://api-gilo.herokuapp.com/api/order/' + this.orderbyStatus)
-                    .then((response) => response.json())
-                    .then((data) => (this.orders = data));
-            },
-            orderAll() {
+        getOrderDetail(id) {
+            let uri = 'https://api-gilo.herokuapp.com/api/order/'+id;
+            this.axios.get(uri).then((response) => {
+                this.Orderdetails = response.data;
+            });           
+        },
+        orderConfirm() {
+            this.orderbyStatus = +1;
+            fetch('https://api-gilo.herokuapp.com/api/order/' + this.orderbyStatus)
+                .then((response) => response.json())
+                .then((data) => (this.orders = data));
+        },
+        orderFinished() {
+            this.orderbyStatus = +5;
+            fetch('https://api-gilo.herokuapp.com/api/order/' +this.orderbyStatus)
+                .then((response) => response.json())
+                .then((data) => (this.orders = data));
+        },
+        orderAll() {
+            fetch('https://api-gilo.herokuapp.com/api/order')
+                .then((response) => response.json())
+                .then((data) => (this.orders = data));
+        },
+        getData() {
+            if (this.orderbyStatus == 0) {
                 fetch('https://api-gilo.herokuapp.com/api/order')
                     .then((response) => response.json())
                     .then((data) => (this.orders = data));
-            },
-            getData() {
-                if (this.orderbyStatus == 0) {
-                    fetch('https://api-gilo.herokuapp.com/api/order')
-                        .then((response) => response.json())
-                        .then((data) => (this.orders = data));
-                }
-                // this.date_order = moment("13:30 9 11 2021").format('YYYY-MM-DD');
-            },
-            editOrder(id) {
-                axios.put(
-                    'https://api-gilo.herokuapp.com/api/order/' + id
-                );
-                this.getData();
-            },
+            }
+            // this.date_order = moment("13:30 9 11 2021").format('YYYY-MM-DD');
         },
-    };
+        editOrder(id) {
+            axios.put(
+               'https://api-gilo.herokuapp.com/api/order/'+id
+            );
+            this.getData();
+        },
+    }
+
+};
 </script>
 <style lang="scss">
     #img_order_detail {

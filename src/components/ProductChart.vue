@@ -17,11 +17,11 @@ export default {
   },
   mounted() {
     this.gradient = this.$refs.canvas
-      .getContext("2d")
-      .createLinearGradient(0, 0, 0, 450);
+        .getContext("2d")
+        .createLinearGradient(0, 0, 0, 450);
     this.gradient2 = this.$refs.canvas
-      .getContext("2d")
-      .createLinearGradient(0, 0, 0, 450);
+        .getContext("2d")
+        .createLinearGradient(0, 0, 0, 450);
 
     this.gradient.addColorStop(0, "rgba(143, 117, 215, 0.9)");
     this.gradient.addColorStop(0.5, "rgba(143, 117, 215, 0.3)");
@@ -31,47 +31,60 @@ export default {
     this.gradient2.addColorStop(0.5, "rgba(0, 231, 255, 1.5)");
     this.gradient2.addColorStop(1, "rgba(0, 231, 255, 0.1)");
 
-    fetch('https://api-gilo.herokuapp.com/api/product_chart')
-      .then((response) => response.json())
-      .then((data) => {
-        const product_month = data;
+    fetch(`https://api-gilo.herokuapp.com/api/product_chart`)
+        .then((response) => response.json())
+        .then((data) => {
+          const product_month = data;
 
-            // render chart here
-            this.renderChart(
-              {
-                labels: [
-                  "Tháng 1",
-                  "Tháng 2",
-                  "Tháng 3",
-                  "Tháng 4",
-                  "Tháng 5",
-                  "Tháng 6",
-                  "Tháng 7",
-                  "Tháng 8",
-                  "Tháng 9",
-                  "Tháng 10",
-                  "Tháng 11",
-                  "Tháng 12",
-                ],
-                datasets: [
-                  {
-                    label: "Sản phẩm",
-                    borderWidth: 1,
-                    pointBorderColor: "white",
-                    backgroundColor: this.gradient,
-                    borderColor: "rgba(1, 116, 188, 0.50)",
-                    pointBackgroundColor: "rgba(171, 71, 188, 1)",
-                    data: product_month,
-                  },
-                  //
-                ],
-              },
-              {
-                responsive: true,
-                maintainAspectRatio: false,
-              }
-            );
-          });
+          fetch(`https://api-gilo.herokuapp.com/api/order_barchart`)
+              .then((response) => response.json())
+              .then((data) => {
+                const order_month = data;
+                // render chart here
+                this.renderChart(
+                    {
+                      labels: [
+                        "Tháng 1",
+                        "Tháng 2",
+                        "Tháng 3",
+                        "Tháng 4",
+                        "Tháng 5",
+                        "Tháng 6",
+                        "Tháng 7",
+                        "Tháng 8",
+                        "Tháng 9",
+                        "Tháng 10",
+                        "Tháng 11",
+                        "Tháng 12",
+                      ],
+                      datasets: [
+                        {
+                          label: "Sản phẩm",
+                          borderWidth: 1,
+                          pointBorderColor: "white",
+                          backgroundColor: this.gradient,
+                          borderColor: "rgba(1, 116, 188, 0.50)",
+                          pointBackgroundColor: "rgba(171, 71, 188, 1)",
+                          data: product_month,
+                        },
+                        {
+                          label: "Đơn hàng",
+                          borderColor: "yellow",
+                          pointBackgroundColor: "white",
+                          pointBorderColor: "white",
+                          borderWidth: 1,
+                          backgroundColor: this.gradient2,
+                          data: order_month,
+                        },
+                      ],
+                    },
+                    {
+                      responsive: true,
+                      maintainAspectRatio: false,
+                    }
+                );
+              });
+        });
   },
 };
 </script>

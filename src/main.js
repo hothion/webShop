@@ -16,10 +16,22 @@ import Profile from './components/Profile.vue';
 // import uploadAdmin from './components/uploadImageFireBase.vue';
 import Notification from './components/Notification.vue';
 import Statistic from './components/Statistic.vue';
+import OrderMonth from "./components/OrderMonth";
+import OrderWeeks from "./components/OrderWeeks";
 const routes = [{
         name: 'login',
         path: '/login',
         component: LoginAdmin
+    },
+    {
+        name: 'order-month',
+        path: '/order-month',
+        component: OrderMonth
+    },
+    {
+        name: 'order-weeks',
+        path: '/order-weeks',
+        component: OrderWeeks
     },
     {
         name: 'chat',
