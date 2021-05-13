@@ -16,8 +16,8 @@
               </nav>
             </div>
             <div class="col-lg-6 col-5 text-right">
-              <a href="#" class="btn btn-sm btn-neutral">New</a>
-              <a href="#" class="btn btn-sm btn-neutral">Filters</a>
+              <a href="#" class="btn btn-sm btn-neutral">Mới</a>
+              <a href="#" class="btn btn-sm btn-neutral">Bộ lọc</a>
             </div>
           </div>
           <!-- Card stats -->
@@ -160,7 +160,7 @@
             <div class="card-header bg-transparent">
               <div class="row align-items-center">
                 <div class="col">
-                  <h6 class="text-uppercase text-muted ls-1 mb-1">Biểu di</h6>
+                  <h6 class="text-uppercase text-muted ls-1 mb-1">Biểu diễn</h6>
                   <h5 class="h3 mb-0">Sản phẩm bán chạy trong ngày</h5>
                 </div>
               </div>
@@ -181,10 +181,10 @@
           <div class="card-header border-0">
             <div class="row align-items-center">
               <div class="col">
-                <h3 class="mb-0">Page visits</h3>
+                <h3 class="mb-0">Lượt truy cập trang</h3>
               </div>
               <div class="col text-right">
-                <a href="#!" class="btn btn-sm btn-primary">See all</a>
+                <a href="#!" class="btn btn-sm btn-primary">Xem tất cả</a>
               </div>
             </div>
           </div>
@@ -193,10 +193,10 @@
             <table class="table align-items-center table-flush">
               <thead class="thead-light">
               <tr>
-                <th scope="col">Page name</th>
-                <th scope="col">Visitors</th>
-                <th scope="col">Unique users</th>
-                <th scope="col">Bounce rate</th>
+                <th scope="col">Tên trang</th>
+                <th scope="col">Khách</th>
+                <th scope="col">Người dùng duy nhất</th>
+                <th scope="col">Tỷ lệ thoát</th>
               </tr>
               </thead>
               <tbody>
@@ -280,10 +280,10 @@
           <div class="card-header border-0">
             <div class="row align-items-center">
               <div class="col">
-                <h3 class="mb-0">Social traffic</h3>
+                <h3 class="mb-0">Phương tiện xã hội</h3>
               </div>
               <div class="col text-right">
-                <a href="#!" class="btn btn-sm btn-primary">See all</a>
+                <a href="#!" class="btn btn-sm btn-primary">Xem tất cả</a>
               </div>
             </div>
           </div>
@@ -292,8 +292,8 @@
             <table class="table align-items-center table-flush">
               <thead class="thead-light">
               <tr>
-                <th scope="col">Referral</th>
-                <th scope="col">Visitors</th>
+                <th scope="col">Giới thiệu</th>
+                <th scope="col">Khách</th>
                 <th scope="col"></th>
               </tr>
               </thead>

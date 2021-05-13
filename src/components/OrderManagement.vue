@@ -39,7 +39,7 @@
                     </p>
                     <p>
                     <a class="btn btn-danger" href="#detailOrder">
-                        <button @click.prevent="getOrderDetail(order.users.id)"><i class="fas fa-eye"></i></button>
+                        <button @click.prevent="getOrderDetail(order.users[0].id)"><i class="fas fa-eye"></i></button>
                     </a>
                 </p>
                 <p>
