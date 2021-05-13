@@ -184,7 +184,7 @@
           </li>
           <li class="page-item">
             <button type="button" class="page-link" v-for="pageNumber in pages.slice(page - 1, page + 5)"
-              v-bind:key="pageNumber" @click="page = pageNumber">
+                    v-bind:key="pageNumber" @click="page = pageNumber">
               {{ pageNumber }}
             </button>
           </li>
@@ -319,14 +319,6 @@ export default {
     this.getData();
   },
   methods: {
-    onChange(e) {
-      const file = e.target.files[0]
-      this.img = file
-      this.newproduct.img = URL.createObjectURL(file)
-
-      console.log(file);
-      alert(this.newproduct.img);
-    },
     getData() {
       fetch('https://api-gilo.herokuapp.com/api/products')
           .then((response) => response.json())
@@ -399,11 +391,11 @@ export default {
       } else {
         return this.paginate(this.products);
       }
-    },
-    watch: {
-      products() {
-        this.setPages();
-      },
+    }
+  },
+  watch: {
+    products() {
+      this.setPages();
     },
     filters: {
       trimWords(value) {
@@ -676,7 +668,7 @@ ul li {
     display: flex;
     justify-content: center;
 
-    >button {
+    > button {
       margin-left: 1%;
     }
   }
@@ -708,7 +700,7 @@ ul li {
       background-color: yellow;
     }
 
-    &>div {
+    & > div {
       width: 60%;
       position: absolute;
       top: 50%;
@@ -720,7 +712,7 @@ ul li {
       padding: 2em;
       background-image: linear-gradient(to right, #f2709c, #ff9472);
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
-        0 20px 20px 0 rgba(0, 0, 0, 0.19);
+      0 20px 20px 0 rgba(0, 0, 0, 0.19);
     }
 
     header {
@@ -787,7 +779,7 @@ ul li {
       font-size: 17px;
       margin: 5px;
       box-shadow: inset 0 5px 10px rgba(0, 0, 0, 0.1),
-        0 2px 5px rgba(0, 0, 0, 0.5);
+      0 2px 5px rgba(0, 0, 0, 0.5);
       transition: all 0.3s ease;
 
       &:hover,
@@ -804,5 +796,6 @@ ul li {
     &:last-child button {
       border-radius: 30px;
     }
-  }}
+  }
+}
 </style>

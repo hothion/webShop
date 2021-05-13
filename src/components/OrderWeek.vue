@@ -24,7 +24,6 @@ export default {
     yeu.innerText = " Add";
     yeu.innerHTML;
     yeu.style.color="red";
-    console.log( yeu.innerText);
     this.gradient = this.$refs.canvas
       .getContext("2d")
       .createLinearGradient(0, 0, 0, 450);
