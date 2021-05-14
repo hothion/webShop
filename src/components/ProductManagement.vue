@@ -401,7 +401,7 @@ export default {
       trimWords(value) {
         return value.split(" ").splice(0, 20).join(" ") + "...";
       },
-    },
+    }
   }
 }
 </script>

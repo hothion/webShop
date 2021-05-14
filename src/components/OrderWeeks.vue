@@ -116,11 +116,15 @@ export default {
           for (let i = this.getWeek; i < this.getWeek + 7; i++) {
             let numberYear = new Date(Date.UTC(this.currentYear, 0, i));
             let formattedDate = moment(numberYear).format("YYYY-MM-DD");
+
             this.listDay.push(formattedDate);
             localStorage.setItem("date", JSON.stringify(this.listDay));
           }
         });
+        const dateYeu = JSON.parse(localStorage.getItem("date"));
+        dateYeu.splice(-7);
         this.listDay.splice(-7);
+        this.reloadPage();
       }
     },
     nextWeek() {
@@ -136,9 +140,11 @@ export default {
           localStorage.setItem("date", JSON.stringify(this.listDay));
         }
       });
+      const dateYeu = JSON.parse(localStorage.getItem("date"));
+      dateYeu.splice(-7);
       this.listDay.splice(-7);
     },
-  },
+  }
 };
 </script>
 <style lang="scss">
