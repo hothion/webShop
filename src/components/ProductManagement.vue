@@ -163,12 +163,12 @@
         <div class="card_pro3">
           <div class="action">
             <div class="edit-dele">
-              <a href="#open-modal">
+              <a href="#open-modal" id="editButton">
                 <button @click.prevent="editProduct(product)">
                   <i class="fas fa-edit"> </i>
                 </button>
               </a>
-              <a @click.prevent="deleteProduct(product.id)">
+              <a @click.prevent="deleteProduct(product.id)" id="deleteButton">
                 <i class="fas fa-trash-alt"></i>
               </a>
             </div>
@@ -446,6 +446,18 @@ export default {
       }
     }
   }
+  #open-modal{
+    .form {
+      h2{
+        font-size: 19px;
+        font-weight: bold;
+      }
+      a{
+        font-size: 17px;
+        color: back;
+      }
+    }
+  }
 
   .card_pro3 {
     height: auto;
@@ -457,11 +469,13 @@ export default {
         margin-bottom: 1px;
 
         a {
+
+        }
+        #editButton{
+          padding: 11px 12px;
           background-color: crimson;
           /* Màu của Quản trị mạng ^^ */
           border: none;
-          color: white;
-          padding: 13px 18px;
           text-align: center;
           text-decoration: none;
           display: inline-block;
@@ -472,10 +486,39 @@ export default {
           transition-duration: 0.4s;
           cursor: pointer;
           border-radius: 15px;
-        }
+          button{
+            border: 1px solid grey;
+            border-radius: 4px;
+            &:hover{
+              transition: 1s all;
+              background-color: green;
+            }
+            &:hover i{
+              color: white;
+            }
 
-        a:hover {
-          background-color: seagreen;
+          }
+        }
+        #deleteButton{
+          background-color: crimson;
+          /* Màu của Quản trị mạng ^^ */
+          border: none;
+          color: white;
+          padding: 13px 16px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          margin: 100px 2px 0px 0px;
+          -webkit-transition-duration: 0.4s;
+          /* Safari */
+          transition-duration: 0.4s;
+          cursor: pointer;
+          border-radius: 15px;
+          &:hover{
+            transition: 1s all;
+            background-color: green;
+          }
         }
       }
     }
@@ -623,9 +666,9 @@ form button {
 }
 
 .modal-close {
-  color: #aaa;
+  color: black;
   line-height: 50px;
-  font-size: 80%;
+  font-size: 20px;
   position: absolute;
   right: 0;
   text-align: center;
@@ -634,7 +677,7 @@ form button {
   text-decoration: none;
 
   &:hover {
-    color: black;
+    color: white;
   }
 }
 
