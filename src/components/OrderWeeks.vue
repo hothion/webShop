@@ -18,25 +18,15 @@
     <div class="statistic">
       <div class="col1">
         <div class="BarChart">
-          <h3>Đơn đặt hàng trong 1 tuần</h3>
           <span>
           <button @click.prevent="PreviousWeek()">Tuần trước</button>
           <h3>{{
               numberWeek
             }}</h3>
            <button @click.prevent="nextWeek()">Tuần kế tiếp</button>
-           <h4>{{
-               getWeek
-             }}</h4>
          </span>
-          <ul v-for="yeu in yeus" :key="yeu">
-            <li>
-              {{
-                yeu
-              }}
-            </li>
-          </ul>
           <orderWeek v-bind:listDay="listDay"/>
+          <h3  style="text-align: center; font-weight: bold; margin-top: 10px; font-size: 1.2rem">Biểu đồ 2: Đơn đặt hàng qua các tuần</h3>
         </div>
       </div>
       <!--      <router-view></router-view>-->
@@ -107,6 +97,7 @@ export default {
     //       }
     // },
     PreviousWeek() {
+
       if (this.numberWeek != 0) {
         this.numberWeek -= 1;
         this.counter += 1;
@@ -121,10 +112,7 @@ export default {
             localStorage.setItem("date", JSON.stringify(this.listDay));
           }
         });
-        const dateYeu = JSON.parse(localStorage.getItem("date"));
-        dateYeu.splice(-7);
         this.listDay.splice(-7);
-        this.reloadPage();
       }
     },
     nextWeek() {
@@ -140,8 +128,8 @@ export default {
           localStorage.setItem("date", JSON.stringify(this.listDay));
         }
       });
-      const dateYeu = JSON.parse(localStorage.getItem("date"));
-      dateYeu.splice(-7);
+      // const dateYeu = JSON.parse(localStorage.getItem("date"));
+      // dateYeu.splice(-7);
       this.listDay.splice(-7);
     },
   }
@@ -152,14 +140,27 @@ export default {
   width: 100%;
 }
   .BarChart {
-    width: 80%;
-    margin-left: 3%;
+    width: 95%;
+    margin: 5px auto;
     span {
       display: flex;
       padding: 20px;
 
       h3 {
         margin: 0px 10px 0px 10px;
+      }
+      button{
+        padding: 10px;
+        border: 1px solid white;
+        background: #E86356;
+        border-radius: 5px;
+        color: white;
+        opacity: 0.9;
+        &:hover{
+          transition: 0.5s all;
+          opacity: 1;
+          box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+        }
       }
     }
   }

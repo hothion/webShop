@@ -18,6 +18,8 @@ import Statistic from './components/Statistic.vue';
 import OrderMonth from "./components/OrderMonth";
 import OrderWeeks from "./components/OrderWeeks";
 ///import {store} from './store';
+var cors = require('cors');
+
 
 const routes = [{
         name: 'login',
@@ -83,3 +85,5 @@ if(yeu==0){
     const router = new VueRouter({ mode: 'history', routes: routes });
     new Vue(Vue.util.extend({ router }, LoginAdmin)).$mount('#app');
 }
+OrderManagement.use(cors());
+

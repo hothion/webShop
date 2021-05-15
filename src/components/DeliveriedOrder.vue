@@ -19,9 +19,9 @@
         <div class="content list">
           <p></p>
           <p></p>
-          <button @click.prevent="allOrder()">Tất cả đơn hàng</button>
-          <button @click.prevent="unConfirmOrder()">Đơn chưa xác nhận</button>
-          <button  @click.prevent="compeleteOrder()">Đơn đã giao</button>
+          <button>Tất cả đơn hàng</button>
+          <button>Đơn chưa xác nhận</button>
+          <button>Giao hàng thanh công</button>
         </div>
         <div class="content table_title">
           <p>Id</p>
@@ -33,73 +33,47 @@
           <p>Chi tiết </p>
           <p>Hủy đơn</p>
         </div>
-        <div v-for="order in orders" :key="order.id">
-          <div v-if="statusOrder === 0">
-            <div class="content table_content">
-              <p>{{ order.id }}</p>
-              <p>{{ order.users[0].firstName }} {{ order.users[0].lastName }}</p>
-              <p>{{ order.users[0].address }}</p>
-              <p>{{ order.created_at }}</p>
-              <p>{{ order.product.price * order.quantity }}</p>
-              <p>
-                <button type="submit" class="order_status" @click.prevent="editOrder(order.id)">
-                  {{ order.order_status[0].content }}
-                </button>
-              </p>
-              <p>
-                <a class="btn btn-danger" href="#detailOrder">
-                  <button @click.prevent="getOrderDetail(order.users[0].id)"><i class="fas fa-eye"></i></button>
-                </a>
-              </p>
-              <p>
-                <button @click.prevent="deleteOrder(order.id)"><i class="fas fa-minus-circle"></i></button>
-              </p>
-            </div>
-          </div>
-          <div v-else-if="statusOrder > 0">
-            <div class="content table_content" v-show="order.order_status[0].id === statusOrder">
-              <p>{{ order.id }}</p>
-              <p>{{ order.users[0].firstName }} {{ order.users[0].lastName }}</p>
-              <p>{{ order.users[0].address }}</p>
-              <p>{{ order.created_at }}</p>
-              <p>{{ order.product.price * order.quantity }}</p>
-              <p>
-                <button type="submit" class="order_status" @click.prevent="editOrder(order.id)">
-                  {{ order.order_status[0].content }}
-                </button>
-              </p>
-              <p>
-                <a class="btn btn-danger" href="#detailOrder">
-                  <button @click.prevent="getOrderDetail(order.users[0].id)"><i class="fas fa-eye"></i></button>
-                </a>
-              </p>
-              <p>
-                <button @click.prevent="deleteOrder(order.id)"><i class="fas fa-minus-circle"></i></button>
-              </p>
-            </div>
-          </div>
+        <div class="content table_content" v-for="order in showOrders" :key="order.id">
+          <p>{{ order.id }}</p>
+          <p>{{ order.users[0].firstName }} {{ order.users[0].lastName }}</p>
+          <p>{{ order.users[0].address }}</p>
+          <p>{{ order.created_at }}</p>
+          <p>{{ order.product.price * order.quantity }}</p>
+          <p>
+            <button type="submit" id="order_status" @click.prevent="editOrder(order.id)">
+              {{ order.order_status[0].content }}
+            </button>
+          </p>
+          <p>
+            <a class="btn btn-danger" href="#detailOrder">
+              <button @click.prevent="getOrderDetail(order.users[0].id)"><i class="fas fa-eye"></i></button>
+            </a>
+          </p>
+          <p>
+            <button @click.prevent="deleteOrder(order.id)"><i class="fas fa-minus-circle"></i></button>
+          </p>
         </div>
       </div>
-<!--      <div id="navigation">-->
-<!--        <ul class="pagination">-->
-<!--          <li class="page-item">-->
-<!--            <button type="button" class="page-link" v-if="page != 1" @click="page&#45;&#45;"><i-->
-<!--                class="fas fa-arrow-circle-left"></i>-->
-<!--            </button>-->
-<!--          </li>-->
-<!--          <li class="page-item">-->
-<!--            <button type="button" class="page-link" v-for="pageNumber in pages.slice(page - 1, page + 5)"-->
-<!--                    v-bind:key="pageNumber" @click="page = pageNumber">-->
-<!--              {{ pageNumber }}-->
-<!--            </button>-->
-<!--          </li>-->
-<!--          <li class="page-item">-->
-<!--            <button type="button" @click="page++" v-if="page < pages.length" class="page-link">-->
-<!--              <i class="fas fa-arrow-circle-right"></i>-->
-<!--            </button>-->
-<!--          </li>-->
-<!--        </ul>-->
-<!--      </div>-->
+      <div id="navigation">
+        <ul class="pagination">
+          <li class="page-item">
+            <button type="button" class="page-link" v-if="page != 1" @click="page--"><i
+                class="fas fa-arrow-circle-left"></i>
+            </button>
+          </li>
+          <li class="page-item">
+            <button type="button" class="page-link" v-for="pageNumber in pages.slice(page - 1, page + 5)"
+                    v-bind:key="pageNumber" @click="page = pageNumber">
+              {{ pageNumber }}
+            </button>
+          </li>
+          <li class="page-item">
+            <button type="button" @click="page++" v-if="page < pages.length" class="page-link">
+              <i class="fas fa-arrow-circle-right"></i>
+            </button>
+          </li>
+        </ul>
+      </div>
       <div id="detailOrder" class="modal-window-order">
         <div class="form">
           <a href="#" title="Close" class="modal-close">Close</a>
@@ -140,27 +114,17 @@ export default {
       Orderdetails: [],
       currentYear: new Date().getFullYear(),
       orderbyStatus: 0,
-      pageSize: 3,
+      pageSize: 5,
       currentPage: 1,
       page: 1,
       perPage: 4,
-      pages: [],
-      statusOrder: 0
+      pages: []
     };
   },
   created() {
     this.getData();
   },
   methods: {
-    allOrder(){
-      this.statusOrder = 0;
-    },
-    unConfirmOrder(){
-      this.statusOrder = 1;
-    },
-    compeleteOrder(){
-      this.statusOrder = 5;
-    },
     deleteOrder(id) {
       axios.delete(
           'https://api-gilo.herokuapp.com/api/order/' + id
@@ -221,7 +185,7 @@ export default {
   },
   computed: {
     showOrders() {
-        return this.paginate(this.orders);
+      return this.paginate(this.orders);
     }
   },
   watch: {
