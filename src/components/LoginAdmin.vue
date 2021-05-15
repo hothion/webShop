@@ -172,7 +172,7 @@ export default {
             password: this.password,
         }
         // `${process.env.MIX_GIFS_API_HOST}/api/product_chart`
-        axios.post('https://damp-woodland-88343.herokuapp.com/api/loginAdmin/', data).then(response => {
+        axios.post('https://api-gilo.herokuapp.com/api/loginShop', data).then(response => {
             if(response.status === 200)
             {
                 console.log("login sucessfully");
