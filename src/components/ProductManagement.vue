@@ -152,11 +152,11 @@
         <div class="card_pro0">
           <img :src="product.img" id="img1" alt="image"/>
         </div>
-        <div class="card_pro2">
+        <div class="card_pro2" style="margin-top: 10px;">
           <span class="font-bold text-title"><h2>{{ product.name }}</h2></span>
-          <p><b>Mô tả :</b> {{ product.description }}</p>
+          <p><strong style="font-weight: bold">Mô tả :</strong> {{ product.description }}</p>
           <span class="price_discount">
-            <p><b>Giá :</b> {{ product.price }} đ</p>
+            <p><strong style="font-weight: bold">Giá :</strong> {{ product.price }} đ</p>
             <p class="discount">- {{ product.discount }}%</p>
           </span>
         </div>
@@ -445,17 +445,9 @@ export default {
         font-weight: bold;
       }
     }
-  }
-  #open-modal{
-    .form {
-      h2{
-        font-size: 19px;
-        font-weight: bold;
-      }
-      a{
-        font-size: 17px;
-        color: back;
-      }
+    h2{
+      font-size: 1.3rem;
+      font-weight: bold;
     }
   }
 
@@ -570,6 +562,7 @@ export default {
 
 .form h2 {
   margin-bottom: 4%;
+  font-size: 1.5rem;
 }
 
 div#formAdd {
