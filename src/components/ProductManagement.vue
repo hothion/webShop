@@ -149,26 +149,26 @@
         >
       </div>
       <div class="main__product" v-for="product in showProducts" :key="product.id">
-        <div class="card_pro0">
+        <div class="card_pro0" style="margin: auto 0;">
           <img :src="product.img" id="img1" alt="image"/>
         </div>
-        <div class="card_pro2">
+        <div class="card_pro2" style="margin: auto 0;">
           <span class="font-bold text-title"><h2>{{ product.name }}</h2></span>
-          <p><b>Mô tả :</b> {{ product.description }}</p>
+          <p><strong style="font-weight: bold">Mô tả :</strong> {{ product.description }}</p>
           <span class="price_discount">
-            <p><b>Giá :</b> {{ product.price }} đ</p>
+            <p><strong style="font-weight: bold">Giá :</strong> {{ product.price }} đ</p>
             <p class="discount">- {{ product.discount }}%</p>
           </span>
         </div>
         <div class="card_pro3">
           <div class="action">
             <div class="edit-dele">
-              <a href="#open-modal">
+              <a href="#open-modal" id="editButton">
                 <button @click.prevent="editProduct(product)">
                   <i class="fas fa-edit"> </i>
                 </button>
               </a>
-              <a @click.prevent="deleteProduct(product.id)">
+              <a @click.prevent="deleteProduct(product.id)" id="deleteButton">
                 <i class="fas fa-trash-alt"></i>
               </a>
             </div>
@@ -294,7 +294,6 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 import VueAxios from 'vue-axios';
 import axios from 'axios';
-
 Vue.use(VueAxios, axios);
 export default {
   data() {
@@ -324,6 +323,7 @@ export default {
           .then((response) => response.json())
           .then((data) => (this.products = data));
     },
+
     deleteProduct(id) {
       axios.delete('https://api-gilo.herokuapp.com/api/products/' + id);
       this.getData();
@@ -415,7 +415,7 @@ export default {
 .main__product {
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 2fr 2fr;
+  grid-template-columns: 1fr 2fr 1fr;
   gap: 30px;
   margin: 10px 0;
   border-left: 5px solid rebeccapurple;
@@ -426,12 +426,12 @@ export default {
   border-radius: 20px;
 
   .card_pro0 {
-    padding-top: 10px;
-
+    padding: 5px 10px;
     img {
       width: 160px;
       height: 150px;
       margin-left: 3%;
+      border-radius: 6px;
     }
   }
 
@@ -444,38 +444,67 @@ export default {
         color: red;
         font-weight: bold;
       }
+      span, p{
+        margin: auto 0;
+      }
+    }
+    h2{
+      font-size: 1.3rem;
+      font-weight: bold;
     }
   }
 
   .card_pro3 {
     height: auto;
-
+    margin: auto 20px;
     .action {
       float: right;
-
       .edit-dele {
         margin-bottom: 1px;
-
-        a {
+        #editButton{
+          padding: 11px 10px;
           background-color: crimson;
-          /* Màu của Quản trị mạng ^^ */
           border: none;
-          color: white;
-          padding: 13px 18px;
           text-align: center;
           text-decoration: none;
           display: inline-block;
           font-size: 16px;
-          margin: 100px 2px 0px 0px;
+          margin: 0 10px;
           -webkit-transition-duration: 0.4s;
-          /* Safari */
           transition-duration: 0.4s;
           cursor: pointer;
-          border-radius: 15px;
-        }
+          border-radius: 10px;
+          button{
+            border: 1px solid grey;
+            border-radius: 4px;
+            &:hover{
+              transition: 1s all;
+              background-color: green;
+            }
+            &:hover i{
+              color: white;
+            }
 
-        a:hover {
-          background-color: seagreen;
+          }
+        }
+        #deleteButton{
+          background-color: crimson;
+          border: none;
+          color: white;
+          padding: 13px 16px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          margin: 0 10px;
+          -webkit-transition-duration: 0.4s;
+          transition-duration: 0.4s;
+          cursor: pointer;
+          border-radius: 10px;
+          &:hover{
+            transition: 1s all;
+            background-color: green;
+          }
         }
       }
     }
@@ -527,6 +556,7 @@ export default {
 
 .form h2 {
   margin-bottom: 4%;
+  font-size: 1.5rem;
 }
 
 div#formAdd {
@@ -623,9 +653,9 @@ form button {
 }
 
 .modal-close {
-  color: #aaa;
+  color: black;
   line-height: 50px;
-  font-size: 80%;
+  font-size: 20px;
   position: absolute;
   right: 0;
   text-align: center;
@@ -634,7 +664,7 @@ form button {
   text-decoration: none;
 
   &:hover {
-    color: black;
+    color: white;
   }
 }
 

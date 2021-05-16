@@ -15,11 +15,11 @@
         <router-link href="#" class="btn btn-sm btn-neutral" to="/order-weeks">Tuần</router-link>
       </div>
     </div>
-    <div class="statistic">
+    <div class="statistic" style="width: 95%; margin: 10px auto">
       <div class="col1">
         <div class="LineChart">
-          <h3>Sản phẩm và đơn hàng qua các tháng</h3>
           <productChart/>
+          <h3 style="text-align: center; font-weight: bold; margin-top: 10px; font-size: 1.2rem"> Biểu đồ 1: Sản phẩm và đơn hàng qua các tháng</h3>
         </div>
       </div>
     </div>

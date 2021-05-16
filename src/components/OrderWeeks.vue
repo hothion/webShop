@@ -18,30 +18,20 @@
     <div class="statistic">
       <div class="col1">
         <div class="BarChart">
-          <h3>Đơn đặt hàng trong 1 tuần</h3>
           <span>
           <button @click.prevent="PreviousWeek()">Tuần trước</button>
           <h3>{{
               numberWeek
             }}</h3>
            <button @click.prevent="nextWeek()">Tuần kế tiếp</button>
-           <h4>{{
-               getWeek
-             }}</h4>
+            <p>{{love}}</p>
          </span>
-          <ul v-for="yeu in yeus" :key="yeu">
-            <li>
-              {{
-                yeu
-              }}
-            </li>
-          </ul>
-          <orderWeek v-bind:listDay="listDay"/>
+          <orderWeek :love="love"/>
+          <h3  style="text-align: center; font-weight: bold; margin-top: 10px; font-size: 1.2rem">Biểu đồ 2: Đơn đặt hàng qua các tuần</h3>
         </div>
       </div>
       <!--      <router-view></router-view>-->
     </div>
-    <Footer></Footer>
   </div>
 
 
@@ -51,7 +41,6 @@
 import orderWeek from "./OrderWeek.vue";
 import moment from "moment";
 import Header from './Header.vue';
-
 export default {
   name: "order",
   data() {
@@ -62,8 +51,8 @@ export default {
       getWeek: [],
       number: 0,
       listDay: [],
-      yeus: [],
       currentYear: new Date().getFullYear(),
+      love: []
     };
   },
   components: {
@@ -76,15 +65,17 @@ export default {
     this.axios.get(uri).then((response) => {
       this.getWeek = response.data;
     });
-    //  var storedNames = JSON.parse(localStorage.getItem("date"));
-    //       console.log(storedNames);
-    //       this.yeus = storedNames;
+    console.log(this.setdate)
+  //  this.getCurrentDay();
   },
   mounted() {
-    let yeu = localStorage.getItem('date');
-    console.log(yeu);
+    console.log(this.setdate)
   },
   methods: {
+    increment() {
+     this.setdate = this.$store.commit('increment')
+    // console.log(this.$store.state.count)
+    },
     getNumberWeek() {
       this.axios.get('https://api-gilo.herokuapp.com/api/getNumber').then((response) => {
         this.numberWeek = response.data;
@@ -98,16 +89,18 @@ export default {
         location.reload();
       }
     },
-    // getCurrentDay(){
-    //   for (let i = this.getWeek; i < this.getWeek ; i++) {
-    //         let numberYear = new Date(Date.UTC(this.currentYear, 0, i));
-    //         let formattedDate = moment(numberYear).format("YYYY-MM-DD");
-    //         this.listDay.push(formattedDate);
-    //        localStorage.setItem("date", JSON.stringify(this.listDay));
-    //       }
-    // },
+    getCurrentDay(){
+      for (let i = this.getWeek; i < this.getWeek ; i++) {
+            let numberYear = new Date(Date.UTC(this.currentYear, 0, i));
+            let formattedDate = moment(numberYear).format("DD-MM-YYYY");
+            this.listDay.push(formattedDate);
+            this.$store.commit('setNewDate', this.listDay);
+           localStorage.setItem("date", JSON.stringify(this.listDay));
+          }
+    },
     PreviousWeek() {
       if (this.numberWeek != 0) {
+        this.listDay.splice(-7);
         this.numberWeek -= 1;
         this.counter += 1;
         let uri = 'https://api-gilo.herokuapp.com/api/getWeek/' + this.counter;
@@ -115,16 +108,17 @@ export default {
           this.getWeek = response.data;
           for (let i = this.getWeek; i < this.getWeek + 7; i++) {
             let numberYear = new Date(Date.UTC(this.currentYear, 0, i));
-            let formattedDate = moment(numberYear).format("YYYY-MM-DD");
+            let formattedDate = moment(numberYear).format("DD-MM-YYYY");
 
             this.listDay.push(formattedDate);
-            localStorage.setItem("date", JSON.stringify(this.listDay));
+           localStorage.setItem("date", JSON.stringify(this.listDay));
           }
         });
-        const dateYeu = JSON.parse(localStorage.getItem("date"));
-        dateYeu.splice(-7);
+        //const dateInLocal = JSON.parse(localStorage.getItem("date"));
         this.listDay.splice(-7);
-        this.reloadPage();
+        this.$store.commit('setNewDate', this.listDay);
+        this.love = this.$store.state.dateWeek
+        console.log(this.$store.state.dateWeek);
       }
     },
     nextWeek() {
@@ -135,13 +129,13 @@ export default {
         this.getWeek = response.data;
         for (let i = this.getWeek; i < this.getWeek + 7; i++) {
           let numberYear = new Date(Date.UTC(this.currentYear, 0, i));
-          let formattedDate = moment(numberYear).format("YYYY-MM-DD");
+          let formattedDate = moment(numberYear).format("DD-MM-YYYY");
           this.listDay.push(formattedDate);
           localStorage.setItem("date", JSON.stringify(this.listDay));
         }
       });
-      const dateYeu = JSON.parse(localStorage.getItem("date"));
-      dateYeu.splice(-7);
+      // const dateYeu = JSON.parse(localStorage.getItem("date"));
+      // dateYeu.splice(-7);
       this.listDay.splice(-7);
     },
   }
@@ -152,14 +146,27 @@ export default {
   width: 100%;
 }
   .BarChart {
-    width: 80%;
-    margin-left: 3%;
+    width: 95%;
+    margin: 5px auto;
     span {
       display: flex;
       padding: 20px;
 
       h3 {
         margin: 0px 10px 0px 10px;
+      }
+      button{
+        padding: 10px;
+        border: 1px solid white;
+        background: #E86356;
+        border-radius: 5px;
+        color: white;
+        opacity: 0.9;
+        &:hover{
+          transition: 0.5s all;
+          opacity: 1;
+          box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+        }
       }
     }
   }

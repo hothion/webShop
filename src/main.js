@@ -17,8 +17,8 @@ import Notification from './components/Notification.vue';
 import Statistic from './components/Statistic.vue';
 import OrderMonth from "./components/OrderMonth";
 import OrderWeeks from "./components/OrderWeeks";
-///import {store} from './store';
-
+Vue.config.productionTip = false
+import {store} from "./store";
 const routes = [{
         name: 'login',
         path: '/login',
@@ -75,11 +75,19 @@ const routes = [{
         component: Navigation
     }
 ]
-let yeu = 0;
-if(yeu==0){
-    const router = new VueRouter({ mode: 'history', routes: routes });
-    new Vue( Vue.util.extend({ router }, Navigation)).$mount('#app');
-}else{
-    const router = new VueRouter({ mode: 'history', routes: routes });
-    new Vue(Vue.util.extend({ router }, LoginAdmin)).$mount('#app');
-}
+// let yeu = 0;
+// if(yeu==0) {
+//     const router = new VueRouter({mode: 'history', routes: routes});
+  //  new Vue(Vue.util.extend({router}, Navigation)).$mount('#app');
+//}
+    // }else{
+//     // const router = new VueRouter({ mode: 'history', routes: routes });
+//     // new Vue(Vue.util.extend({ router }, LoginAdmin)).$mount('#app');
+// }
+const router = new VueRouter({mode: 'history', routes: routes});
+
+new Vue({
+    render: h => h(Navigation),
+    router,
+    store
+}).$mount('#app')
