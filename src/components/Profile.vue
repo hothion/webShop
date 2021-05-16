@@ -42,16 +42,16 @@
             <div class="card-body pt-0">
               <div class="text-center">
                 <h5 class="h3">
-                  {{itemDatas.account}}<span class="font-weight-light">, 27</span>
+                  {{itemDatas.account}}<span class="font-weight-light">, 21</span>
                 </h5>
                 <div class="h5 font-weight-300">
-                  <i class="ni location_pin mr-2"></i>Bucharest, Romania
+                  <i class="ni location_pin mr-2"></i>Shop admin
                 </div>
                 <div class="h5 mt-4">
-                  <i class="ni business_briefcase-24 mr-2"></i>Solution Manager - Creative Tim Officer
+                  <i class="ni business_briefcase-24 mr-2"></i>Quản lí cửa hàng shop
                 </div>
                 <div>
-                  <i class="ni education_hat mr-2"></i>University of Computer Science
+                  <i class="ni education_hat mr-2"></i>Sinh viên CNTT
                 </div>
               </div>
             </div>

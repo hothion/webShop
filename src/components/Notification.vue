@@ -6,7 +6,7 @@
                   <h6 class="text-sm text-muted m-0">Bạn có<strong class="text-primary">13</strong> thông báo.</h6>
                 </div>
                 <!-- List group -->
-                <div class="list-group list-group-flush" v-for="nontification in nontifications" :key="nontification.id">
+                <div class="list-group list-group-flush" v-for="(nontification, i) in nontifications" :key="i">
                   <a href="#!" class="list-group-item list-group-item-action">
                     <div class="row align-items-center">
                       <div class="col-auto">
@@ -48,10 +48,10 @@ export default {
    methods: {
        getNonti(){
         // this.id=this.$route.params.id;
-        axios.get("http://api-gilo.herokuapp.com/api/nofication").then((response) => {
+        const id_shop = JSON.parse(localStorage.getItem("data"));
+        axios.get("https://api-gilo.herokuapp.com/api/noficationShop/" + id_shop).then((response) => {
         this.nontifications = response.data;
-      })
-        
+      });  
        }
     }
 }
