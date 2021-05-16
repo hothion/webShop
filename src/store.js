@@ -15,6 +15,5 @@ export const store = new Vuex.Store({
         setNewDate (state, newValue) {
             state.dateWeek = newValue
         },
-
     }
 })

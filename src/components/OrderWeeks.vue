@@ -19,14 +19,14 @@
       <div class="col1">
         <div class="BarChart">
           <span>
-          <button @click.prevent="getCurrentDay()">Tuần trước</button>
           <button @click.prevent="PreviousWeek()">Tuần trước</button>
           <h3>{{
               numberWeek
             }}</h3>
            <button @click.prevent="nextWeek()">Tuần kế tiếp</button>
+            <p>{{love}}</p>
          </span>
-          <orderWeek v-bind:listDay="listDay"/>
+          <orderWeek :love="love"/>
           <h3  style="text-align: center; font-weight: bold; margin-top: 10px; font-size: 1.2rem">Biểu đồ 2: Đơn đặt hàng qua các tuần</h3>
         </div>
       </div>
@@ -41,7 +41,6 @@
 import orderWeek from "./OrderWeek.vue";
 import moment from "moment";
 import Header from './Header.vue';
-import {store} from "../store";
 export default {
   name: "order",
   data() {
@@ -52,9 +51,8 @@ export default {
       getWeek: [],
       number: 0,
       listDay: [],
-      yeus: [],
-      setdate: store.state.dateWeek,
       currentYear: new Date().getFullYear(),
+      love: []
     };
   },
   components: {
@@ -67,12 +65,16 @@ export default {
     this.axios.get(uri).then((response) => {
       this.getWeek = response.data;
     });
-    this.getCurrentDay();
+    console.log(this.setdate)
+  //  this.getCurrentDay();
+  },
+  mounted() {
+    console.log(this.setdate)
   },
   methods: {
     increment() {
-      this.$store.commit('setNewDate')
-      console.log(this.$store.state.dateWeek)
+     this.setdate = this.$store.commit('increment')
+    // console.log(this.$store.state.count)
     },
     getNumberWeek() {
       this.axios.get('https://api-gilo.herokuapp.com/api/getNumber').then((response) => {
@@ -109,13 +111,14 @@ export default {
             let formattedDate = moment(numberYear).format("DD-MM-YYYY");
 
             this.listDay.push(formattedDate);
-          localStorage.setItem("date", JSON.stringify(this.listDay));
+           localStorage.setItem("date", JSON.stringify(this.listDay));
           }
         });
         //const dateInLocal = JSON.parse(localStorage.getItem("date"));
         this.listDay.splice(-7);
         this.$store.commit('setNewDate', this.listDay);
-       // console.log(this.$store.state.dateWeek);
+        this.love = this.$store.state.dateWeek
+        console.log(this.$store.state.dateWeek);
       }
     },
     nextWeek() {

@@ -1,12 +1,12 @@
 <script>
 import {Line} from "vue-chartjs";
 import {store} from "../store";
-
 export default {
   extends: Line,
-  props: {
-    listDay: {
-      type: Array
+  props : {
+    love: {
+      type: Array,
+      required: true
     }
   },
   data() {
@@ -19,16 +19,9 @@ export default {
     };
   },
   created() {
-    console.log(this.$store.state.dateWeek)
-    //this.setdate();
+    console.log(this.love);
   },
-  methods:{
-    setdate() {
-      this.dateTimeStore = JSON.parse(localStorage.getItem("date"));
-      this.$store.commit('setNewDate',this.dateTimeStore);
-      console.log(this.$store.state.dateWeek)
-    }
-  },
+
   mounted() {
     let yeu = document.createElement('button');
     yeu.innerText = " Add";
@@ -40,7 +33,9 @@ export default {
     this.gradient.addColorStop(0, "rgba(255, 99, 71, 0.8)");
     this.gradient.addColorStop(0.5, "rgba(255, 99, 71, 0.6)");
     this.gradient.addColorStop(1, "rgba(255, 99, 71, 0.4)");
-
+    this.love.map(yeu=>{
+      yeu
+    });
     fetch('https://api-gilo.herokuapp.com/api/weekChart')
         .then((response) => response.json())
         .then((data) => {
