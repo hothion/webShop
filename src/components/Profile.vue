@@ -2,8 +2,6 @@
      <div class="main-content" id="panel">
     <!-- Topnav -->
     <Header></Header>
-    <!-- Header -->
-    <!-- Header -->
     <div class="header pb-6 d-flex align-items-center" style="min-height: 500px; background-image: url(../assets/img/theme/profile-cover.jpg); background-size: cover; background-position: center top;">
       <!-- Mask -->
       <span class="mask bg-gradient-default opacity-8"></span>

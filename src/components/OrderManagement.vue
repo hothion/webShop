@@ -19,9 +19,9 @@
         <div class="content list">
           <p></p>
           <p></p>
-          <button @click.prevent="allOrder()">Tất cả đơn hàng</button>
+          <button @click.prevent="allOrder()">Tất cả đơn hàng {{ formattedDate }}</button>
           <button @click.prevent="unConfirmOrder()">Đơn chưa xác nhận</button>
-          <button  @click.prevent="compeleteOrder()">Đơn đã giao</button>
+          <button @click.prevent="compeleteOrder()">Đơn đã giao</button>
         </div>
         <div class="content table_title">
           <p>Id</p>
@@ -33,14 +33,14 @@
           <p>Chi tiết </p>
           <p>Hủy đơn</p>
         </div>
-        <div v-for="order in orders" :key="order.id">
-          <div v-if="statusOrder === 0">
+        <div v-if="statusOrder === 0">
+          <div v-for="order in showOrders" :key="order.id">
             <div class="content table_content">
               <p>{{ order.id }}</p>
               <p>{{ order.users[0].firstName }} {{ order.users[0].lastName }}</p>
               <p>{{ order.users[0].address }}</p>
               <p>{{ order.created_at }}</p>
-              <p>{{ order.product.price * order.quantity }}</p>
+              <p>{{ order.product[0].price * order.quantity }}</p>
               <p>
                 <button type="submit" class="order_status" @click.prevent="editOrder(order.id)">
                   {{ order.order_status[0].content }}
@@ -56,13 +56,17 @@
               </p>
             </div>
           </div>
-          <div v-else-if="statusOrder > 0">
+        </div>
+        <div v-else-if="statusOrder > 0">
+          <div v-for="order in orders" :key="order.id">
             <div class="content table_content" v-show="order.order_status[0].id === statusOrder">
-              <p>{{ order.id }}</p>
+              <p>
+                {{ order.id }}
+              </p>
               <p>{{ order.users[0].firstName }} {{ order.users[0].lastName }}</p>
               <p>{{ order.users[0].address }}</p>
               <p>{{ order.created_at }}</p>
-              <p>{{ order.product.price * order.quantity }}</p>
+              <p>{{ order.product[0].price * order.quantity }}</p>
               <p>
                 <button type="submit" class="order_status" @click.prevent="editOrder(order.id)">
                   {{ order.order_status[0].content }}
@@ -80,26 +84,26 @@
           </div>
         </div>
       </div>
-<!--      <div id="navigation">-->
-<!--        <ul class="pagination">-->
-<!--          <li class="page-item">-->
-<!--            <button type="button" class="page-link" v-if="page != 1" @click="page&#45;&#45;"><i-->
-<!--                class="fas fa-arrow-circle-left"></i>-->
-<!--            </button>-->
-<!--          </li>-->
-<!--          <li class="page-item">-->
-<!--            <button type="button" class="page-link" v-for="pageNumber in pages.slice(page - 1, page + 5)"-->
-<!--                    v-bind:key="pageNumber" @click="page = pageNumber">-->
-<!--              {{ pageNumber }}-->
-<!--            </button>-->
-<!--          </li>-->
-<!--          <li class="page-item">-->
-<!--            <button type="button" @click="page++" v-if="page < pages.length" class="page-link">-->
-<!--              <i class="fas fa-arrow-circle-right"></i>-->
-<!--            </button>-->
-<!--          </li>-->
-<!--        </ul>-->
-<!--      </div>-->
+      <div id="navigation" v-if="statusOrder === 0">
+        <ul class="pagination">
+          <li class="page-item">
+            <button type="button" class="page-link" v-if="page != 1" @click="page--"><i
+                class="fas fa-arrow-circle-left"></i>
+            </button>
+          </li>
+          <li class="page-item">
+            <button type="button" class="page-link" v-for="pageNumber in pages.slice(page - 1, page + 5)"
+                    v-bind:key="pageNumber" @click="page = pageNumber">
+              {{ pageNumber }}
+            </button>
+          </li>
+          <li class="page-item">
+            <button type="button" @click="page++" v-if="page < pages.length" class="page-link">
+              <i class="fas fa-arrow-circle-right"></i>
+            </button>
+          </li>
+        </ul>
+      </div>
       <div id="detailOrder" class="modal-window-order">
         <div class="form">
           <a href="#" title="Close" class="modal-close">Close</a>
@@ -129,6 +133,7 @@ import axios from 'axios';
 
 Vue.use(VueAxios, axios);
 import Header from './Header.vue'
+import moment from "moment";
 
 export default {
   components: {
@@ -143,22 +148,34 @@ export default {
       pageSize: 3,
       currentPage: 1,
       page: 1,
-      perPage: 4,
+      perPage: 5,
       pages: [],
-      statusOrder: 0
+      statusOrder: 0,
+      formattedDate: ''
     };
   },
   created() {
     this.getData();
+    this.formatDate();
+  },
+  mounted() {
+    this.getData();
   },
   methods: {
-    allOrder(){
+    formatDate(){
+      this.getData();
+      for (let i =0; i< this.orders.length; i++) {
+        this.formattedDate = moment(this.orders[i].created_at).format('YYYYMMDD');
+        console.log(this.formattedDate);
+      }
+    },
+    allOrder() {
       this.statusOrder = 0;
     },
-    unConfirmOrder(){
+    unConfirmOrder() {
       this.statusOrder = 1;
     },
-    compeleteOrder(){
+    compeleteOrder() {
       this.statusOrder = 5;
     },
     deleteOrder(id) {
@@ -201,7 +218,7 @@ export default {
     },
     editOrder(id) {
       axios.put(
-          'https://api-gilo.herokuapp.com/api/order/' + id
+          'https://api-gilo.herokuapp.com/api/orderUpdate/' + id
       );
       this.getData();
     },
@@ -221,7 +238,7 @@ export default {
   },
   computed: {
     showOrders() {
-        return this.paginate(this.orders);
+      return this.paginate(this.orders);
     }
   },
   watch: {
@@ -257,7 +274,9 @@ export default {
   grid-row-gap: 20px;
   border-radius: 10px;
 }
-
+.table_content p{
+  margin: auto 0;
+}
 .content .table {
   width: 85%;
   margin-left: auto;
@@ -330,12 +349,14 @@ export default {
     }
   }
 }
+
 .content .list {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1.1fr;
   margin-bottom: 10px;
   float: right;
 }
+
 .content .list button {
   padding: 11px 9px;
   border: 1px solid white;
@@ -343,13 +364,15 @@ export default {
   border-radius: 6px;
   opacity: 0.9;
   font-size: 16.5px;
-  &:hover{
+
+  &:hover {
     transition: 0.6s all;
     opacity: 1;
     color: white;
     box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
   }
 }
+
 .modal-window-order {
   position: fixed;
   background-color: rgba(255, 255, 255, 0.25);
@@ -409,6 +432,7 @@ export default {
     color: black;
   }
 }
+
 ///// PAGINATION
 ul li {
   list-style: none;
@@ -495,7 +519,6 @@ ul li {
       margin: 0 0 15px;
     }
   }
-
 
 
   ///// PAGINATION

@@ -149,10 +149,10 @@
         >
       </div>
       <div class="main__product" v-for="product in showProducts" :key="product.id">
-        <div class="card_pro0">
+        <div class="card_pro0" style="margin: auto 0;">
           <img :src="product.img" id="img1" alt="image"/>
         </div>
-        <div class="card_pro2" style="margin-top: 10px;">
+        <div class="card_pro2" style="margin: auto 0;">
           <span class="font-bold text-title"><h2>{{ product.name }}</h2></span>
           <p><strong style="font-weight: bold">Mô tả :</strong> {{ product.description }}</p>
           <span class="price_discount">
@@ -294,7 +294,6 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 import VueAxios from 'vue-axios';
 import axios from 'axios';
-
 Vue.use(VueAxios, axios);
 export default {
   data() {
@@ -324,6 +323,7 @@ export default {
           .then((response) => response.json())
           .then((data) => (this.products = data));
     },
+
     deleteProduct(id) {
       axios.delete('https://api-gilo.herokuapp.com/api/products/' + id);
       this.getData();
@@ -426,12 +426,12 @@ export default {
   border-radius: 20px;
 
   .card_pro0 {
-    padding-top: 10px;
-
+    padding: 5px 10px;
     img {
       width: 160px;
       height: 150px;
       margin-left: 3%;
+      border-radius: 6px;
     }
   }
 
@@ -444,6 +444,9 @@ export default {
         color: red;
         font-weight: bold;
       }
+      span, p{
+        margin: auto 0;
+      }
     }
     h2{
       font-size: 1.3rem;
@@ -453,31 +456,24 @@ export default {
 
   .card_pro3 {
     height: auto;
-
+    margin: auto 20px;
     .action {
       float: right;
-
       .edit-dele {
         margin-bottom: 1px;
-
-        a {
-
-        }
         #editButton{
-          padding: 11px 12px;
+          padding: 11px 10px;
           background-color: crimson;
-          /* Màu của Quản trị mạng ^^ */
           border: none;
           text-align: center;
           text-decoration: none;
           display: inline-block;
           font-size: 16px;
-          margin: 100px 2px 0px 0px;
+          margin: 0 10px;
           -webkit-transition-duration: 0.4s;
-          /* Safari */
           transition-duration: 0.4s;
           cursor: pointer;
-          border-radius: 15px;
+          border-radius: 10px;
           button{
             border: 1px solid grey;
             border-radius: 4px;
@@ -493,7 +489,6 @@ export default {
         }
         #deleteButton{
           background-color: crimson;
-          /* Màu của Quản trị mạng ^^ */
           border: none;
           color: white;
           padding: 13px 16px;
@@ -501,12 +496,11 @@ export default {
           text-decoration: none;
           display: inline-block;
           font-size: 16px;
-          margin: 100px 2px 0px 0px;
+          margin: 0 10px;
           -webkit-transition-duration: 0.4s;
-          /* Safari */
           transition-duration: 0.4s;
           cursor: pointer;
-          border-radius: 15px;
+          border-radius: 10px;
           &:hover{
             transition: 1s all;
             background-color: green;
