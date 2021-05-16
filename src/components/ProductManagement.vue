@@ -415,7 +415,7 @@ export default {
 .main__product {
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 2fr 2fr;
+  grid-template-columns: 1fr 2fr 1fr;
   gap: 30px;
   margin: 10px 0;
   border-left: 5px solid rebeccapurple;

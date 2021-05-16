@@ -19,6 +19,7 @@
       <div class="col1">
         <div class="BarChart">
           <span>
+          <button @click.prevent="getCurrentDay()">Tuần trước</button>
           <button @click.prevent="PreviousWeek()">Tuần trước</button>
           <h3>{{
               numberWeek
@@ -31,7 +32,6 @@
       </div>
       <!--      <router-view></router-view>-->
     </div>
-    <Footer></Footer>
   </div>
 
 
@@ -41,7 +41,7 @@
 import orderWeek from "./OrderWeek.vue";
 import moment from "moment";
 import Header from './Header.vue';
-
+import {store} from "../store";
 export default {
   name: "order",
   data() {
@@ -53,6 +53,7 @@ export default {
       number: 0,
       listDay: [],
       yeus: [],
+      setdate: store.state.dateWeek,
       currentYear: new Date().getFullYear(),
     };
   },
@@ -66,15 +67,13 @@ export default {
     this.axios.get(uri).then((response) => {
       this.getWeek = response.data;
     });
-    //  var storedNames = JSON.parse(localStorage.getItem("date"));
-    //       console.log(storedNames);
-    //       this.yeus = storedNames;
-  },
-  mounted() {
-    let yeu = localStorage.getItem('date');
-    console.log(yeu);
+    this.getCurrentDay();
   },
   methods: {
+    increment() {
+      this.$store.commit('setNewDate')
+      console.log(this.$store.state.dateWeek)
+    },
     getNumberWeek() {
       this.axios.get('https://api-gilo.herokuapp.com/api/getNumber').then((response) => {
         this.numberWeek = response.data;
@@ -88,17 +87,18 @@ export default {
         location.reload();
       }
     },
-    // getCurrentDay(){
-    //   for (let i = this.getWeek; i < this.getWeek ; i++) {
-    //         let numberYear = new Date(Date.UTC(this.currentYear, 0, i));
-    //         let formattedDate = moment(numberYear).format("YYYY-MM-DD");
-    //         this.listDay.push(formattedDate);
-    //        localStorage.setItem("date", JSON.stringify(this.listDay));
-    //       }
-    // },
+    getCurrentDay(){
+      for (let i = this.getWeek; i < this.getWeek ; i++) {
+            let numberYear = new Date(Date.UTC(this.currentYear, 0, i));
+            let formattedDate = moment(numberYear).format("DD-MM-YYYY");
+            this.listDay.push(formattedDate);
+            this.$store.commit('setNewDate', this.listDay);
+           localStorage.setItem("date", JSON.stringify(this.listDay));
+          }
+    },
     PreviousWeek() {
-
       if (this.numberWeek != 0) {
+        this.listDay.splice(-7);
         this.numberWeek -= 1;
         this.counter += 1;
         let uri = 'https://api-gilo.herokuapp.com/api/getWeek/' + this.counter;
@@ -106,13 +106,16 @@ export default {
           this.getWeek = response.data;
           for (let i = this.getWeek; i < this.getWeek + 7; i++) {
             let numberYear = new Date(Date.UTC(this.currentYear, 0, i));
-            let formattedDate = moment(numberYear).format("YYYY-MM-DD");
+            let formattedDate = moment(numberYear).format("DD-MM-YYYY");
 
             this.listDay.push(formattedDate);
-            localStorage.setItem("date", JSON.stringify(this.listDay));
+          localStorage.setItem("date", JSON.stringify(this.listDay));
           }
         });
+        //const dateInLocal = JSON.parse(localStorage.getItem("date"));
         this.listDay.splice(-7);
+        this.$store.commit('setNewDate', this.listDay);
+       // console.log(this.$store.state.dateWeek);
       }
     },
     nextWeek() {
@@ -123,7 +126,7 @@ export default {
         this.getWeek = response.data;
         for (let i = this.getWeek; i < this.getWeek + 7; i++) {
           let numberYear = new Date(Date.UTC(this.currentYear, 0, i));
-          let formattedDate = moment(numberYear).format("YYYY-MM-DD");
+          let formattedDate = moment(numberYear).format("DD-MM-YYYY");
           this.listDay.push(formattedDate);
           localStorage.setItem("date", JSON.stringify(this.listDay));
         }

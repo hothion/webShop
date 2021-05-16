@@ -15,10 +15,19 @@ export default {
       gradient2: null,
       found: [],
       dateLocal: store.state.dateWeek,
+      dateTimeStore: []
     };
   },
   created() {
-    console.log(this.dateLocal);
+    console.log(this.$store.state.dateWeek)
+    //this.setdate();
+  },
+  methods:{
+    setdate() {
+      this.dateTimeStore = JSON.parse(localStorage.getItem("date"));
+      this.$store.commit('setNewDate',this.dateTimeStore);
+      console.log(this.$store.state.dateWeek)
+    }
   },
   mounted() {
     let yeu = document.createElement('button');
@@ -28,7 +37,6 @@ export default {
     this.gradient = this.$refs.canvas
         .getContext("2d")
         .createLinearGradient(0, 0, 0, 450);
-
     this.gradient.addColorStop(0, "rgba(255, 99, 71, 0.8)");
     this.gradient.addColorStop(0.5, "rgba(255, 99, 71, 0.6)");
     this.gradient.addColorStop(1, "rgba(255, 99, 71, 0.4)");

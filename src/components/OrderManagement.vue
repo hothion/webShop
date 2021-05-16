@@ -39,7 +39,9 @@
               <p>{{ order.id }}</p>
               <p>{{ order.users[0].firstName }} {{ order.users[0].lastName }}</p>
               <p>{{ order.users[0].address }}</p>
-              <p>{{ order.created_at }}</p>
+              <p class="create_at">
+                {{ order.created_at }}
+              </p>
               <p>{{ order.product[0].price * order.quantity }}</p>
               <p>
                 <button type="submit" class="order_status" @click.prevent="editOrder(order.id)">
@@ -63,10 +65,18 @@
               <p>
                 {{ order.id }}
               </p>
-              <p>{{ order.users[0].firstName }} {{ order.users[0].lastName }}</p>
-              <p>{{ order.users[0].address }}</p>
-              <p>{{ order.created_at }}</p>
-              <p>{{ order.product[0].price * order.quantity }}</p>
+              <p>
+                {{ order.users[0].firstName }} {{ order.users[0].lastName }}
+              </p>
+              <p>
+                {{ order.users[0].address }}
+              </p>
+              <p class="create_at">
+                {{ order.created_at }}
+              </p>
+              <p>
+                {{ order.product[0].price * order.quantity }}
+              </p>
               <p>
                 <button type="submit" class="order_status" @click.prevent="editOrder(order.id)">
                   {{ order.order_status[0].content }}
@@ -162,9 +172,9 @@ export default {
     this.getData();
   },
   methods: {
-    formatDate(){
+    formatDate() {
       this.getData();
-      for (let i =0; i< this.orders.length; i++) {
+      for (let i = 0; i < this.orders.length; i++) {
         this.formattedDate = moment(this.orders[i].created_at).format('YYYYMMDD');
         console.log(this.formattedDate);
       }
@@ -265,6 +275,13 @@ export default {
 
 }
 
+.create_at {
+  white-space: nowrap!important;
+  width: 98px!important;
+  overflow: hidden!important;
+  text-overflow: clip!important;
+}
+
 .content .table_content,
 .content .table_title {
   width: 100%;
@@ -274,9 +291,11 @@ export default {
   grid-row-gap: 20px;
   border-radius: 10px;
 }
-.table_content p{
+
+.table_content p {
   margin: auto 0;
 }
+
 .content .table {
   width: 85%;
   margin-left: auto;
