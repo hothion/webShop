@@ -38,15 +38,15 @@
           <label for="search1"><i class="fa fa-search" aria-hidden="true"></i></label>
           <input type="text" v-model="searchText" @keyup="search()" id="search1" placeholder="Tìm kiếm trên chat..." />
         </div>
-        <div id="contacts">
-          <ul v-for="user in users" :key="user.id" v-on:click="sendselect(user.id_user)">
-            <li class="contact" v-if="user.id_user!=1">
+        <div id="contacts" v-for="(user, i) in users" :key="i" v-on:click="sendselect(user.id_user)" >
+          <ul v-if="user.id_user !=1 ">
+            <li class="contact">
               <div class="wrap">
                 <span class="contact-status online"></span>
-                <img :src="user.images">
+                <img :src="user.img">
                 <div class="meta">
                   <p class="name">{{user.account}}</p>
-                  <p class="preview">{{user.content}}v</p>
+                  <p class="preview">{{user.content}}</p>
                 </div>
               </div>
             </li>
@@ -60,7 +60,7 @@
       </div>
       <div class="content">
         <div class="contact-profile" v-if="messages.id_user==id_user ">
-          <imgs :src="messages.image" alt="" />
+          <imgs :src="messages.img" alt="" />
           <p>{{messages.account}}</p>
           <div class="social-media">
             <!-- <i class="fa fa-facebook" aria-hidden="true"></i>
@@ -74,11 +74,11 @@
         <div class="messages">
           <ul v-for="message in messages" :key="message.id">
             <li class="sent" v-if="message.id_user==id_usser ">
-              <img :src="message.images">
+              <img :src="message.img">
               <p>{{message.content}}</p>
             </li>
             <li class="replies" v-else-if=" message.id_user === 1 && message.id_admin === id_ad">
-              <img :src="message.images">
+              <img :src="message.img">
               <p>{{message.content}}</p>
             </li>
           </ul>
@@ -120,7 +120,7 @@
       setInterval(() => {
         axios({
           method: "GET",
-          url: `https://api-gilo.herokuapp.com/api/chatcustomer/`,
+          url: `http://api-gilo.herokuapp.com/api/chatcustomer`,
           data: null
         }).then(res => {
           this.setState({chat: res.data});
@@ -137,7 +137,7 @@
     created() {
       this.loadListChat();
       //const formdis=this.form;
-      this.id_user = localStorage.getItem("user_id");
+      this.id_usser = localStorage.getItem("user_id");
       this.id_ad = JSON.parse(localStorage.getItem("data"));
     },
 
@@ -160,6 +160,7 @@
       },
 
       sendMessage() {
+        
         let Mess = {
           content: this.content,
           id_user: localStorage.getItem('data')
@@ -195,13 +196,14 @@
 <style class="cp-pen-styles">
   
 #frame {
-  width: 95%;
-  min-width: 360px;
-  max-width: 1000px;
-  height: 92vh;
-  min-height: 300px;
-  max-height: 720px;
-  background: #E6EAEA;
+    width: 100%;
+    min-width: 360px;
+    max-width: 100%;
+    height: 92vh;
+    min-height: 300px;
+    max-height: 720px;
+    background: #E6EAEA;
+    margin-right: 0px;
 }
 @media screen and (max-width: 360px) {
   #frame {
@@ -797,9 +799,12 @@
   float: left;
   border: none;
   width: calc(100% - 90px);
-  padding: 11px 32px 10px 8px;
+  padding: 11px 32px 14px 8px;
   font-size: 0.8em;
   color: #32465a;
+}
+#frame .content .message-input .wrap button{
+  margin-top: 0px;
 }
 @media screen and (max-width: 735px) {
   #frame .content .message-input .wrap input {
