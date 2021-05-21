@@ -12,7 +12,7 @@
       </div>
       <div class="col-lg-6 col-5 text-right">
         <router-link href="#" class="btn btn-sm btn-neutral" to="/order-month">Tháng</router-link>
-        <router-link href="#" class="btn btn-sm btn-neutral" to="/order-weeks">Tuần</router-link>
+        <router-link href="#" class="btn btn-sm btn-neutral" to="/order-week2">Tuần</router-link>
       </div>
     </div>
     <div class="statistic" style="width: 95%; margin: 10px auto">

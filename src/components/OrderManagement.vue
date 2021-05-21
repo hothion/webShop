@@ -34,23 +34,23 @@
           <p>Hủy đơn</p>
         </div>
         <div v-if="statusOrder === 0">
-          <div v-for="order in showOrders" :key="order.id">
+          <div v-for="order in orders" :key="order.id">
             <div class="content table_content">
               <p>{{ order.id }}</p>
-              <p>{{ order.users[0].firstName }} {{ order.users[0].lastName }}</p>
-              <p>{{ order.users[0].address }}</p>
+              <p>{{ order.name_recive }}</p>
+              <p>{{ order.address }}</p>
               <p class="create_at">
                 {{ order.created_at }}
               </p>
-              <p>{{ order.product[0].price * order.quantity }}</p>
+              <p>{{ order.total }}</p>
               <p>
-                <button type="submit" class="order_status" @click.prevent="editOrder(order.id)">
-                  {{ order.order_status[0].content }}
+                <button type="submit" class="order_status" @click.prevent="editOrder(order.order_id)">
+                  {{ order.id }}
                 </button>
               </p>
               <p>
                 <a class="btn btn-danger" href="#detailOrder">
-                  <button @click.prevent="getOrderDetail(order.users[0].id)"><i class="fas fa-eye"></i></button>
+                  <button @click.prevent="getOrderDetail(order.id)"><i class="fas fa-eye"></i></button>
                 </a>
               </p>
               <p>
@@ -61,30 +61,30 @@
         </div>
         <div v-else-if="statusOrder > 0">
           <div v-for="order in orders" :key="order.id">
-            <div class="content table_content" v-show="order.order_status[0].id === statusOrder">
+            <div class="content table_content" v-show="order.id === statusOrder">
               <p>
                 {{ order.id }}
               </p>
               <p>
-                {{ order.users[0].firstName }} {{ order.users[0].lastName }}
+                {{ order.name_recive}}
               </p>
               <p>
-                {{ order.users[0].address }}
+                {{ order.address }}
               </p>
               <p class="create_at">
                 {{ order.created_at }}
               </p>
               <p>
-                {{ order.product[0].price * order.quantity }}
+                {{ order.total }}
               </p>
               <p>
-                <button type="submit" class="order_status" @click.prevent="editOrder(order.id)">
-                  {{ order.order_status[0].content }}
+                <button type="submit" class="order_status" @click.prevent="editOrder(order.order_id)">
+                  {{ order.id }}
                 </button>
               </p>
               <p>
                 <a class="btn btn-danger" href="#detailOrder">
-                  <button @click.prevent="getOrderDetail(order.users[0].id)"><i class="fas fa-eye"></i></button>
+                  <button @click.prevent="getOrderDetail(order.id)"><i class="fas fa-eye"></i></button>
                 </a>
               </p>
               <p>
@@ -201,30 +201,10 @@ export default {
         this.Orderdetails = response.data;
       });
     },
-    orderConfirm() {
-      this.orderbyStatus = +1;
-      fetch('https://api-gilo.herokuapp.com/api/order/' + this.orderbyStatus)
-          .then((response) => response.json())
-          .then((data) => (this.orders = data));
-    },
-    orderFinished() {
-      this.orderbyStatus = +5;
-      fetch('https://api-gilo.herokuapp.com/api/order/' + this.orderbyStatus)
-          .then((response) => response.json())
-          .then((data) => (this.orders = data));
-    },
-    orderAll() {
-      fetch('https://api-gilo.herokuapp.com/api/order')
-          .then((response) => response.json())
-          .then((data) => (this.orders = data));
-    },
     getData() {
-      if (this.orderbyStatus == 0) {
-        fetch('https://api-gilo.herokuapp.com/api/order')
+        fetch('https://api-gilo.herokuapp.com/api/listOrder')
             .then((response) => response.json())
             .then((data) => (this.orders = data));
-      }
-      // this.date_order = moment("13:30 9 11 2021").format('YYYY-MM-DD');
     },
     editOrder(id) {
       axios.put(

@@ -17,6 +17,7 @@ import Notification from './components/Notification.vue';
 import Statistic from './components/Statistic.vue';
 import OrderMonth from "./components/OrderMonth";
 import OrderWeeks from "./components/OrderWeeks";
+import RanDomChart from "./components/RanDomChart";
 Vue.config.productionTip = false
 import {store} from "./store";
 const routes = [{
@@ -33,6 +34,11 @@ const routes = [{
         name: 'order-weeks',
         path: '/order-weeks',
         component: OrderWeeks
+    },
+    {
+        name:'order-week2',
+        path: '/order-week2',
+        component: RanDomChart
     },
     {
         name: 'chat',

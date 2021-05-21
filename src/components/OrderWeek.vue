@@ -19,23 +19,19 @@ export default {
     };
   },
   created() {
-    console.log(this.love);
+    console.log('this.$store.state.dateWeek');
+    console.log(this.$store.state.dateWeek);
+
+    console.log('this.$store.state.dateWeek');
   },
 
   mounted() {
-    let yeu = document.createElement('button');
-    yeu.innerText = " Add";
-    yeu.innerHTML;
-    yeu.style.color = "red";
     this.gradient = this.$refs.canvas
         .getContext("2d")
         .createLinearGradient(0, 0, 0, 450);
     this.gradient.addColorStop(0, "rgba(255, 99, 71, 0.8)");
     this.gradient.addColorStop(0.5, "rgba(255, 99, 71, 0.6)");
     this.gradient.addColorStop(1, "rgba(255, 99, 71, 0.4)");
-    this.love.map(yeu=>{
-      yeu
-    });
     fetch('https://api-gilo.herokuapp.com/api/weekChart')
         .then((response) => response.json())
         .then((data) => {
