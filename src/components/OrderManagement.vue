@@ -44,8 +44,8 @@
               </p>
               <p>{{ order.total }}</p>
               <p>
-                <button type="submit" class="order_status" @click.prevent="editOrder(order.order_id)">
-                  {{ order.id }}
+                <button type="submit" class="order_status" @click.prevent="editOrder(order.id_status)">
+                  {{ order.content }}
                 </button>
               </p>
               <p>
@@ -61,7 +61,7 @@
         </div>
         <div v-else-if="statusOrder > 0">
           <div v-for="order in orders" :key="order.id">
-            <div class="content table_content" v-show="order.id === statusOrder">
+            <div class="content table_content" v-show="order.id_status === statusOrder">
               <p>
                 {{ order.id }}
               </p>
@@ -78,13 +78,13 @@
                 {{ order.total }}
               </p>
               <p>
-                <button type="submit" class="order_status" @click.prevent="editOrder(order.order_id)">
-                  {{ order.id }}
+                <button type="submit" class="order_status" @click.prevent="editOrder(order.id_status)">
+                  {{ order.content }}
                 </button>
               </p>
               <p>
                 <a class="btn btn-danger" href="#detailOrder">
-                  <button @click.prevent="getOrderDetail(order.id)"><i class="fas fa-eye"></i></button>
+                  <button @click.prevent="getOrderDetail(order.id_product)"><i class="fas fa-eye"></i></button>
                 </a>
               </p>
               <p>
@@ -202,7 +202,7 @@ export default {
       });
     },
     getData() {
-        fetch('https://api-gilo.herokuapp.com/api/listOrder')
+        fetch('https://api-gilo.herokuapp.com/api/progress')
             .then((response) => response.json())
             .then((data) => (this.orders = data));
     },

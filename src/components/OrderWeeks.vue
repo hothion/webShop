@@ -26,7 +26,7 @@
            <button @click.prevent="nextWeek()">Tuần kế tiếp</button>
             <p>{{ love }}</p>
          </span>
-          <orderWeek :love="love"/>
+          <RanDomChart />
           <h3 style="text-align: center; font-weight: bold; margin-top: 10px; font-size: 1.2rem">Biểu đồ 2: Đơn đặt hàng
             qua các tuần</h3>
         </div>
@@ -36,10 +36,10 @@
 </template>
 
 <script>
-import orderWeek from "./OrderWeek.vue";
+//import orderWeek from "./OrderWeek.vue";
 import moment from "moment";
 import Header from './Header.vue';
-
+import RanDomChart from "./RanDomChart";
 export default {
   name: "order",
   data() {
@@ -55,8 +55,9 @@ export default {
     };
   },
   components: {
-    orderWeek,
-    Header
+    //orderWeek,
+    Header,
+    RanDomChart
   },
   created() {
     this.getNumberWeek();

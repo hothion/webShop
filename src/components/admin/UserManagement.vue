@@ -1,6 +1,111 @@
 <template>
   <div class="main-content" id="panel">
-    <Header></Header>
+    <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <!-- Search form -->
+          <form class="navbar-search navbar-search-light form-inline mr-sm-3" id="navbar-search-main">
+            <div class="form-group mb-0">
+              <div class="input-group input-group-alternative input-group-merge">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-search"></i></span>
+                </div>
+                <input class="form-control" placeholder="Tìm kiếm ..." v-model="search" type="text">
+              </div>
+            </div>
+            <button type="button" class="close" data-action="search-close" data-target="#navbar-search-main"
+                    aria-label="Close">
+              <span aria-hidden="true"> u </span>
+            </button>
+          </form>
+          <!-- Navbar links -->
+          <ul class="navbar-nav align-items-center  ml-md-auto ">
+            <li class="nav-item d-xl-none">
+              <!-- Sidenav toggler -->
+              <div class="pr-3 sidenav-toggler sidenav-toggler-dark" data-action="sidenav-pin"
+                   data-target="#sidenav-main">
+                <div class="sidenav-toggler-inner">
+                  <i class="sidenav-toggler-line"></i>
+                  <i class="sidenav-toggler-line"></i>
+                  <i class="sidenav-toggler-line"></i>
+                </div>
+              </div>
+            </li>
+            <li class="nav-item d-sm-none">
+              <a class="nav-link" href="#" data-action="search-show" data-target="#navbar-search-main">
+                <i class="ni ni-zoom-split-in"></i>
+              </a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+                 aria-expanded="false">
+                <i class="fas fa-bell"></i>
+              </a>
+              <div class="dropdown-menu dropdown-menu-xl  dropdown-menu-right  py-0 overflow-hidden">
+                <!-- Dropdown header -->
+                <div class="px-3 py-3">
+                  <h6 class="text-sm text-muted m-0">You have <strong class="text-primary">13</strong> notifications.
+                  </h6>
+                </div>
+                <!-- List group -->
+                <div class="list-group list-group-flush">
+                  <a href="#!" class="list-group-item list-group-item-action">
+                    <div class="row align-items-center">
+                      <div class="col-auto">
+                        <!-- Avatar -->
+                        <img alt="Image placeholder" src="assets/img/theme/team-5.jpg" class="avatar rounded-circle">
+                      </div>
+                      <div class="col ml--2">
+                        <div class="d-flex justify-content-between align-items-center">
+                          <div>
+                            <h4 class="mb-0 text-sm">John Snow</h4>
+                          </div>
+                          <div class="text-right text-muted">
+                            <small>3 hrs ago</small>
+                          </div>
+                        </div>
+                        <p class="text-sm mb-0">A new issue has been reported for Argon.</p>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+                <!-- View all -->
+                <a href="#!" class="dropdown-item text-center text-primary font-weight-bold py-3">View all</a>
+              </div>
+            </li>
+          </ul>
+          <ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
+            <li class="nav-item dropdown">
+              <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+                 aria-expanded="false">
+                <div class="media align-items-center">
+              <span class="avatar avatar-sm rounded-circle">
+                <img alt="Image placeholder" src="assets/img/theme/team-4.jpg">
+              </span>
+                  <div class="media-body  ml-2  d-none d-lg-block">
+                    <span class="mb-0 text-sm  font-weight-bold">Lao yeu</span>
+                  </div>
+                </div>
+              </a>
+              <div class="dropdown-menu  dropdown-menu-right ">
+                <div class="dropdown-header noti-title">
+                  <h6 class="text-overflow m-0">Chào mừng bạn đã trở lại!</h6>
+                </div>
+                <a href="#!" class="dropdown-item">
+                  <i class="ni ni-single-02"></i>
+                  <span>Tôi</span>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#!" class="dropdown-item">
+                  <i class="ni ni-user-run"></i>
+                  <span>Đăng xuất</span>
+                </a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
     <div class="row align-items-center py-4">
       <div class="col-lg-6 col-7">
         <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
@@ -9,7 +114,7 @@
               <router-link to="/dashboard"><i class="fas fa-home"></i></router-link>
             </li>
             <li class="breadcrumb-item">
-              <router-link to="/order">Quản lý người cha</router-link>
+              <router-link to="/order">Quản lý người dùng</router-link>
             </li>
           </ol>
         </nav>
@@ -18,69 +123,61 @@
         <div class="content table_title">
           <p>Id</p>
           <p>Hình ảnh</p>
-          <p>Tên tài khoản </p>
           <p>Tên người dùng </p>
-          <p>Birthday</p>
-          <p>Giới tính</p>
+          <p>Ngày sinh</p>
           <p>Địa chỉ</p>
           <p>Điện thoại</p>
           <p>Email</p>
-          <p>Xóa/p>
+          <p>Xóa</p>
         </div>
         <div>
-            <div class="content table_content" v-for="user in showUsers" :key="user.id">
-              <p>
-                {{ user.id }}
-              </p>
-              <p>
-                {{ user.img}}
-              </p>
-              <p>
-                {{ user.account }}
-              </p>
-              <p class="create_at">
-                {{ user.lastName }}
-                {{ user.firstName }}
-              </p>
-              <p>
-                {{ user.birthday }}
-              </p>
-              <p>
-                {{ user.gender }}
-              </p>
-              <p>
-                {{ user.address }}
-              </p>
-              <p>
-                {{ user.phone }}
-              </p>
-              <p>
-                {{ user.email }}
-              </p>
-              <p>
-                <button @click.prevent="deleteUser(user.id)"><i class="fas fa-minus-circle"></i></button>
-              </p>
-            </div>
+          <div class="content table_content" v-for="user in showUsers" :key="user.id">
+            <p>
+              {{ user.id }}
+            </p>
+            <p>
+              <img :src="user.img" id="img">
+            </p>
+            <p >
+              {{ user.lastName }}
+              {{ user.firstName }}
+            </p>
+            <p class="create_at">
+              {{ user.birthday }}
+            </p>
+            <p>
+              {{ user.address }}
+            </p>
+            <p>
+              {{ user.phone }}
+            </p>
+            <p>
+              {{ user.email }}
+            </p>
+            <p>
+              <button @click.prevent="deleteUser(user.id)"><i class="fas fa-minus-circle"></i></button>
+            </p>
           </div>
         </div>
-        <ul class="pagination">
-          <li class="page-item">
-            <button type="button" class="page-link" v-if="page != 1" @click="page--"><i
-                class="fas fa-arrow-circle-left"></i>
-            </button>
-          </li>
-          <li class="page-item">
-            <button type="button" class="page-link" v-for="pageNumber in pages.slice(page - 1, page + 5)"
-                    v-bind:key="pageNumber" @click="page = pageNumber">
-              {{ pageNumber }}
-            </button>
-          </li>
-          <li class="page-item">
-            <button type="button" @click="page++" v-if="page < pages.length" class="page-link">
-              <i class="fas fa-arrow-circle-right"></i>
-            </button>
-          </li>
-        </ul>
+      </div>
+      <ul class="pagination">
+        <li class="page-item">
+          <button type="button" class="page-link" v-if="page != 1" @click="page--"><i
+              class="fas fa-arrow-circle-left"></i>
+          </button>
+        </li>
+        <li class="page-item">
+          <button type="button" class="page-link" v-for="pageNumber in pages.slice(page - 1, page + 5)"
+                  v-bind:key="pageNumber" @click="page = pageNumber">
+            {{ pageNumber }}
+          </button>
+        </li>
+        <li class="page-item">
+          <button type="button" @click="page++" v-if="page < pages.length" class="page-link">
+            <i class="fas fa-arrow-circle-right"></i>
+          </button>
+        </li>
+      </ul>
       <router-view></router-view>
     </div>
   </div>
@@ -91,13 +188,8 @@ import VueAxios from 'vue-axios';
 import axios from 'axios';
 
 Vue.use(VueAxios, axios);
-import Header from '../Header.vue'
-import moment from "moment";
 
 export default {
-  components: {
-    Header
-  },
   data() {
     return {
       users: [],
@@ -105,7 +197,8 @@ export default {
       currentPage: 1,
       page: 1,
       perPage: 5,
-      pages: []
+      pages: [],
+      search: null
     };
   },
   created() {
@@ -143,7 +236,16 @@ export default {
   },
   computed: {
     showUsers() {
-      return this.paginate(this.users);
+      if (this.search) {
+        return this.users.filter((item) => {
+          return this.search
+              .toLowerCase()
+              .split(" ")
+              .every((v) => item.account.toLowerCase().includes(v));
+        });
+      } else {
+        return this.paginate(this.users);
+      }
     }
   },
   watch: {
@@ -171,17 +273,17 @@ export default {
 }
 
 .create_at {
-  white-space: nowrap!important;
-  width: 98px!important;
-  overflow: hidden!important;
-  text-overflow: clip!important;
+  white-space: nowrap !important;
+  width: 98px !important;
+  overflow: hidden !important;
+  text-overflow: clip !important;
 }
 
 .content .table_content,
 .content .table_title {
   width: 100%;
   display: grid;
-  grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 1fr 1fr 0.5fr;
   grid-column-gap: 10px;
   grid-row-gap: 20px;
   border-radius: 10px;
@@ -189,6 +291,11 @@ export default {
 
 .table_content p {
   margin: auto 0;
+}
+
+#img {
+  width: 100px;
+  height: 100px;
 }
 
 .content .table {
@@ -244,6 +351,7 @@ export default {
 
     p {
       padding: 17px 15px;
+      word-break: break-all;
     }
 
     a {
