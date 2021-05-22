@@ -235,7 +235,7 @@ export default {
 
     getData(){
     const idShop = JSON.parse(localStorage.getItem("data"));
-  axios.get('https://api-gilo.herokuapp.com/api/profileAdmin/'+  idShop)
+    axios.get('https://api-gilo.herokuapp.com/api/profileAdmin/'+  idShop)
     .then(response =>(
         console.log(response),
          this.itemDatas = response.data

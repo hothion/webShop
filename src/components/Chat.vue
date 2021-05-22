@@ -39,7 +39,7 @@
           <input type="text" v-model="searchText" @keyup="search()" id="search1" placeholder="Tìm kiếm trên chat..." />
         </div>
         <div id="contacts" v-for="(user, i) in users" :key="i" v-on:click="sendselect(user.id_user)" >
-          <ul v-if="user.id_user !=1 ">
+          <ul v-if="user.id_user !=1 && user.remember_token!=1">
             <li class="contact">
               <div class="wrap">
                 <span class="contact-status online"></span>

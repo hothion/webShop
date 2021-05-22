@@ -24,7 +24,7 @@
                         </div>
                     </div>
                 </div>
-                <ul class="navbar-nav mr-auto">
+                <!-- <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
                         <a href="dashboard.html" class="nav-link">
                             <span class="nav-link-inner--text">Dashboard</span>
@@ -35,7 +35,7 @@
                             <span class="nav-link-inner--text">Login</span>
                         </a>
                     </li>
-                </ul>
+                </ul> -->
                 <hr class="d-lg-none" />
                 <ul class="navbar-nav align-items-lg-center ml-lg-auto">
                     <li class="nav-item">
@@ -74,8 +74,8 @@
                 <div class="header-body text-center mb-7">
                     <div class="row justify-content-center">
                         <div class="col-xl-5 col-lg-6 col-md-8 px-5">
-                            <h1 class="text-white">Welcome!</h1>
-                            <p class="text-lead text-white">Use these awesome forms to login or create new account in your project for free.</p>
+                            <h1 class="text-white">Chào mừng!</h1>
+                            <p class="text-lead text-white">Bạn đến với cửa hàng Shop của chúng tôi.</p>
                         </div>
                     </div>
                 </div>
@@ -92,8 +92,8 @@
                 <div class="col-lg-5 col-md-7">
                     <div class="card bg-secondary border-0 mb-0">
                         <div class="card-header bg-transparent pb-5">
-                            <div class="text-muted text-center mt-2 mb-3"><small>Sign in with</small></div>
-                            <div class="btn-wrapper text-center">
+                            <div class="text-muted text-center mt-2 mb-3">
+                             <!-- <div class="btn-wrapper text-center"> 
                                 <a href="#" class="btn btn-neutral btn-icon">
                                     <span class="btn-inner--icon"><img src="../assets/img/icons/common/github.svg"></span>
                                     <span class="btn-inner--text">Github</span>
@@ -102,12 +102,16 @@
                                     <span class="btn-inner--icon"><img src="../assets/img/icons/common/google.svg"></span>
                                     <span class="btn-inner--text">Google</span>
                                 </a>
-                            </div>
+                            </div>  -->
+                        <img src="https://www.enic.it/wp-content/uploads/2019/11/gilo-Logo.png"
+                         class="navbar-brand-img" alt="...">
+                       <h1>Đăng nhập</h1>
+                       </div>
                         </div>
                         <div class="card-body px-lg-5 py-lg-5">
-                            <div class="text-center text-muted mb-4">
-                                <small>Or sign in with credentials</small>
-                            </div>
+                            <!-- <div class="text-center text-muted mb-4">
+                                <small>Đăng nhập bằng thông tin đăng nhập</small>
+                            </div> -->
                             <form role="form" @submit.prevent="onSubmit" method="post">
                                 <div class="form-group mb-3">
                                     <div class="input-group input-group-merge input-group-alternative">
@@ -128,21 +132,21 @@
                                 <div class="custom-control custom-control-alternative custom-checkbox">
                                     <input class="custom-control-input" id=" customCheckLogin" type="checkbox">
                                     <label class="custom-control-label" for=" customCheckLogin">
-                    <span class="text-muted">Remember me</span>
+                    <span class="text-muted">Nhớ mật khẩu</span>
                   </label>
                                 </div>
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary my-4">Sign in</button>
+                                    <button type="submit" class="btn btn-primary my-4">Đăng nhập</button>
                                 </div>
                             </form>
                         </div>
                     </div>
                     <div class="row mt-3">
                         <div class="col-6">
-                            <a href="#" class="text-light"><small>Forgot password?</small></a>
+                            <a href="#" class="text-light"><small>Quên mật khẩu?</small></a>
                         </div>
                         <div class="col-6 text-right">
-                            <a href="#" class="text-light"><small>Create new account</small></a>
+                            <a href="#" class="text-light"><small>Tạo tài khoản mới</small></a>
                         </div>
                     </div>
                 </div>
@@ -173,13 +177,14 @@ export default {
         }
          let ShopLogin = JSON.stringify(data);
          console.log(ShopLogin);
-        axios.post('https://api-gilo.herokuapp.com/api/loginShop', ShopLogin).then(response => {
+            axios.post('https://api-gilo.herokuapp.com/api/loginShop', ShopLogin)
+            .then(response => {
             if(response.status === 200)
             {
                 console.log("login sucessfully");
                     localStorage.setItem("data",response.data.idToken);
                     const remember_token = JSON.parse(localStorage.getItem("data"));
-                    if(remember_token==1){
+                    if(remember_token == 1){
                             alert("Đăng nhập thành công vào admin.");
                             this.$router.push({ path : '/navigation' });
                                 window.location.reload();
@@ -203,4 +208,20 @@ export default {
 .row.justify-content-center{
     margin: 0;
 }
+.text-muted{
+    height: 50px;
+}
+.card-header img{
+    width: 70px;
+    height: auto;
+    margin-top: -5px;
+}
+.text-muted h1{
+    margin-top: -20px;
+    font-size: 28px;
+    margin-left: -15px;
+    font-weight: bold;
+    color: #6c757d;
+    padding: 25px 0 20px 25px;
+    }
 </style>
