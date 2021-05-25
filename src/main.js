@@ -19,6 +19,10 @@ import OrderMonth from "./components/OrderMonth";
 import OrderWeeks from "./components/OrderWeeks";
 Vue.config.productionTip = false
 import {store} from "./store";
+
+import VueDayjs from 'vue-dayjs-plugin';
+Vue.use(VueDayjs);
+
 const routes = [{
         name: 'login',
         path: '/login',

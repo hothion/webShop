@@ -2,16 +2,14 @@
      <div class="main-content" id="panel">
     <!-- Topnav -->
     <Header></Header>
-    <div class="header pb-6 d-flex align-items-center" style="min-height: 500px; background-image: url(../assets/img/theme/profile-cover.jpg); background-size: cover; background-position: center top;">
+    <div class="header pb-6 d-flex align-items-center" style="min-height: 300px; background-image: url(../assets/img/theme/profile-cover.jpg); background-size: cover; background-position: center top;">
       <!-- Mask -->
       <span class="mask bg-gradient-default opacity-8"></span>
       <!-- Header container -->
       <div class="container-fluid d-flex align-items-center">
         <div class="row">
-          <div class="col-lg-7 col-md-10">
+          <div class="col-lg-12 col-md-12">
             <h1 class="display-2 text-white">Xin chào {{itemDatas.account}}</h1>
-            <p class="text-white mt-0 mb-5"> Những thông tin cá nhân về bạn. Hãy cùng chúng tôi chỉnh sửa lại thông tin của bạn để có những thông tin chân thật nhất về bạn</p>
-            <!-- <a href="#!" class="btn btn-neutral">Edit profile</a> -->
           </div>
         </div>
       </div>
@@ -144,9 +142,8 @@
                     <div class="col-lg-4">
                       <div class="form-group">
                         <label class="form-control-label" for="input-country">Ngày sinh</label>
-                        <!-- <input type="date" id="input-birthday" class="form-control"  v-model="itemDatas.birthday"> -->
                          <input format="YYYY-MM-DD" class="form-control" id ="date" v-model="itemDatas.birthday">
-                      
+                          <!-- <small>{{$date(itemDatas.birthday).format('DD/MM/YYYY')}}</small> -->
                       </div>
                     </div>
                   </div>
@@ -318,5 +315,7 @@ export default {
   color: #15824B;
   padding: 10px 0;
 }
-
+.container-fluid .mt--6{
+  margin-top: -20px  !important;
+}
 </style>

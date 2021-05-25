@@ -4,43 +4,15 @@
     <div id="frame">
       <div id="sidepanel">
         <div id="profile">
-          <div class="wrap">
-            <img id="profile-img" src="http://emilcarlsson.se/assets/mikeross.png" class="online" alt="" />
-            <p>{{users.account}}</p>
-            <i class="fa fa-chevron-down expand-button" aria-hidden="true"></i>
-            <div id="status-options">
-              <ul>
-                <li id="status-online" class="active"><span class="status-circle"></span>
-                  <p>Online</p>
-                </li>
-                <li id="status-away"><span class="status-circle"></span>
-                  <p>Away</p>
-                </li>
-                <li id="status-busy"><span class="status-circle"></span>
-                  <p>Busy</p>
-                </li>
-                <li id="status-offline"><span class="status-circle"></span>
-                  <p>Offline</p>
-                </li>
-              </ul>
-            </div>
-            <div id="expanded">
-              <label for="twitter"><i class="fa fa-facebook fa-fw" aria-hidden="true" id="twitter"></i></label>
-              <input name="twitter" type="text" value="mikeross" />
-              <label for="twitter"><i class="fa fa-twitter fa-fw" aria-hidden="true"></i></label>
-              <input name="twitter" type="text" value="ross81" />
-              <label for="twitter"><i class="fa fa-instagram fa-fw" aria-hidden="true"></i></label>
-              <input name="twitter" type="text" value="mike.ross" />
-            </div>
-          </div>
+          <h1>Tin nhắn</h1>
         </div>
         <div id="search">
           <label for="search1"><i class="fa fa-search" aria-hidden="true"></i></label>
           <input type="text" v-model="searchText" @keyup="search()" id="search1" placeholder="Tìm kiếm trên chat..." />
         </div>
-        <div id="contacts" v-for="(user, i) in users" :key="i" v-on:click="sendselect(user.id_user)" >
-          <ul v-if="user.id_user !=1 && user.remember_token!=1">
-            <li class="contact">
+        <div id="contacts">
+          <ul v-for="(user, i) in users" :key="i" v-on:click="sendselect(user.id_user)" >
+            <li class="contact" v-if="user.id_user !=1 && user.remember_token!=1">
               <div class="wrap">
                 <span class="contact-status online"></span>
                 <img :src="user.img">
@@ -194,7 +166,14 @@
 </script>
 
 <style class="cp-pen-styles">
-  
+.nav-item span{
+  color: black;
+}
+  #profile h1{
+    color: #fff;
+    font-size: 20px;
+    margin-left:-15px;
+  }
 #frame {
     width: 100%;
     min-width: 360px;
@@ -486,7 +465,7 @@
 #frame #sidepanel #search input {
   font-family: "proxima-nova",  "Source Sans Pro", sans-serif;
   padding: 10px 0 10px 46px;
-  width: calc(100% - 25px);
+  width: calc(100% - 0px);
   border: none;
   background: #32465a;
   color: #f5f5f5;
@@ -508,9 +487,10 @@
   color: #f5f5f5;
 }
 #frame #sidepanel #contacts {
-  height: calc(100% - 177px);
+  height: calc(100% - 1778x);
   overflow-y: scroll;
   overflow-x: hidden;
+  padding-top: 10px;
 }
 @media screen and (max-width: 735px) {
   #frame #sidepanel #contacts {
@@ -532,11 +512,16 @@
 #frame #sidepanel #contacts::-webkit-scrollbar-thumb {
   background-color: #243140;
 }
+#frame #sidepanel #contacts ul{
+list-style: none;
+height: 100%;
+}
 #frame #sidepanel #contacts ul li.contact {
   position: relative;
-  padding: 10px 0 15px 0;
+  padding: 5px 0 5px 0;
   font-size: 0.9em;
   cursor: pointer;
+  height: 100%;
 }
 @media screen and (max-width: 735px) {
   #frame #sidepanel #contacts ul li.contact {
@@ -556,6 +541,7 @@
 #frame #sidepanel #contacts ul li.contact .wrap {
   width: 88%;
   margin: 0 auto;
+  height: 100%;
   position: relative;
 }
 @media screen and (max-width: 735px) {
@@ -566,9 +552,9 @@
 #frame #sidepanel #contacts ul li.contact .wrap span {
   position: absolute;
   left: 0;
-  margin: -2px 0 0 -2px;
-  width: 10px;
-  height: 10px;
+  margin: 45px 0 0 48px;
+  width: 13px;
+  height: 13px;
   border-radius: 50%;
   border: 2px solid #2c3e50;
   background: #95a5a6;
@@ -583,8 +569,9 @@
   background: #e74c3c;
 }
 #frame #sidepanel #contacts ul li.contact .wrap img {
-  width: 40px;
-  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
   float: left;
   margin-right: 10px;
 }

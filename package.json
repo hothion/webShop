@@ -21,6 +21,7 @@
         "vue": "^2.6.11",
         "vue-axios": "^3.2.4",
         "vue-chartjs": "^3.5.1",
+        "vue-dayjs-plugin": "^1.0.0",
         "vue-firebase": "^1.0.8",
         "vue-router": "^3.5.1",
         "vuejs-datepicker": "^1.6.2",
