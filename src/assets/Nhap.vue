@@ -148,25 +148,25 @@
         >Thêm sản phẩm</a
         >
       </div>
-      <div class="content tableProduct">
-        <div class="content table_titleProduct">
+      <div class="content table">
+        <div class="content table_title">
           <p>Id</p>
           <p>Tên Sản phẩm </p>
           <p>Hình ảnh</p>
           <p>Mô tả</p>
-          <p>Giá (đ)</p>
+          <p>Giá</p>
           <p>Sửa</p>
           <p>Xóa </p>
         </div>
           <div v-for="product in showProducts" :key="product.id">
-            <div class="content table_contentProduct">
+            <div class="content table_content">
               <p>{{ product.id }}</p>
               <p>{{ product.name }}</p>
               <p> <img :src="product.img" id="img1" alt="image"/></p>
-              <p style="text-align: left">
+              <p>
                 {{ product.description }}
               </p>
-              <p>{{ product.price }}(- {{ product.discount }}%)</p>
+              <p>{{ product.price }} đ (- {{ product.discount }}%)</p>
               <p>
                 <a class="btn btn-danger" href="#open-modal">
                   <button @click.prevent="editProduct(product)"><i class="fas fa-edit"> </i></button>
@@ -178,6 +178,33 @@
             </div>
           </div>
       </div>
+<!--      <div class="main__product" v-for="product in showProducts" :key="product.id">-->
+<!--        <div class="card_pro0" style="margin: auto 0;">-->
+<!--          <img :src="product.img" id="img1" alt="image"/>-->
+<!--        </div>-->
+<!--        <div class="card_pro2" style="margin: auto 0;">-->
+<!--          <span class="font-bold text-title"><h2>{{ product.name }}</h2></span>-->
+<!--          <p><strong style="font-weight: bold">Mô tả :</strong> {{ product.description }}</p>-->
+<!--          <span class="price_discount">-->
+<!--            <p><strong style="font-weight: bold">Giá :</strong> {{ product.price }} đ</p>-->
+<!--            <p class="discount">- {{ product.discount }}%</p>-->
+<!--          </span>-->
+<!--        </div>-->
+<!--        <div class="card_pro3">-->
+<!--          <div class="action">-->
+<!--            <div class="edit-dele">-->
+<!--              <a href="#open-modal" id="editButton">-->
+<!--                <button @click.prevent="editProduct(product)">-->
+<!--                  <i class="fas fa-edit"> </i>-->
+<!--                </button>-->
+<!--              </a>-->
+<!--              <a @click.prevent="deleteProduct(product.id)" id="deleteButton">-->
+<!--                <i class="fas fa-trash-alt"></i>-->
+<!--              </a>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
       <div id="navigation">
         <ul class="pagination">
           <li class="page-item">
@@ -410,10 +437,110 @@ export default {
 </script>
 <style lang="scss">
 .product {
-  width: 100%;
+  width: 85%;
   margin-left: auto;
   margin-right: auto;
 }
+
+.main__product {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 30px;
+  margin: 10px 0;
+  border-left: 5px solid rebeccapurple;
+  border-right: 5px solid rgb(77, 218, 119);
+  background: white;
+  /* background: cadetblue; */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 20px;
+
+  .card_pro0 {
+    padding: 5px 10px;
+    img {
+      width: 160px;
+      height: 150px;
+      margin-left: 3%;
+      border-radius: 6px;
+    }
+  }
+
+  .card_pro2 {
+    .price_discount {
+      display: flex;
+
+      .discount {
+        padding: 0 10px;
+        color: red;
+        font-weight: bold;
+      }
+      span, p{
+        margin: auto 0;
+      }
+    }
+    h2{
+      font-size: 1.3rem;
+      font-weight: bold;
+    }
+  }
+
+  .card_pro3 {
+    height: auto;
+    margin: auto 20px;
+    .action {
+      float: right;
+      .edit-dele {
+        margin-bottom: 1px;
+        #editButton{
+          padding: 11px 10px;
+          background-color: crimson;
+          border: none;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          margin: 0 10px;
+          -webkit-transition-duration: 0.4s;
+          transition-duration: 0.4s;
+          cursor: pointer;
+          border-radius: 10px;
+          button{
+            border: 1px solid grey;
+            border-radius: 4px;
+            &:hover{
+              transition: 1s all;
+              background-color: green;
+            }
+            &:hover i{
+              color: white;
+            }
+
+          }
+        }
+        #deleteButton{
+          background-color: crimson;
+          border: none;
+          color: white;
+          padding: 13px 16px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          margin: 0 10px;
+          -webkit-transition-duration: 0.4s;
+          transition-duration: 0.4s;
+          cursor: pointer;
+          border-radius: 10px;
+          &:hover{
+            transition: 1s all;
+            background-color: green;
+          }
+        }
+      }
+    }
+  }
+}
+
 .header_pro {
   display: grid;
   grid-template-columns: 2fr 1.5fr 1fr;
@@ -554,10 +681,7 @@ form button {
     margin: 0 0 15px;
   }
 }
-#img{
-  width: 85% !important;
-  height: 43px!important;
-}
+
 .modal-close {
   color: black;
   line-height: 50px;
@@ -676,22 +800,80 @@ ul li {
       color: black;
     }
   }
+
+  ///// PAGINATION
+  ul li {
+    list-style: none;
+  }
+
+  .page-item {
+    padding: 10px;
+  }
+
+  &:first-child button {
+    border-radius: 30px;
+  }
+
+  .pagination {
+    margin-top: 5%;
+    width: 50%;
+    transform: translate(-50%, -50%);
+    margin-left: 50px;
+    padding: 10px;
+
+    li {
+      display: flex;
+      list-style: none;
+    }
+
+    button {
+      display: block;
+      width: 100px;
+      height: 40px;
+      line-height: 40px;
+      background-color: #fff;
+      text-align: center;
+      text-decoration: none;
+      color: #252525;
+      border-radius: 4px;
+      font-size: 17px;
+      margin: 5px;
+      box-shadow: inset 0 5px 10px rgba(0, 0, 0, 0.1),
+      0 2px 5px rgba(0, 0, 0, 0.5);
+      transition: all 0.3s ease;
+
+      &:hover,
+      &.active {
+        color: white;
+        background-color: yellow;
+      }
+    }
+
+    &:first-child button {
+      border-radius: 30px;
+    }
+
+    &:last-child button {
+      border-radius: 30px;
+    }
+  }
 }
-.content .table_contentProduct,
-.content .table_titleProduct {
+
+.content .table_content,
+.content .table_title {
   width: 100%;
   display: grid;
-  grid-template-columns: 0.5fr 0.7fr 1fr 1.2fr 0.8fr 0.5fr 0.5fr;
+  grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-column-gap: 10px;
   grid-row-gap: 20px;
   border-radius: 10px;
 }
 
-.table_contentProduct p {
+.table_content p {
   margin: auto 0;
 }
 
-.content .tableProduct {
+.content .table {
   width: 85%;
   margin-left: auto;
   margin-right: auto;
@@ -724,7 +906,7 @@ ul li {
     }
   }
 
-  .table_titleProduct {
+  .table_title {
     margin-left: 0;
     text-align: center;
     background: #009688;
@@ -734,7 +916,7 @@ ul li {
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.35);
   }
 
-  .table_contentProduct {
+  .table_content {
     margin-top: 10px;
     font-size: 1.1rem;
     background: white;
@@ -772,7 +954,7 @@ ul li {
 }
 
 #img1{
-  width: 100%;
-  height: 150px;
+  width: 100px;
+  height: 100px;
 }
 </style>

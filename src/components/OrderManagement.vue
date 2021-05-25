@@ -19,7 +19,7 @@
         <div class="content list">
           <p></p>
           <p></p>
-          <button @click.prevent="allOrder()">Tất cả đơn hàng {{ formattedDate }}</button>
+          <button @click.prevent="allOrder()">Tất cả đơn hàng </button>
           <button @click.prevent="unConfirmOrder()">Đơn chưa xác nhận</button>
           <button @click.prevent="compeleteOrder()">Đơn đã giao</button>
         </div>
@@ -34,13 +34,13 @@
           <p>Hủy đơn</p>
         </div>
         <div v-if="statusOrder === 0">
-          <div v-for="order in orders" :key="order.id">
+          <div v-for="order in rolesByCategory" :key="order.id">
             <div class="content table_content">
               <p>{{ order.id }}</p>
               <p>{{ order.name_recive }}</p>
               <p>{{ order.address }}</p>
-              <p class="create_at">
-                {{ order.created_at }}
+              <p class="create_at1">
+                {{ $date(order.created_at).format('DD/MM/YYYY') }}
               </p>
               <p>{{ order.total }}</p>
               <p>
@@ -60,7 +60,7 @@
           </div>
         </div>
         <div v-else-if="statusOrder > 0">
-          <div v-for="order in orders" :key="order.id">
+          <div v-for="order in rolesByCategory" :key="order.id">
             <div class="content table_content" v-show="order.id_status === statusOrder">
               <p>
                 {{ order.id }}
@@ -71,14 +71,14 @@
               <p>
                 {{ order.address }}
               </p>
-              <p class="create_at">
-                {{ order.created_at }}
+              <p class="create_at1">
+                {{ $date(order.created_at).format('DD/MM/YYYY') }}
               </p>
               <p>
                 {{ order.total }}
               </p>
               <p>
-                <button type="submit" class="order_status" @click.prevent="editOrder(order.id_status)">
+                <button type="submit" class="order_status" @click.prevent="editOrder(order.id)">
                   {{ order.content }}
                 </button>
               </p>
@@ -144,7 +144,14 @@ import axios from 'axios';
 Vue.use(VueAxios, axios);
 import Header from './Header.vue'
 import moment from "moment";
-
+var _ = require('lodash');
+// Load the core build.
+//var _ = require('lodash/core');
+//var fp = require('lodash/fp');
+// import tap from "lodash/fp/tap";
+// import flow from "lodash/fp/flow";
+// import groupBy from "lodash/fp/groupBy";
+//const map = require('lodash/fp/map').convert({ 'cap': false });
 export default {
   components: {
     Header
@@ -204,11 +211,26 @@ export default {
     getData() {
         fetch('https://api-gilo.herokuapp.com/api/progress')
             .then((response) => response.json())
-            .then((data) => (this.orders = data));
+            .then((data) =>{
+              var result = _(data)
+                  .groupBy(x => x.payment_id)
+                  .map((value, key) =>
+                      ({payment_id: key,
+                        orders: value})).value();
+
+              console.log(result)});
+       // console.log(data)
+            // var result = _(data) (this.orders = data)
+            //     .groupBy(x => x.payment_id)
+            //     .map((value, key) =>
+            //         ({payment_id: key,
+            //           orders: value})).value();
+            //
+            // console.log(result);
     },
     editOrder(id) {
       axios.put(
-          'https://api-gilo.herokuapp.com/api/orderUpdate/' + id
+          'https://api-gilo.herokuapp.com/api/progress/' + id
       );
       this.getData();
     },
@@ -227,13 +249,13 @@ export default {
     },
   },
   computed: {
-    showOrders() {
-      return this.paginate(this.orders);
+    rolesByCategory() {
+      return _.groupBy(this.orders, 'payment_id')
     }
   },
   watch: {
-    orders() {
-      this.setPages();
+    showOrders() {
+        return this.paginate(this.orders);
     },
     filters: {
       trimWords(value) {
