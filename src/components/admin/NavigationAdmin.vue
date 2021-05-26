@@ -37,7 +37,7 @@
                 </router-link>
               </li>
               <li class="nav-item">
-                <router-link class="nav-link" to="/notification">
+                <router-link class="nav-link" to="/notificationAdmin">
                   <i class="fas fa-bell"></i>
                   <span class="nav-link-text">Thông báo</span>
                 </router-link>
@@ -78,3 +78,9 @@ export default {
   }
 };
 </script>
+<style>
+.navbar-vertical .navbar-brand-img, .navbar-vertical .navbar-brand > img {
+  max-width: 100%;
+  max-height: 4rem;
+}
+</style>

@@ -85,3 +85,20 @@ export default {
   }
 };
 </script>
+<style lang="scss">
+.nav-link:hover{
+  transition: 0.4s all;
+  background-color: #bee6e3;
+  border-radius: 4px;
+  width: 100% !important;
+}
+.nav-link.active.router-link-active{
+  width: 100% !important;
+  margin-left: 0rem!important;
+  padding-left: 1.6rem!important;
+}
+.nav-link.active.router-link-active:hover{
+  transition: 0.4s all!important;
+  background-color: #bee6e3!important;
+}
+</style>

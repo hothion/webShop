@@ -144,7 +144,7 @@ import axios from 'axios';
 Vue.use(VueAxios, axios);
 import Header from './Header.vue'
 import moment from "moment";
-var _ = require('lodash');
+import _ from 'lodash';
 // Load the core build.
 //var _ = require('lodash/core');
 //var fp = require('lodash/fp');
@@ -299,15 +299,15 @@ export default {
 }
 
 .content .table {
-  width: 85%;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
 }
 
 .content {
-  width: 85%;
-  margin-left: auto;
-  margin-right: auto;
+  width: 90% !important;
+  margin-left: auto!important;
+  margin-right: auto!important;
 
   h1 {
     margin-bottom: 10px;

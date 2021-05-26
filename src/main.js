@@ -7,6 +7,8 @@ Vue.use(VueAxios, axios);
 Vue.config.productionTip = false
 import VueDayjs from 'vue-dayjs-plugin'
 Vue.use(VueDayjs)
+import {store} from "./store";
+
 
 import Dashboard from './components/Dashboard.vue'
 import Navigation from './components/Navigation.vue'
@@ -28,12 +30,7 @@ import UserManagement from "./components/admin/UserManagement";
 import UserMonth from "./components/admin/UserMonth";
 import ShopMonth from "./components/admin/ShopMonth";
 import StatisticAdmin from "./components/admin/StatisticAdmin";
-Vue.config.productionTip = false
-import {store} from "./store";
-
-import VueDayjs from 'vue-dayjs-plugin';
-Vue.use(VueDayjs);
-
+import NotificationAdmin from "./components/admin/NotificationAdmin";
 const routes = [{
         name: 'login',
         path: '/login',
@@ -98,6 +95,11 @@ const routes = [{
         name: 'navigationAdmin',
         path: '/navigationAdmin',
         component: NavigationAdmin
+    },
+    {
+        name: 'notificationAdmin',
+        path: '/notificationAdmin',
+        component: NotificationAdmin
     },
     {
         name: 'user',
