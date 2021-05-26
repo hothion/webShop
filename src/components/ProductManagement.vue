@@ -33,13 +33,13 @@
             </li>
             <li class="nav-item d-sm-none">
               <a class="nav-link" href="#" data-action="search-show" data-target="#navbar-search-main">
-                <i class="ni ni-zoom-split-in"></i>
+                <i style="color: white!important;" class="ni ni-zoom-split-in"></i>
               </a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
                  aria-expanded="false">
-                <i class="fas fa-bell"></i>
+                <i style="color: white!important;" class="fas fa-bell"></i>
               </a>
               <div class="dropdown-menu dropdown-menu-xl  dropdown-menu-right  py-0 overflow-hidden">
                 <!-- Dropdown header -->
@@ -58,7 +58,7 @@
                       <div class="col ml--2">
                         <div class="d-flex justify-content-between align-items-center">
                           <div>
-                            <h4 class="mb-0 text-sm">John Snow</h4>
+                            <h4 style="color: white!important;" class="mb-0 text-sm">John Snow</h4>
                           </div>
                           <div class="text-right text-muted">
                             <small>3 hrs ago</small>
@@ -76,7 +76,7 @@
             <li class="nav-item dropdown">
               <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
                  aria-expanded="false">
-                <i class="fab fa-facebook-messenger"></i>
+                <i style="color: white!important;"  class="fab fa-facebook-messenger"></i>
               </a>
               <div class="dropdown-menu dropdown-menu-lg dropdown-menu-dark bg-default  dropdown-menu-right ">
                 <div class="row shortcuts px-4">
@@ -141,9 +141,7 @@
       </div>
     </div>
     <div class="product">
-      <div class="header_pro">
-        <p></p>
-        <p></p>
+      <div class="header_pro" style="float: right">
         <a href="#open-modal"
         >Thêm sản phẩm</a
         >
@@ -415,16 +413,14 @@ export default {
   margin-right: auto;
 }
 .header_pro {
-  display: grid;
-  grid-template-columns: 2fr 1.5fr 1fr;
   margin-bottom: 3%;
-
+  margin-right:5%;
   a {
     background-color: crimson;
     /* Màu của Quản trị mạng ^^ */
     border: none;
     color: white;
-    padding: 13px 18px;
+    padding: 13px 15px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -692,15 +688,15 @@ ul li {
 }
 
 .content .tableProduct {
-  width: 85%;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
 }
 
 .content {
-  width: 85%;
-  margin-left: auto;
-  margin-right: auto;
+  width: 95% !important;
+  margin-left: auto!important;
+  margin-right: auto!important;
 
   h1 {
     margin-bottom: 10px;
@@ -765,10 +761,13 @@ ul li {
 }
 
 .content .list {
+
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1.1fr;
   margin-bottom: 10px;
   float: right;
+  margin-right: auto!important;
+  margin-left: auto!important;
 }
 
 #img1{

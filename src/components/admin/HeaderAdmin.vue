@@ -32,13 +32,13 @@
           </li>
           <li class="nav-item d-sm-none">
             <a class="nav-link" href="#" data-action="search-show" data-target="#navbar-search-main">
-              <i class="ni ni-zoom-split-in"></i>
+              <i class="ni ni-zoom-split-in" style="color: white!important;"></i>
             </a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
                aria-expanded="false">
-              <i class="fas fa-bell"></i>
+              <i style="color: white!important;" class="fas fa-bell"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-xl  dropdown-menu-right  py-0 overflow-hidden">
               <!-- Dropdown header -->
@@ -56,7 +56,7 @@
                     <div class="col ml--2">
                       <div class="d-flex justify-content-between align-items-center">
                         <div>
-                          <h4 class="mb-0 text-sm">John Snow</h4>
+                          <h4 class="mb-0 text-sm" style="color: white!important;">John Snow</h4>
                         </div>
                         <div class="text-right text-muted">
                           <small>3 hrs ago</small>
@@ -81,7 +81,7 @@
                     <img alt="Image placeholder" src="assets/img/theme/team-4.jpg">
                   </span>
                 <div class="media-body  ml-2  d-none d-lg-block">
-                  <span class="mb-0 text-sm  font-weight-bold">John Snow</span>
+                  <span style="color: white!important;" class="mb-0 text-sm  font-weight-bold">John Snow</span>
                 </div>
               </div>
             </a>

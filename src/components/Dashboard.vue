@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="header-body">
           <div class="row align-items-center py-4">
-            <div class="col-lg-6 col-7">
+            <div class="col-lg-6 col-7" style="padding-left: 0!important; margin-left: -10px!important;">
               <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                   <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
@@ -16,8 +16,8 @@
               </nav>
             </div>
             <div class="col-lg-6 col-5 text-right">
-              <a href="#" class="btn btn-sm btn-neutral">Mới</a>
-              <a href="#" class="btn btn-sm btn-neutral">Bộ lọc</a>
+              <a href="#" class="btn btn-sm btn-neutral" style="background-color: whitesmoke!important;">Mới</a>
+              <a href="#" class="btn btn-sm btn-neutral" style="background-color: whitesmoke!important;">Bộ lọc</a>
             </div>
           </div>
           <!-- Card stats -->
