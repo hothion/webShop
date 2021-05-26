@@ -5,6 +5,9 @@ import VueAxios from 'vue-axios';
 import axios from 'axios';
 Vue.use(VueAxios, axios);
 Vue.config.productionTip = false
+import VueDayjs from 'vue-dayjs-plugin'
+Vue.use(VueDayjs)
+
 import Dashboard from './components/Dashboard.vue'
 import Navigation from './components/Navigation.vue'
 import LoginAdmin from './components/LoginAdmin.vue';

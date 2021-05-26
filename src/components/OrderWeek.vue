@@ -3,12 +3,6 @@ import {Line} from "vue-chartjs";
 import {store} from "../store";
 export default {
   extends: Line,
-  props : {
-    love: {
-      type: Array,
-      required: true
-    }
-  },
   data() {
     return {
       gradient: null,
@@ -19,10 +13,7 @@ export default {
     };
   },
   created() {
-    console.log('this.$store.state.dateWeek');
     console.log(this.$store.state.dateWeek);
-
-    console.log('this.$store.state.dateWeek');
   },
 
   mounted() {
@@ -36,11 +27,9 @@ export default {
         .then((response) => response.json())
         .then((data) => {
           const order_week = data;
-          //var storedNames = JSON.parse(localStorage.getItem("date"));
-
           let quantity = [];
           for (var i = 0; i < order_week.length; i++) {
-            if (this.dateLocal.indexOf(order_week[i].date) != -1) {
+            if (this.dateLocal.indexOf(order_week[i].date) !== -1) {
               quantity.push(order_week[i].date);
             }
           }

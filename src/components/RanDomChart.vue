@@ -19,16 +19,18 @@
       <div class="col1">
         <div class="BarChart">
           <span>
-          <button @click.prevent="PreviousWeek()">Tuần trước</button>
+          <button @click="PreviousWeek()">Tuần trước</button>
           <h3>{{
               numberWeek
             }}</h3>
-           <button @click.prevent="nextWeek()">Tuần kế tiếp</button>
-            <p>{{ love }}</p>
+           <button @click="nextWeek()">Tuần kế tiếp</button>
+            <p>{{ dateStore }}</p>
          </span>
-          <line-chart :chart-data="datacollection"></line-chart>
-          <h3 style="text-align: center; font-weight: bold; margin-top: 10px; font-size: 1.2rem">Biểu đồ 2: Đơn đặt hàng
-            qua các tuần</h3>
+          <line-chart :chartData="datacollection"></line-chart>
+          <!--          <OrderWeek />-->
+          <h3 style="text-align: center; font-weight: bold; margin-top: 10px; font-size: 1.2rem">
+            Biểu đồ 2: Đơn đặt hàng qua các tuần
+          </h3>
         </div>
       </div>
     </div>
@@ -38,28 +40,36 @@
 import LineChart from './LineChart';
 import Header from './Header';
 import moment from "moment";
+//import OrderWeek from "./OrderWeek";
 export default {
   components: {
     LineChart,
-    Header
+    Header,
+    // OrderWeek
   },
-  data () {
+  data() {
     return {
       datacollection: null,
       listDay: [],
       currentYear: new Date().getFullYear(),
       numberWeek: {},
       counter: 0,
-      getWeek: [],
-      love: [],
-      quantity:[]
+      getWeek: null,
+      dateStore: [],
+      quantity: [1, 2, 3, 2, 1, 2, 1],
+      dateLo: JSON.parse(localStorage.getItem("date")),
     }
   },
   created() {
     this.getNumberWeek();
+    this.getCurrentDay();
+   // const date = moment();
+    // const FormattedDate = date.format('MMM DD-YY ') + date.add(7, 'days').format('D YYYY');
+    // console.log(FormattedDate);
+
   },
-  mounted () {
-    this.fillData()
+  mounted() {
+    this.fillData();
   },
   methods: {
     getNumberWeek() {
@@ -67,9 +77,30 @@ export default {
         this.numberWeek = response.data;
       });
     },
-    fillData () {
+    getCurrentDay() {
+      this.counter = 0;
+      let uri = 'https://api-gilo.herokuapp.com/api/getWeek/' + this.counter;
+      this.axios.get(uri).then((response) => {
+        this.getWeek = response.data;
+        for (let i = this.getWeek; i < this.getWeek; i++) {
+          let numberYear = new Date(Date.UTC(this.currentYear, 0, i));
+          let formattedDate = moment(numberYear).format("DD-MM-YYYY");
+          this.listDay.push(formattedDate);
+        }
+        console.log(this.listDay);
+      });
+      return this.listDay;
+    },
+    setDataLocal(listDay) {
+      return localStorage.setItem("date", JSON.stringify(listDay));
+    },
+    getDataLocal() {
+      return JSON.parse(localStorage.getItem("date"));
+    },
+    ////
+    fillData() {
       this.datacollection = {
-        labels: this.$store.state.dateWeek,
+        labels: this.getDataLocal(),
         datasets: [
           {
             label: 'Đơn hàng',
@@ -78,12 +109,14 @@ export default {
           }
         ]
       }
+
     },
-    PreviousWeek() {
-      if (this.numberWeek != 0) {
+    async PreviousWeek() {
+      if (this.numberWeek !== 0) {
         this.listDay.splice(-7);
         this.numberWeek -= 1;
         this.counter += 1;
+
         let uri = 'https://api-gilo.herokuapp.com/api/getWeek/' + this.counter;
         this.axios.get(uri).then((response) => {
           this.getWeek = response.data;
@@ -91,54 +124,46 @@ export default {
             let numberYear = new Date(Date.UTC(this.currentYear, 0, i));
             let formattedDate = moment(numberYear).format("DD-MM-YYYY");
             this.listDay.push(formattedDate);
-            localStorage.setItem("date", JSON.stringify(this.listDay));
           }
+          this.setDataLocal(this.listDay);
         });
-        this.$store.commit('setNewDate', this.listDay);
-        this.love = this.$store.state.dateWeek
+        await this.$store.commit('setNewDate', this.listDay);
+        this.dateStore = this.$store.state.dateWeek;
+        this.fillData();
       }
     },
-    nextWeek() {
-      this.numberWeek += 1;
-      this.counter -= 1;
-      let uri = 'https://api-gilo.herokuapp.com/api/getWeek/' + this.counter;
-      this.axios.get(uri).then((response) => {
-        this.getWeek = response.data;
-        for (let i = this.getWeek; i < this.getWeek + 7; i++) {
-          let numberYear = new Date(Date.UTC(this.currentYear, 0, i));
-          let formattedDate = moment(numberYear).format("DD-MM-YYYY");
-          this.listDay.push(formattedDate);
-          localStorage.setItem("date", JSON.stringify(this.listDay));
-        }
-      });
-      this.listDay.splice(-7);
-      this.$store.commit('setNewDate', this.listDay);
-      this.love = this.$store.state.dateWeek
+    async nextWeek() {
+      if (this.numberWeek !== 0) {
+        this.listDay.splice(-7);
+        this.numberWeek += 1;
+        this.counter -= 1;
+
+        let uri = 'https://api-gilo.herokuapp.com/api/getWeek/' + this.counter;
+        this.axios.get(uri).then((response) => {
+          this.getWeek = response.data;
+          for (let i = this.getWeek; i < this.getWeek + 7; i++) {
+            let numberYear = new Date(Date.UTC(this.currentYear, 0, i));
+            let formattedDate = moment(numberYear).format("DD-MM-YYYY");
+            this.listDay.push(formattedDate);
+          }
+          this.setDataLocal(this.listDay);
+        });
+        await this.$store.commit('setNewDate', this.listDay);
+        this.dateStore = this.$store.state.dateWeek;
+        this.fillData();
+      }
     },
   }
-  // fetch('https://api-gilo.herokuapp.com/api/weekChart')
-//     .then((response) => response.json())
-//     .then((data) => {
-//       const order_week = data;
-//       for (var i = 0; i < order_week.length; i++) {
-//         if (this.listDay.indexOf(order_week[i].date) != -1) {
-//           this.quantity.push(order_week[i].date);
-//         }
-//       }
-//     });
-// this.listDay.splice(-7);
-// this.$store.commit('setNewDate', this.listDay);
-
 }
 </script>
 <style>
 .statistic {
   width: 95%;
   margin: 10px auto;
-  height: 600px!important;
+  height: 600px !important;
 }
-#line-chart{
-  height: 700px!important;
-  font-size: 18px!important;
+#bar-chart{
+  height: 80% !important;
+  width: 90%!important;
 }
 </style>

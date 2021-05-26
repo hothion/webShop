@@ -56,12 +56,6 @@
                 </router-link>
               </li>
               <li class="nav-item">
-                <router-link class="nav-link" to="/login">
-                  <i class="fas fa-sign-in-alt"></i>
-                  <span class="nav-link-text">Đăng nhập</span>
-                </router-link>
-              </li>
-              <li class="nav-item">
                 <a class="nav-link" @click="logOut()">
                   <i class="fas fa-sign-in-alt"></i>
                   <span class="nav-link-text">Đăng xuất</span>
