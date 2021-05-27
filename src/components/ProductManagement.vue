@@ -131,7 +131,7 @@
         <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
           <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
             <li class="breadcrumb-item">
-              <router-link to="/dashboard"><i class="fas fa-home"></i></router-link>
+              <router-link to="/"><i class="fas fa-home"></i></router-link>
             </li>
             <li class="breadcrumb-item">
               <router-link to="/product">Quản lý sản phẩm</router-link>
@@ -146,11 +146,11 @@
         >Thêm sản phẩm</a
         >
       </div>
-      <div class="content tableProduct">
+      <div class="content tableProduct" style="width: 97%!important;">
         <div class="content table_titleProduct">
           <p>Id</p>
-          <p>Tên Sản phẩm </p>
           <p>Hình ảnh</p>
+          <p>Tên Sản phẩm </p>
           <p>Mô tả</p>
           <p>Giá (đ)</p>
           <p>Sửa</p>
@@ -159,19 +159,19 @@
           <div v-for="product in showProducts" :key="product.id">
             <div class="content table_contentProduct">
               <p>{{ product.id }}</p>
-              <p>{{ product.name }}</p>
               <p> <img :src="product.img" id="img1" alt="image"/></p>
+              <p>{{ product.name }}</p>
               <p style="text-align: left">
                 {{ product.description }}
               </p>
-              <p>{{ product.price }}(- {{ product.discount }}%)</p>
+              <p>{{ product.price }}</p>
               <p>
                 <a class="btn btn-danger" href="#open-modal">
-                  <button @click.prevent="editProduct(product)"><i class="fas fa-edit"> </i></button>
+                  <button style="padding: 3px!important;" @click.prevent="editProduct(product)"><i class="fas fa-edit"> </i></button>
                 </a>
               </p>
               <p>
-                <button @click.prevent="deleteProduct(product.id)"><i class="fas fa-trash-alt"></i></button>
+                <button style="padding: 11px 9px!important;"  @click.prevent="deleteProduct(product.id)"><i class="fas fa-trash-alt"></i></button>
               </p>
             </div>
           </div>
@@ -198,14 +198,14 @@
       </div>
       <div id="open-modal" class="modal-window-product">
         <div class="form">
-          <a href="#" title="Close" class="modal-close">Close</a>
+          <a href="#" title="Close" class="modal-close"><i class="fas fa-times"></i></a>
           <center>
-            <h2>{{ contentForm }}</h2>
+            <h1 style="font-weight: bold; font-size: 1.8rem; margin-bottom: 30px">{{ contentForm }}</h1>
           </center>
           <form @submit.prevent="addProduct">
             <div id="formAdd">
               <div class="item_input">
-                <label for="input" class="Input-label">Tên sản phẩm </label>
+                <label for="input" class="Input-label" style="margin-bottom: 10px!important; font-size: 1.1rem; font-weight: bold">Tên sản phẩm </label>
                 <input
                     type="text"
                     id="input"
@@ -215,21 +215,21 @@
                 />
               </div>
               <div class="item_input">
-                <label>Hình ảnh</label><br/>
-                <input type="text" placeholder="Link ảnh" name="image" id="img" v-model="newproduct.img"/>
+                <label style="margin-bottom: 10px!important; font-size: 1.1rem; font-weight: bold" >Hình ảnh</label><br/>
+                <input type="text" placeholder="Link ảnh" name="image" id="img2" v-model="newproduct.img"/>
               </div>
               <div class="item_input">
-                <label for="type">Loại sản phẩm</label><br/>
+                <label for="type" style="margin-bottom: 10px!important; font-size: 1.1rem; font-weight: bold">Loại sản phẩm</label><br/>
                 <input
                     type="text"
                     name="type"
                     v-model="newproduct.type"
                     id="type"
-                    hplaceholder=" Nhập loại sản phẩm"
+                    placeholder=" Nhập loại sản phẩm"
                 />
               </div>
               <div class="item_input">
-                <label for="quantity"> Số lượng</label><br/>
+                <label for="quantity" style="margin-bottom: 10px!important; font-size: 1.1rem; font-weight: bold"> Số lượng</label><br/>
                 <input
                     type="number"
                     name="quantity"
@@ -237,11 +237,11 @@
                     id="quantity"
                     min="1"
                     max="10000"
-                    hplaceholder=" Số lượng sản phẩm"
+                    placeholder=" Số lượng sản phẩm"
                 />
               </div>
               <div class="item_input">
-                <label for="price">Giá</label><br/>
+                <label style="margin-bottom: 10px!important;font-size: 1.1rem; font-weight: bold" for="price">Giá ( đ )</label><br/>
                 <input
                     type="number"
                     name="price"
@@ -249,11 +249,11 @@
                     id="price"
                     min="100000"
                     max="1000000"
-                    hplaceholder=" Giá của sản phẩm"
+                    placeholder=" Giá của sản phẩm"
                 />
               </div>
               <div class="item_input">
-                <label for="discount">Giảm giá</label><br/>
+                <label style="margin-bottom: 10px!important;font-size: 1.1rem; font-weight: bold" for="discount">Giảm giá( % )</label><br/>
                 <input
                     type="number"
                     name="discount"
@@ -261,24 +261,24 @@
                     id="discount"
                     min="1"
                     max="100"
-                    hplaceholder=" Giám giá "
+                    placeholder=" Giám giá "
                 />
               </div>
-              <div class="item_input">
-                <label for="description"> Mô tả</label><br/>
-                <textarea
-                    name="description"
-                    id="description"
-                    cols="40"
-                    rows="8"
-                    v-model="newproduct.description"
-                    hplaceholder=" Mô tả cho sản phẩm"
-                ></textarea>
-              </div>
+            </div>
+            <div class="item_input" style="margin-top: 35px!important;">
+              <label for="description" style="margin-bottom: 10px!important;font-size: 1.1rem; font-weight: bold"> Mô tả</label><br/>
+              <textarea
+                  name="description"
+                  id="description"
+                  cols="73"
+                  rows="3"
+                  v-model="newproduct.description"
+                  placeholder=" Mô tả cho sản phẩm"
+              ></textarea>
             </div>
             <div class="add_resest">
-              <button type="submit">{{ buttonAdd }}</button>
-              <button type="submit" @click.prevent="clearData">Xóa dữ liệu</button>
+              <button type="submit" style="font-weight: bold">{{ buttonAdd }}</button>
+              <button type="submit" style="font-weight: bold" @click.prevent="clearData">Hủy</button>
             </div>
           </form>
         </div>
@@ -407,13 +407,17 @@ export default {
 }
 </script>
 <style lang="scss">
+.row.align-items-center.py-4{
+  padding-top:24px!important;
+  padding-bottom: 0!important;
+}
 .product {
   width: 100%;
   margin-left: auto;
   margin-right: auto;
 }
 .header_pro {
-  margin-bottom: 3%;
+  margin-bottom: 1%;
   margin-right:5%;
   a {
     background-color: crimson;
@@ -462,6 +466,7 @@ div#formAdd {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-row-gap: 30px;
+  width: 100%;
 }
 
 .add_resest {
@@ -491,22 +496,33 @@ form button {
 
 .item_input label {
   top: 2%;
-  bottom: 2%;
+  bottom: 3%;
 }
-
+form{
+  margin-left: 25px!important;
+  width: 100%;
+}
 .item_input input {
+  border: 1px solid honeydew;
+  outline: none;
   border-radius: 0.4rem;
-  height: 75%;
   width: 85%;
   padding: 10px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 10px 10px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;}
+.item_input input:focus{
+  border-bottom: 2px solid cadetblue;
 }
-
 .item_input textarea {
+  outline: none;
+  padding: 10px;
+  border: 1px solid honeydew;
   border-radius: 0.4rem;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 10px 10px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
 }
+.item_input textarea:focus{
+  border-bottom: 2px solid cadetblue;
 
+}
 .modal-window-product {
   position: fixed;
   background-color: rgba(255, 255, 255, 0.25);
@@ -527,16 +543,15 @@ form button {
   }
 
   & > div {
-    width: 60%;
+    width: 55%;
     position: absolute;
-    top: 50%;
+    top: 45%;
     left: 50%;
-    height: 80%;
-    overflow: auto;
+    height: 95%;
     border-radius: 0.4rem;
     transform: translate(-50%, -50%);
     padding: 2em;
-    background-image: linear-gradient(to right, #f2709c, #ff9472);
+    background-image: linear-gradient(to right, #faf5fc, #faf5fc);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
     0 20px 20px 0 rgba(0, 0, 0, 0.19);
   }
@@ -566,7 +581,7 @@ form button {
   text-decoration: none;
 
   &:hover {
-    color: white;
+    color: blue;
   }
 }
 
@@ -635,9 +650,9 @@ ul li {
     & > div {
       width: 60%;
       position: absolute;
-      top: 50%;
+      top: 45%;
       left: 50%;
-      height: 80%;
+      height: 85%;
       overflow: auto;
       border-radius: 0.4rem;
       transform: translate(-50%, -50%);
@@ -677,7 +692,7 @@ ul li {
 .content .table_titleProduct {
   width: 100%;
   display: grid;
-  grid-template-columns: 0.5fr 0.7fr 1fr 1.2fr 0.8fr 0.5fr 0.5fr;
+  grid-template-columns: 0.5fr 1fr 0.8fr 1.4fr 0.7fr 0.4fr 0.4fr;
   grid-column-gap: 10px;
   grid-row-gap: 20px;
   border-radius: 10px;
@@ -711,7 +726,7 @@ ul li {
     margin-bottom: 10px;
 
     button {
-      padding: 10px;
+      padding:  8px 10px;
       background: none;
       border-bottom: 2px solid red;
       border-right: 2px solid red;
@@ -743,7 +758,7 @@ ul li {
     }
 
     a {
-      padding: 8px;
+      padding: 6px 6px;
       background: red;
       color: white;
       border: 0;

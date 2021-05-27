@@ -7,7 +7,7 @@
         <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
           <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
             <li class="breadcrumb-item">
-              <router-link to="/dashboard"><i class="fas fa-home"></i></router-link>
+              <router-link to="/"><i class="fas fa-home"></i></router-link>
             </li>
             <li class="breadcrumb-item">
               <router-link to="/order">Quản lý đơn hàng</router-link>
@@ -60,7 +60,7 @@
           </div>
         </div>
         <div v-else-if="statusOrder > 0">
-          <div v-for="order in rolesByCategory" :key="order.id">
+          <div v-for="order in orders" :key="order.id">
             <div class="content table_content" v-show="order.id_status === statusOrder">
               <p>
                 {{ order.id }}
@@ -375,7 +375,8 @@ export default {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1.1fr;
   margin-bottom: 10px;
-  float: right;
+  float: left!important;
+  width: 97.5%!important;
 }
 
 .content .list button {
