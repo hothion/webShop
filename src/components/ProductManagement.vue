@@ -148,7 +148,7 @@
       </div>
       <div class="content tableProduct" style="width: 97%!important;">
         <div class="content table_titleProduct">
-          <p>Id</p>
+          <p>STT</p>
           <p>Hình ảnh</p>
           <p>Tên Sản phẩm </p>
           <p>Mô tả</p>
@@ -158,7 +158,7 @@
         </div>
           <div v-for="product in showProducts" :key="product.id">
             <div class="content table_contentProduct">
-              <p>{{ product.id }}</p>
+              <p>{{ stt ++ }}</p>
               <p> <img :src="product.img" id="img1" alt="image"/></p>
               <p>{{ product.name }}</p>
               <p style="text-align: left">
@@ -313,6 +313,7 @@ export default {
       edit: false,
       buttonAdd: "Thêm",
       contentForm: "Thêm sản phẩm mới",
+      stt: 0
     };
   },
   created() {

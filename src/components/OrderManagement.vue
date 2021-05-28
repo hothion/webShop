@@ -34,9 +34,10 @@
           <p>Hủy đơn</p>
         </div>
         <div v-if="statusOrder === 0">
-          <div v-for="order in rolesByCategory" :key="order.id">
+          <div v-for="result in results" :key="result.payment_id">
+            <div v-for="order in result.orders" :key="order.id">
             <div class="content table_content">
-              <p>{{ order.id }}</p>
+              <p>{{ order.payment_id }}</p>
               <p>{{ order.name_recive }}</p>
               <p>{{ order.address }}</p>
               <p class="create_at1">
@@ -44,7 +45,7 @@
               </p>
               <p>{{ order.total }}</p>
               <p>
-                <button type="submit" class="order_status" @click.prevent="editOrder(order.id_status)">
+                <button type="submit" class="order_status" @click.prevent="editOrder(order.order_id)">
                   {{ order.content }}
                 </button>
               </p>
@@ -59,8 +60,10 @@
             </div>
           </div>
         </div>
+        </div>
         <div v-else-if="statusOrder > 0">
-          <div v-for="order in orders" :key="order.id">
+          <div v-for="result in results" :key="result.payment_id">
+            <div v-for="order in result.orders" :key="order.id">
             <div class="content table_content" v-show="order.id_status === statusOrder">
               <p>
                 {{ order.id }}
@@ -78,7 +81,7 @@
                 {{ order.total }}
               </p>
               <p>
-                <button type="submit" class="order_status" @click.prevent="editOrder(order.id)">
+                <button type="submit" class="order_status" @click.prevent="editOrder(order.order_id)">
                   {{ order.content }}
                 </button>
               </p>
@@ -93,6 +96,7 @@
             </div>
           </div>
         </div>
+      </div>
       </div>
       <div id="navigation" v-if="statusOrder === 0">
         <ul class="pagination">
@@ -143,15 +147,8 @@ import axios from 'axios';
 
 Vue.use(VueAxios, axios);
 import Header from './Header.vue'
-import moment from "moment";
 import _ from 'lodash';
-// Load the core build.
-//var _ = require('lodash/core');
-//var fp = require('lodash/fp');
-// import tap from "lodash/fp/tap";
-// import flow from "lodash/fp/flow";
-// import groupBy from "lodash/fp/groupBy";
-//const map = require('lodash/fp/map').convert({ 'cap': false });
+
 export default {
   components: {
     Header
@@ -168,24 +165,14 @@ export default {
       perPage: 5,
       pages: [],
       statusOrder: 0,
-      formattedDate: ''
+      formattedDate: '',
+      results: []
     };
   },
   created() {
     this.getData();
-    this.formatDate();
-  },
-  mounted() {
-    this.getData();
   },
   methods: {
-    formatDate() {
-      this.getData();
-      for (let i = 0; i < this.orders.length; i++) {
-        this.formattedDate = moment(this.orders[i].created_at).format('YYYYMMDD');
-        console.log(this.formattedDate);
-      }
-    },
     allOrder() {
       this.statusOrder = 0;
     },
@@ -212,25 +199,17 @@ export default {
         fetch('https://api-gilo.herokuapp.com/api/progress')
             .then((response) => response.json())
             .then((data) =>{
-              var result = _(data)
+             this.results = _(data)
                   .groupBy(x => x.payment_id)
                   .map((value, key) =>
                       ({payment_id: key,
                         orders: value})).value();
 
-              console.log(result)});
-       // console.log(data)
-            // var result = _(data) (this.orders = data)
-            //     .groupBy(x => x.payment_id)
-            //     .map((value, key) =>
-            //         ({payment_id: key,
-            //           orders: value})).value();
-            //
-            // console.log(result);
+              console.log(this.results)});
     },
     editOrder(id) {
       axios.put(
-          'https://api-gilo.herokuapp.com/api/progress/' + id
+          'https://api-gilo.herokuapp.com/api/orderUpdate/' + id
       );
       this.getData();
     },
