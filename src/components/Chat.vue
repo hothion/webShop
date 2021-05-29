@@ -10,9 +10,9 @@
           <label for="search1"><i class="fa fa-search" aria-hidden="true"></i></label>
           <input type="text" v-model="searchText" @keyup="search()" id="search1" placeholder="Tìm kiếm trên chat..." />
         </div>
-        <div id="contacts">
-          <ul v-for="(user, i) in users" :key="i" v-on:click="sendselect(user.id_user)" >
-            <li class="contact" v-if="user.id_user !=1 && user.remember_token!=1">
+        <div id="contacts" v-for="(user, i) in users" :key="i" v-on:click="sendselect(user.id_user)">
+          <ul v-if="user.id_user !=1">
+            <li class="contact" >
               <div class="wrap">
                 <span class="contact-status online"></span>
                 <img :src="user.img">
@@ -24,11 +24,11 @@
             </li>
           </ul>
         </div>
-        <div id="bottom-bar">
+        <!-- <div id="bottom-bar">
           <button id="addcontact"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i> <span>Add
               contact</span></button>
           <button id="settings"><i class="fa fa-cog fa-fw" aria-hidden="true"></i> <span>Settings</span></button>
-        </div>
+        </div> -->
       </div>
       <div class="content">
         <div class="contact-profile" v-if="messages.id_user==id_user ">
@@ -135,7 +135,7 @@
         
         let Mess = {
           content: this.content,
-          id_user: localStorage.getItem('data')
+          id_user: localStorage.getItem('user_id')
         }
         let MessUser = JSON.stringify(Mess);
         axios({

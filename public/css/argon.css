@@ -4427,8 +4427,6 @@ input[type='button'].btn-block
     z-index: 1000;
     display: none;
     width: 60%;
-    /* float: left; */
-    /* min-width: 10rem; */
     padding: 0.5rem 0 !important;
     margin: 5% 0 0 10%!important;
     font-size: 1rem;
@@ -4476,95 +4474,6 @@ input[type='button'].btn-block
         border-radius: .25rem;
     } 
 }
-
-/* @media (min-width: 576px)
-{
-    .dropdown-menu {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        z-index: 1000;
-        display: none;
-        float: left; 
-        padding: 0.5rem 0 !important;
-        margin: 0 0 0 0 !important;
-        font-size: 1rem;
-        color: #212529;
-         text-align: left; 
-        list-style: none;
-        background-color: #fff;
-        background-clip: padding-box;
-        border: 1px solid rgba(0,0,0,.15);
-        border-radius: .25rem;
-    } 
-}
-
-@media (min-width: 992px)
-{
-    .dropdown-menu {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 60%;
-        z-index: 1000;
-        display: none;
-         float: left; 
-        padding: 0.5rem 0 !important;
-        margin: 0 0 0 0 !important;
-        font-size: 1rem;
-        color: #212529;
-        text-align: left; 
-        list-style: none;
-        background-color: #fff;
-        background-clip: padding-box;
-        border: 1px solid rgba(0,0,0,.15);
-        border-radius: .25rem;
-    } 
-} */
-
-/* 
-@media (min-width: 768px)
-{
-    .dropdown-menu-md-left
-    {
-        right: auto;
-        left: 0;
-    }
-    .dropdown-menu-md-right
-    {
-        right: 0;
-        left: auto;
-    }
-}
-
-@media (min-width: 992px)
-{
-    .dropdown-menu-lg-left
-    {
-        right: auto;
-        left: 0;
-    }
-    .dropdown-menu-lg-right
-    {
-        right: 0;
-        left: auto;
-    }
-}
-
-@media (min-width: 1200px)
-{
-    .dropdown-menu-xl-left
-    {
-        right: auto;
-        left: 0;
-    }
-    .dropdown-menu-xl-right
-    {
-        right: 0;
-        left: auto;
-    }
-} */
-
 .dropup .dropdown-menu
 {
     top: auto;
