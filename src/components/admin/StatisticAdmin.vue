@@ -1,6 +1,6 @@
 <template>
   <div class="main-content" id="panel">
-    <Header></Header>
+    <HeaderAdmin></HeaderAdmin>
     <div class="row align-items-center py-4">
       <div class="col-lg-6 col-7">
         <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
@@ -11,16 +11,16 @@
         </nav>
       </div>
       <div class="col-lg-6 col-5 text-right">
-        <router-link href="#" class="btn btn-sm btn-neutral" to="/order-month">Tháng</router-link>
-        <router-link href="#" class="btn btn-sm btn-neutral" to="/order-week2">Tuần</router-link>
+        <router-link href="#" class="btn btn-sm btn-neutral" to="/user-month">Người dùng</router-link>
+        <router-link href="#" class="btn btn-sm btn-neutral" to="/shop-month">Cửa hàng</router-link>
       </div>
     </div>
     <div class="statistic" style="width: 95%; margin: 10px auto">
       <div class="col1">
         <div class="LineChart">
-          <productChart/>
+          <UserChart/>
           <h3 style="text-align: center; font-weight: bold; margin-top: 10px; font-size: 1.2rem">
-            Biểu đồ 1: Sản phẩm và đơn hàng qua các tháng
+            Biểu đồ 1: Người dùng đăng ký qua các tháng
           </h3>
         </div>
       </div>
@@ -30,8 +30,9 @@
 </template>
 
 <script>
-import Header from './Header.vue';
-import productChart from './ProductChart.vue';
+import HeaderAdmin from './HeaderAdmin';
+import UserChart from "./UserChart";
+
 export default {
   name: "order",
   data() {
@@ -47,8 +48,8 @@ export default {
     };
   },
   components: {
-    Header,
-    productChart
+    HeaderAdmin,
+    UserChart
   },
 
 };
@@ -57,6 +58,7 @@ export default {
 .statistic {
   width: 100%;
 }
+
 .statistic h1 {
   box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.2), 0 0px 20px 0 rgba(0, 0, 0, 0.19);
 }

@@ -1,23 +1,21 @@
 <template>
   <div class="main-content" id="panel">
-    <!-- Topnav -->
-    <Header></Header>
-    <!-- Header -->
+    <HeaderAdmin/>
     <div class="header bg-primary pb-6">
       <div class="container-fluid">
         <div class="header-body">
           <div class="row align-items-center py-4">
-            <div class="col-lg-6 col-7" style="padding-left: 0!important; margin-left: -10px!important;">
+            <div class="col-lg-6 col-7">
               <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-                  <li class="breadcrumb-item"><router-link to="/"><i class="fas fa-home"></i></router-link></li>
+                  <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
                   <li class="breadcrumb-item"><a href="#">Trang quản lý</a></li>
                 </ol>
               </nav>
             </div>
             <div class="col-lg-6 col-5 text-right">
-              <a href="#" class="btn btn-sm btn-neutral" style="background-color: whitesmoke!important;">Mới</a>
-              <a href="#" class="btn btn-sm btn-neutral" style="background-color: whitesmoke!important;">Bộ lọc</a>
+              <a href="#" class="btn btn-sm btn-neutral">Mới</a>
+              <a href="#" class="btn btn-sm btn-neutral">Bộ lọc</a>
             </div>
           </div>
           <!-- Card stats -->
@@ -150,7 +148,7 @@
             <div class="card-body">
               <!-- Chart -->
               <div class="chart">
-                <orderBar/>
+                <UserChart/>
               </div>
             </div>
           </div>
@@ -168,7 +166,7 @@
             <div class="card-body">
               <!-- Chart -->
               <div class="chart">
-                <orderPie/>
+                <UserChart/>
               </div>
             </div>
           </div>
@@ -178,15 +176,13 @@
   </div>
 </template>
 <script>
-import Header from './Header.vue';
-import orderBar from "./OrderBar.vue";
-import orderPie from "./OrderPie.vue";
+import UserChart from "./UserChart";
+import HeaderAdmin from './HeaderAdmin';
 
 export default {
   components: {
-    Header,
-    orderBar,
-    orderPie
+    UserChart,
+    HeaderAdmin
   }
 }
 </script>

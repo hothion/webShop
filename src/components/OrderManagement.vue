@@ -7,7 +7,7 @@
         <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
           <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
             <li class="breadcrumb-item">
-              <router-link to="/dashboard"><i class="fas fa-home"></i></router-link>
+              <router-link to="/"><i class="fas fa-home"></i></router-link>
             </li>
             <li class="breadcrumb-item">
               <router-link to="/order">Quản lý đơn hàng</router-link>
@@ -19,7 +19,7 @@
         <div class="content list">
           <p></p>
           <p></p>
-          <button @click.prevent="allOrder()">Tất cả đơn hàng {{ formattedDate }}</button>
+          <button @click.prevent="allOrder()">Tất cả đơn hàng </button>
           <button @click.prevent="unConfirmOrder()">Đơn chưa xác nhận</button>
           <button @click.prevent="compeleteOrder()">Đơn đã giao</button>
         </div>
@@ -34,23 +34,23 @@
           <p>Hủy đơn</p>
         </div>
         <div v-if="statusOrder === 0">
-          <div v-for="order in showOrders" :key="order.id">
+          <div v-for="order in rolesByCategory" :key="order.id">
             <div class="content table_content">
               <p>{{ order.id }}</p>
-              <p>{{ order.users[0].firstName }} {{ order.users[0].lastName }}</p>
-              <p>{{ order.users[0].address }}</p>
-              <p class="create_at">
-                {{ order.created_at }}
+              <p>{{ order.name_recive }}</p>
+              <p>{{ order.address }}</p>
+              <p class="create_at1">
+                {{ $date(order.created_at).format('DD/MM/YYYY') }}
               </p>
-              <p>{{ order.product[0].price * order.quantity }}</p>
+              <p>{{ order.total }}</p>
               <p>
-                <button type="submit" class="order_status" @click.prevent="editOrder(order.id)">
-                  {{ order.order_status[0].content }}
+                <button type="submit" class="order_status" @click.prevent="editOrder(order.id_status)">
+                  {{ order.content }}
                 </button>
               </p>
               <p>
                 <a class="btn btn-danger" href="#detailOrder">
-                  <button @click.prevent="getOrderDetail(order.users[0].id)"><i class="fas fa-eye"></i></button>
+                  <button @click.prevent="getOrderDetail(order.id)"><i class="fas fa-eye"></i></button>
                 </a>
               </p>
               <p>
@@ -61,30 +61,30 @@
         </div>
         <div v-else-if="statusOrder > 0">
           <div v-for="order in orders" :key="order.id">
-            <div class="content table_content" v-show="order.order_status[0].id === statusOrder">
+            <div class="content table_content" v-show="order.id_status === statusOrder">
               <p>
                 {{ order.id }}
               </p>
               <p>
-                {{ order.users[0].firstName }} {{ order.users[0].lastName }}
+                {{ order.name_recive}}
               </p>
               <p>
-                {{ order.users[0].address }}
+                {{ order.address }}
               </p>
-              <p class="create_at">
-                {{ order.created_at }}
+              <p class="create_at1">
+                {{ $date(order.created_at).format('DD/MM/YYYY') }}
               </p>
               <p>
-                {{ order.product[0].price * order.quantity }}
+                {{ order.total }}
               </p>
               <p>
                 <button type="submit" class="order_status" @click.prevent="editOrder(order.id)">
-                  {{ order.order_status[0].content }}
+                  {{ order.content }}
                 </button>
               </p>
               <p>
                 <a class="btn btn-danger" href="#detailOrder">
-                  <button @click.prevent="getOrderDetail(order.users[0].id)"><i class="fas fa-eye"></i></button>
+                  <button @click.prevent="getOrderDetail(order.id_product)"><i class="fas fa-eye"></i></button>
                 </a>
               </p>
               <p>
@@ -144,7 +144,14 @@ import axios from 'axios';
 Vue.use(VueAxios, axios);
 import Header from './Header.vue'
 import moment from "moment";
-
+import _ from 'lodash';
+// Load the core build.
+//var _ = require('lodash/core');
+//var fp = require('lodash/fp');
+// import tap from "lodash/fp/tap";
+// import flow from "lodash/fp/flow";
+// import groupBy from "lodash/fp/groupBy";
+//const map = require('lodash/fp/map').convert({ 'cap': false });
 export default {
   components: {
     Header
@@ -201,34 +208,29 @@ export default {
         this.Orderdetails = response.data;
       });
     },
-    orderConfirm() {
-      this.orderbyStatus = +1;
-      fetch('https://api-gilo.herokuapp.com/api/order/' + this.orderbyStatus)
-          .then((response) => response.json())
-          .then((data) => (this.orders = data));
-    },
-    orderFinished() {
-      this.orderbyStatus = +5;
-      fetch('https://api-gilo.herokuapp.com/api/order/' + this.orderbyStatus)
-          .then((response) => response.json())
-          .then((data) => (this.orders = data));
-    },
-    orderAll() {
-      fetch('https://api-gilo.herokuapp.com/api/order')
-          .then((response) => response.json())
-          .then((data) => (this.orders = data));
-    },
     getData() {
-      if (this.orderbyStatus == 0) {
-        fetch('https://api-gilo.herokuapp.com/api/order')
+        fetch('https://api-gilo.herokuapp.com/api/progress')
             .then((response) => response.json())
-            .then((data) => (this.orders = data));
-      }
-      // this.date_order = moment("13:30 9 11 2021").format('YYYY-MM-DD');
+            .then((data) =>{
+              var result = _(data)
+                  .groupBy(x => x.payment_id)
+                  .map((value, key) =>
+                      ({payment_id: key,
+                        orders: value})).value();
+
+              console.log(result)});
+       // console.log(data)
+            // var result = _(data) (this.orders = data)
+            //     .groupBy(x => x.payment_id)
+            //     .map((value, key) =>
+            //         ({payment_id: key,
+            //           orders: value})).value();
+            //
+            // console.log(result);
     },
     editOrder(id) {
       axios.put(
-          'https://api-gilo.herokuapp.com/api/orderUpdate/' + id
+          'https://api-gilo.herokuapp.com/api/progress/' + id
       );
       this.getData();
     },
@@ -247,13 +249,13 @@ export default {
     },
   },
   computed: {
-    showOrders() {
-      return this.paginate(this.orders);
+    rolesByCategory() {
+      return _.groupBy(this.orders, 'payment_id')
     }
   },
   watch: {
-    orders() {
-      this.setPages();
+    showOrders() {
+        return this.paginate(this.orders);
     },
     filters: {
       trimWords(value) {
@@ -297,15 +299,15 @@ export default {
 }
 
 .content .table {
-  width: 85%;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
 }
 
 .content {
-  width: 85%;
-  margin-left: auto;
-  margin-right: auto;
+  width: 90% !important;
+  margin-left: auto!important;
+  margin-right: auto!important;
 
   h1 {
     margin-bottom: 10px;
@@ -373,7 +375,8 @@ export default {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1.1fr;
   margin-bottom: 10px;
-  float: right;
+  float: left!important;
+  width: 97.5%!important;
 }
 
 .content .list button {

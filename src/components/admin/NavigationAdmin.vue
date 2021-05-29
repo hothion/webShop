@@ -2,7 +2,6 @@
   <div>
     <nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
       <div class="scrollbar-inner">
-        <!-- Brand -->
         <div class="sidenav-header  align-items-center">
           <a class="navbar-brand" href="javascript:void(0)">
             <img src="https://www.enic.it/wp-content/uploads/2019/11/gilo-Logo.png" class="navbar-brand-img" alt="...">
@@ -20,31 +19,25 @@
                 </router-link>
               </li>
               <li class="nav-item">
-                <router-link class="nav-link" to="/product">
+                <router-link class="nav-link" to="/user">
                   <i class="fas fa-gift"></i>
-                  <span class="nav-link-text">Quản lý sản phẩm</span>
+                  <span class="nav-link-text">Quản lý người dùng</span>
                 </router-link>
               </li>
               <li class="nav-item">
-                <router-link class="nav-link" to="/order">
+                <router-link class="nav-link" to="/shop">
                   <i class="fa fa-archive"></i>
-                  <span class="nav-link-text">Quản lý đơn hàng</span>
+                  <span class="nav-link-text">Quản lý cửa hàng</span>
                 </router-link>
               </li>
               <li class="nav-item">
-                <router-link class="nav-link" to="/statistic">
+                <router-link class="nav-link" to="/statisticAdmin">
                   <i class="fa fa-wrench"></i>
                   <span class="nav-link-text">Thống kê</span>
                 </router-link>
               </li>
               <li class="nav-item">
-                <router-link class="nav-link" to="/chat">
-                  <i class="fas fa-comment-dots"></i>
-                  <span class="nav-link-text">Tin nhắn</span>
-                </router-link>
-              </li>
-              <li class="nav-item">
-                <router-link class="nav-link" to="/notification">
+                <router-link class="nav-link" to="/notificationAdmin">
                   <i class="fas fa-bell"></i>
                   <span class="nav-link-text">Thông báo</span>
                 </router-link>
@@ -52,7 +45,7 @@
               <li class="nav-item">
                 <router-link class="nav-link" to="/profile">
                   <i class="fas fa-address-card"></i>
-                  <span class="nav-link-text">Thông tin cá nhân</span>
+                  <span class="nav-link-text">Tôi</span>
                 </router-link>
               </li>
               <li class="nav-item">
@@ -85,20 +78,9 @@ export default {
   }
 };
 </script>
-<style lang="scss">
-.nav-link:hover{
-  transition: 0.4s all;
-  background-color: #bee6e3;
-  border-radius: 4px;
-  width: 100% !important;
-}
-.nav-link.active.router-link-active{
-  width: 100% !important;
-  margin-left: 0rem!important;
-  padding-left: 1.6rem!important;
-}
-.nav-link.active.router-link-active:hover{
-  transition: 0.4s all!important;
-  background-color: #bee6e3!important;
+<style>
+.navbar-vertical .navbar-brand-img, .navbar-vertical .navbar-brand > img {
+  max-width: 100%;
+  max-height: 4rem;
 }
 </style>
