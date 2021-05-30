@@ -8,17 +8,17 @@
         </div>
         <div id="search">
           <label for="search1"><i class="fa fa-search" aria-hidden="true"></i></label>
-          <input type="text" v-model="searchText" @keyup="search()" id="search1" placeholder="Tìm kiếm trên chat..." />
+          <input type="text" v-model="searchChat" @keyup="search()" id="search1" placeholder="Tìm kiếm trên chat..." />
         </div>
-        <div id="contacts" v-for="(user, i) in users" :key="i" v-on:click="sendselect(user.id_user)">
-          <ul v-if="user.id_user !=1">
+        <div id="contacts" v-for="(user, i) in results" :key="i" v-on:click="sendselect(user.users[0].id_user)">
+          <ul v-if="user.users[0].id_user !=1">
             <li class="contact" >
               <div class="wrap">
                 <span class="contact-status online"></span>
-                <img :src="user.img">
+                <img :src="user.users[0].img">
                 <div class="meta">
-                  <p class="name">{{user.account}}</p>
-                  <p class="preview">{{user.content}}</p>
+                  <p class="name">{{user.users[0].account}}</p>
+                  <p class="preview">{{user.users[0].content}}</p>
                 </div>
               </div>
             </li>
@@ -32,12 +32,9 @@
       </div>
       <div class="content">
         <div class="contact-profile" v-if="messages.id_user==id_user ">
-          <imgs :src="messages.img" alt="" />
+          <img :src="messages.img" alt="" />
           <p>{{messages.account}}</p>
           <div class="social-media">
-            <!-- <i class="fa fa-facebook" aria-hidden="true"></i>
-				<i class="fa fa-twitter" aria-hidden="true"></i>
-         <i class="fa fa-instagram" aria-hidden="true"></i> -->
             <i class="fa fa-camera" aria-hidden="true"></i>
             <i class="fa fa-microphone"></i>
             <i class="fa fa-close"></i>
@@ -45,11 +42,11 @@
         </div>
         <div class="messages">
           <ul v-for="message in messages" :key="message.id">
-            <li class="sent" v-if="message.id_user==id_usser ">
+            <li class="sent" v-if="message.id_user==id_user && message.id_role === 0">
               <img :src="message.img">
               <p>{{message.content}}</p>
             </li>
-            <li class="replies" v-else-if=" message.id_user === 1 && message.id_admin === id_ad">
+            <li class="replies" v-else-if=" message.id_user ==id_user && message.id_role === 1">
               <img :src="message.img">
               <p>{{message.content}}</p>
             </li>
@@ -83,8 +80,9 @@
         typingTimer: false,
         form: "false",
         show: false,
-        searchText: '',
-        account: ''
+        searchChat: '',
+        account: '',
+        results: []
       }
     },
     componentDidMount() {
@@ -92,7 +90,7 @@
       setInterval(() => {
         axios({
           method: "GET",
-          url: `http://api-gilo.herokuapp.com/api/chatcustomer`,
+          url: `http://api-gilo.herokuapp.com/api/chatadmin/1`,
           data: null
         }).then(res => {
           this.setState({chat: res.data});
@@ -108,26 +106,35 @@
     },
     created() {
       this.loadListChat();
-      //const formdis=this.form;
-      this.id_usser = localStorage.getItem("user_id");
+      this.loadChat();
+      this.id_user = localStorage.getItem("user_id");
       this.id_ad = JSON.parse(localStorage.getItem("data"));
     },
 
     methods: {
       //all
       loadChat() {
-        axios.get("https://api-gilo.herokuapp.com/api/chatcustomer").then((response) => {
+        axios.get("https://api-gilo.herokuapp.com/api/chatadmin/1").then((response) => {
           this.messages = response.data;
+          this.loadListChat();
         })
       },
       //list
       loadListChat() {
-        axios.get("https://api-gilo.herokuapp.com/api/chatadmin").then((response) => {
-          this.users = response.data;
+           fetch('https://api-gilo.herokuapp.com/api/chatadmin/1')
+            .then((response) => response.json())
+            .then((data) =>{
+              this.results = _(data)
+                  .groupBy(x => x.account)
+                  .map((value, key) =>
+                      ({account: key,
+                        users: value})).value();
+              console.log(this.results);
         });
       },
       sendselect(id) {
         localStorage.setItem("user_id", id);
+        this.id_user = localStorage.getItem("user_id");
         this.loadChat();
       },
 
@@ -154,14 +161,14 @@
       },
       search() {
         axios.post('https://api-gilo.herokuapp.com/api/searchchat/', {
-          account: this.searchText
+         account: this.searchChat
         })
             .then((response) => {
-              this.users = response.data;
+              this.results.users = response.data;
             });
       }
-
-    }
+    },
+    
   }
 </script>
 
@@ -175,6 +182,7 @@
     margin-left:-15px;
   }
 #frame {
+  display: flex;
     width: 100%;
     min-width: 360px;
     max-width: 100%;
@@ -514,7 +522,7 @@
 }
 #frame #sidepanel #contacts ul{
 list-style: none;
-height: 100%;
+height: 23vh;
 }
 #frame #sidepanel #contacts ul li.contact {
   position: relative;

@@ -69,10 +69,12 @@
           <div class="menu show" v-show="Dropit">
            <h3> xin chào </h3>
            <ul>
+              <router-link to="/profile">
              <li><i class="fas fa-user"></i><h6>Thông tin cá nhân</h6></li>
+              </router-link>
              <li><i class="fas fa-user-edit"></i><h6>Sửa thông tin</h6></li>
              <li><i class="fas fa-user-cog"></i><h6>Cài đặt</h6></li>
-             <li><i class="fas fa-running"></i><h6>Đăng xuất</h6></li>
+             <a @click="logOut()"><li><i class="fas fa-running"></i><h6>Đăng xuất</h6></li></a>
            </ul>
           </div>
           </transition>
@@ -91,6 +93,7 @@ export default {
     Dropit:false,
     nontifications:[],
     profiles:{},
+    data: localStorage.getItem('data')
         }
   },
    created(){
@@ -123,11 +126,14 @@ export default {
       },
       show2() {
           this.Dropit = !this.Dropit 
-      }
+      },
+      logOut() {
+      localStorage.removeItem('data')
+      this.$router.push('/login')
+    }
       }
 }   
 </script>
-
 <style scoped>
 .fa-bell, .font-weight-bold{
   color: #fff;
