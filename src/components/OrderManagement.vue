@@ -19,7 +19,7 @@
         <div class="content list">
           <p></p>
           <p></p>
-          <button @click.prevent="allOrder()">Tất cả đơn hàng </button>
+          <button @click.prevent="allOrder()">Tất cả đơn hàng</button>
           <button @click.prevent="unConfirmOrder()">Đơn chưa xác nhận</button>
           <button @click.prevent="compeleteOrder()">Đơn đã giao</button>
         </div>
@@ -31,11 +31,9 @@
           <p>Tổng tiền</p>
           <p>Tình trạng</p>
           <p>Chi tiết </p>
-          <p>Hủy đơn</p>
         </div>
         <div v-if="statusOrder === 0">
           <div v-for="(result, index) in results" :key="result.payment_id">
-<!--            <div v-for="order in result.orders[0]" :key="order.id">-->
             <div class="content table_content">
               <p>{{ index + 1 }}</p>
               <p>{{ result.orders[0].name_recive }}</p>
@@ -45,21 +43,18 @@
               </p>
               <p>{{ result.orders[0].total }}</p>
               <p>
-                <button type="submit" class="order_status" @click.prevent="editOrder(result.orders[0].order_id)">
+                <button type="submit" class="order_status" @click.prevent="editOrder(result.orders[0].payment_id)">
                   {{ result.orders[0].content }}
                 </button>
               </p>
               <p>
-                <a class="btn btn-danger" href="#detailOrder" style="padding: 7px 7px!important;">
-                  <button style="padding: 3px!important;" @click.prevent="getOrderDetail(result.orders[0].id)"><i class="fas fa-eye"></i></button>
+                <a class="btn btn-danger" href="#detailOrder" style="padding: 3px!important;">
+                  <button style="padding: 8px!important;" @click.prevent="getOrderDetail(result.orders[0].payment_id)"><i
+                      class="fas fa-eye"></i></button>
                 </a>
               </p>
-              <p>
-                <button style="padding: 13px 9px!important;" @click.prevent="deleteOrder(result.orders[0].id)"><i class="fas fa-minus-circle"></i></button>
-              </p>
             </div>
-<!--          </div>-->
-        </div>
+          </div>
         </div>
         <div v-else-if="statusOrder > 0">
           <div v-for="(result, index) in results" :key="result.payment_id">
@@ -72,21 +67,19 @@
               </p>
               <p>{{ result.orders[0].total }}</p>
               <p>
-                <button type="submit" class="order_status" @click.prevent="editOrder(result.orders[0].order_id)">
+                <button type="submit" class="order_status" @click.prevent="editOrder(result.orders[0].payment_id)">
                   {{ result.orders[0].content }}
                 </button>
               </p>
               <p>
-                <a class="btn btn-danger" href="#detailOrder" style="padding: 7px 7px!important;">
-                  <button style="padding: 3px!important;" @click.prevent="getOrderDetail(result.orders[0].id)"><i class="fas fa-eye"></i></button>
+                <a class="btn btn-danger" href="#detailOrder" style="padding: 3px!important;">
+                  <button style="padding: 8px!important;" @click.prevent="getOrderDetail(result.orders[0].payment_id)"><i
+                      class="fas fa-eye"></i></button>
                 </a>
               </p>
-              <p>
-                <button style="padding: 13px 9px!important;" @click.prevent="deleteOrder(result.orders[0].id)"><i class="fas fa-minus-circle"></i></button>
-              </p>
             </div>
+          </div>
         </div>
-      </div>
       </div>
       <div id="navigation" v-if="statusOrder === 0">
         <ul class="pagination">
@@ -108,22 +101,45 @@
           </li>
         </ul>
       </div>
-      <div id="detailOrder" class="modal-window-order">
-        <div class="form">
-          <a href="#" title="Close" class="modal-close">Close</a>
-          <center>
-            <h2> Sản phẩm</h2>
-          </center>
-          <div id="product_detail" v-for="detail in Orderdetails" :key="detail">
-            <div id="img">
-              <img :src="detail.img" id="img_order_detail" alt="image"/>
-            </div>
-            <div style="margin-left:30px">
-              <h2> {{ detail.name }}</h2>
-              <h3> Số lượng: {{ detail.quantityCart }}</h3>
-              <h3> Giá sản phẩm: {{ detail.price }}</h3>
-            </div>
-          </div>
+      <div class="order-detail" v-bind:style="{ display: isDisplay, margin: marginDetail}">
+        <p class="closeFrom" style="float: right; font-size: 1.3rem" @click.prevent="closeOrderDetail()">x</p>
+        <div class="info_user" >
+          <h2>Thông tin khách hàng</h2>
+          <table>
+            <tr>
+              <th>Tên khách hàng</th>
+              <th>Địa chỉ</th>
+              <th>Email</th>
+              <th>Số điện thoại</th>
+            </tr>
+            <tr v-for="detail in Orderdetails" :key="detail">
+              <td>{{detail.detailOrder[0].name_recive}}</td>
+              <td>{{detail.detailOrder[0].address}}</td>
+              <td>{{detail.detailOrder[0].email}}</td>
+              <td>{{detail.detailOrder[0].phone}}</td>
+            </tr>
+          </table>
+        </div>
+        <div class="info_product">
+          <h2> Thông tin sản phẩm</h2>
+          <table>
+            <tr>
+              <th>Hình ảnh</th>
+              <th>Tên sản phẩm</th>
+              <th>Số lượng</th>
+              <th>Giá</th>
+            </tr>
+            <tr v-for="detail in detailProduct" :key="detail">
+              <td> <img :src="detail.images" id="imgDetail" alt="image"/></td>
+              <td>{{detail.name}}</td>
+              <td>{{detail.quantitycart}}</td>
+              <td>{{detail.price}}</td>
+            </tr>
+          </table>
+        </div>
+        <div class="info-general" v-for="detail in Orderdetails" :key="detail">
+          <h3>Tổng tiền: <strong style="color: red">{{detail.detailOrder[0].total}} </strong> đ</h3>
+          <h3>Tình trạng đơn hàng: <strong style="color: red">{{detail.detailOrder[0].content}}</strong></h3>
         </div>
       </div>
       <router-view></router-view>
@@ -147,6 +163,7 @@ export default {
     return {
       orders: [],
       Orderdetails: [],
+      detailProduct: [],
       currentYear: new Date().getFullYear(),
       orderbyStatus: 0,
       pageSize: 3,
@@ -157,7 +174,9 @@ export default {
       statusOrder: 0,
       formattedDate: '',
       results: [],
-      stt: 0
+      stt: 0,
+      isDisplay: 'none',
+      marginDetail: '-36% 5% 0% 5%'
     };
   },
   created() {
@@ -166,12 +185,18 @@ export default {
   methods: {
     allOrder() {
       this.statusOrder = 0;
+      this.marginDetail = '-35% 5% 0% 5%';
+    },
+    closeOrderDetail(){
+      this.isDisplay = 'none';
     },
     unConfirmOrder() {
       this.statusOrder = 1;
+      this.marginDetail = '-4% 5% 0% 5%';
     },
     compeleteOrder() {
       this.statusOrder = 5;
+      this.marginDetail = '-4% 5% 0% 5%';
     },
     deleteOrder(id) {
       axios.delete(
@@ -180,23 +205,35 @@ export default {
       alert("Delete order succes");
       this.getData();
     },
-    getOrderDetail(id) {
-      let uri = 'https://api-gilo.herokuapp.com/api/order/' + id;
-      this.axios.get(uri).then((response) => {
-        this.Orderdetails = response.data;
-      });
+    getOrderDetail(id_payment) {
+      this.isDisplay = 'block';
+      fetch('https://api-gilo.herokuapp.com/api/order/detailAdmin/'+ id_payment)
+          .then((response) => response.json())
+          .then((data) => {
+            this.Orderdetails = _(data)
+                .groupBy(x => x.payment_id)
+                .map((value, key) =>
+                    ({
+                      payment_id: key,
+                      detailOrder: value
+                    })).value();
+            this.detailProduct = data;
+          });
     },
     getData() {
-        fetch('https://api-gilo.herokuapp.com/api/progress')
-            .then((response) => response.json())
-            .then((data) =>{
-             this.results = _(data)
-                  .groupBy(x => x.payment_id)
-                  .map((value, key) =>
-                      ({payment_id: key,
-                        orders: value})).value();
+      fetch('https://api-gilo.herokuapp.com/api/progress')
+          .then((response) => response.json())
+          .then((data) => {
+            this.results = _(data)
+                .groupBy(x => x.payment_id)
+                .map((value, key) =>
+                    ({
+                      payment_id: key,
+                      orders: value
+                    })).value();
 
-              console.log(this.results)});
+            console.log(this.results)
+          });
     },
     editOrder(id) {
       axios.put(
@@ -225,7 +262,7 @@ export default {
   },
   watch: {
     showOrders() {
-        return this.paginate(this.orders);
+      return this.paginate(this.orders);
     },
     filters: {
       trimWords(value) {
@@ -237,6 +274,62 @@ export default {
 };
 </script>
 <style lang="scss">
+
+/// Detail order
+.order-detail {
+  width: 70%;
+  height: auto;
+  position: fixed;
+  border-radius: 4px;
+  padding: 30px;
+  background-image: linear-gradient(to right, #e4daea, #f2e2f8);
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+  .closeFrom:hover{
+    color: red;
+    font-size: 1.3rem;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  th{
+    font-weight: bold;
+  }
+  th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+
+  tr:hover {
+    background-color: #f5f5f5;
+  }
+  h2{
+    font-size: 1.4rem;
+    font-weight: bold;
+    padding: 5px 0;
+  }
+  h3{
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 5px 0;
+  }
+  .info_user {
+    margin-bottom: 25px;
+  }
+
+  .info_product {
+    margin-bottom: 25px;
+    #imgDetail{
+      width: 150px;
+      height: 130px;
+    }
+  }
+
+  .info-general {
+  }
+}
+
 #img_order_detail {
   width: 150px;
   height: 150px;
@@ -248,22 +341,27 @@ export default {
 }
 
 .create_at {
-  white-space: nowrap!important;
-  width: 98px!important;
-  overflow: hidden!important;
-  text-overflow: clip!important;
+  white-space: nowrap !important;
+  width: 98px !important;
+  overflow: hidden !important;
+  text-overflow: clip !important;
 }
-
-.content .table_content,
-.content .table_title {
+.content .table_content {
   width: 100%;
   display: grid;
-  grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 0.3fr 1.2fr 2fr 0.9fr 0.7fr 1.6fr 0.5fr!important;
   grid-column-gap: 10px;
   grid-row-gap: 20px;
   border-radius: 10px;
 }
-
+.content .table_title{
+  width: 100%;
+  display: grid;
+  grid-template-columns: 0.3fr 1.2fr 2fr 0.9fr 0.7fr 1.6fr 0.6fr!important;
+  grid-column-gap: 10px;
+  grid-row-gap: 20px;
+  border-radius: 10px;
+}
 .table_content p {
   margin: auto 0;
 }
@@ -276,14 +374,13 @@ export default {
 
 .content {
   width: 90% !important;
-  margin-left: auto!important;
-  margin-right: auto!important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 
   h1 {
     margin-bottom: 10px;
     color: black;
     font-size: 2rem;
-    font-size: 1.5rem;
     font-family: Helvetica, Arial, sans-serif;
   }
 
@@ -345,8 +442,8 @@ export default {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1.1fr;
   margin-bottom: 10px;
-  float: left!important;
-  width: 97.5%!important;
+  float: left !important;
+  width: 97.5% !important;
 }
 
 .content .list button {
@@ -362,66 +459,6 @@ export default {
     opacity: 1;
     color: white;
     box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
-  }
-}
-
-.modal-window-order {
-  position: fixed;
-  background-color: rgba(255, 255, 255, 0.25);
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 999;
-  visibility: hidden;
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.3s;
-
-  &:target {
-    visibility: visible;
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  & > div {
-    width: 40%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    height: 70%;
-    overflow: auto;
-    border-radius: 0.4rem;
-    transform: translate(-50%, -50%);
-    padding: 2em;
-    background-image: linear-gradient(to right, #f2e6eb, #e6d3e8);
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
-    0 20px 20px 0 rgba(0, 0, 0, 0.19);
-  }
-
-  header {
-    font-weight: bold;
-  }
-
-  h1 {
-    font-size: 150%;
-    margin: 0 0 15px;
-  }
-}
-
-.modal-close {
-  color: #aaa;
-  line-height: 50px;
-  font-size: 80%;
-  position: absolute;
-  right: 0;
-  text-align: center;
-  top: 0;
-  width: 70px;
-  text-decoration: none;
-
-  &:hover {
-    color: black;
   }
 }
 

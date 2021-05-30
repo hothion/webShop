@@ -83,8 +83,8 @@ export default {
       if (this.numberWeek !== 0) {
         await this.axios.get('https://api-gilo.herokuapp.com/api/getWeek/' + 0).then((response) => {
           this.getWeek = response.data;
-         // var arr = [];
-          if(this.dateCurrent.length>0) {
+          // var arr = [];
+          if (this.dateCurrent.length > 0) {
             this.dateCurrent = [];
           }
           for (let i = this.getWeek; i < this.getWeek + 7; i++) {
@@ -102,7 +102,7 @@ export default {
           // console.log(this.dateCurrent)
           // // console.log(JSON.parse(JSON.stringify(this.dateCurrent[0])).arr)
           // console.log(this.dateCurrent[0])
-         // console.log(JSON.parse(JSON.stringify(this.dateCurrent)));
+          // console.log(JSON.parse(JSON.stringify(this.dateCurrent)));
           return JSON.parse(JSON.stringify(this.dateCurrent));
 
         });
@@ -121,10 +121,10 @@ export default {
       return JSON.parse(localStorage.getItem("currentDate"));
     },
     ////
-   async fillData() {
-     const dateLocal = this.getDataLocal();
-     console.log(this.dateCurrent)
-     if (this.dateCurrent != null) {
+    async fillData() {
+      const dateLocal = this.getDataLocal();
+      console.log(this.dateCurrent)
+      if (dateLocal != null) {
         this.datacollection = {
           labels: this.dateCurrent,
           datasets: [
@@ -148,19 +148,17 @@ export default {
             }
           ]
         }
-       console.log("kaaa");
-       // console.log(JSON.parse(JSON.stringify(this.dateCurrent)));
-       // console.log(lao);
-       //console.log(this.getCurrentDayLocal());
-       // var parsedobj = JSON.parse(JSON.stringify(this.dateCurrent))
+        console.log("kaaa");
+        // console.log(JSON.parse(JSON.stringify(this.dateCurrent)));
+        // console.log(lao);
+        //console.log(this.getCurrentDayLocal());
+        // var parsedobj = JSON.parse(JSON.stringify(this.dateCurrent))
 
       }
-
-     console.log(this.dateCurrent)
-     // console.log(JSON.parse(JSON.stringify(this.dateCurrent[0])).arr)
+      // console.log(JSON.parse(JSON.stringify(this.dateCurrent[0])).arr)
     },
     async PreviousWeek() {
-      localStorage.removeItem('currentDate');
+      // localStorage.removeItem('currentDate');
       if (this.numberWeek !== 0) {
         this.listDay.splice(-7);
         this.numberWeek -= 1;
@@ -174,8 +172,10 @@ export default {
             this.listDay.push(formattedDate);
           }
           this.setDataLocal(this.listDay);
+          this.$store.commit('setNewDate', this.listDay);
+          this.dateStore = this.$store.state.dateWeek;
         });
-        console.log(this.dateCurrent)
+        console.log(this.dateStore)
 
         await this.fillData();
         // console.log(this.getDataLocal())
@@ -198,7 +198,8 @@ export default {
             this.listDay.push(formattedDate);
           }
           this.setDataLocal(this.listDay);
-          this.$store.state
+          this.$store.commit('setNewDate', this.listDay);
+          this.dateStore = this.$store.state.dateWeek;
         });
         await this.fillData();
         // console.log(this.dateCurrent)

@@ -141,10 +141,8 @@
       </div>
     </div>
     <div class="product">
-      <div class="header_pro" style="float: right">
-        <a href="#open-modal"
-        >Thêm sản phẩm</a
-        >
+      <div class="header_pro" style="float: right" >
+        <a @click="openFormAddPro()" style="color: white; font-size: 1.1rem">Thêm sản phẩm</a>
       </div>
       <div class="content tableProduct" style="width: 97%!important;">
         <div class="content table_titleProduct">
@@ -159,15 +157,15 @@
           <div v-for="(product, index) in showProducts" :key="product.id">
             <div class="content table_contentProduct">
               <p>{{ index+1 }}</p>
-              <p> <img :src="product.img" id="img1" alt="image"/></p>
+              <p> <img :src="product.img" id="img1" alt="image"/> <a>{{product.dis}}</a></p>
               <p>{{ product.name }}</p>
               <p style="text-align: left">
                 {{ product.description }}
             </p>
               <p>{{ product.price }}</p>
               <p>
-                <a class="btn btn-danger" href="#open-modal">
-                  <button style="padding: 3px!important;" @click.prevent="editProduct(product)"><i class="fas fa-edit"> </i></button>
+                <a class="btn btn-danger" style="padding: 3px!important;">
+                  <button style="padding: 7px!important;" @click.prevent="editProduct(product)"><i class="fas fa-edit"> </i></button>
                 </a>
               </p>
               <p>
@@ -196,9 +194,9 @@
           </li>
         </ul>
       </div>
-      <div id="open-modal" class="modal-window-product">
+      <div id="open-modal" class="modal-window-product" v-bind:style="{ opacity: isOpacity, display: isDisplay}">
         <div class="form">
-          <a href="#" title="Close" class="modal-close" v-on ="clearData"><i class="fas fa-times"></i></a>
+          <a href="#" title="Close" style="float: right" @click.prevent="closeFrom()"><i class="fas fa-times"></i></a>
           <center>
             <h1 style="font-weight: bold; font-size: 1.8rem; margin-bottom: 30px">{{ contentForm }}</h1>
           </center>
@@ -313,6 +311,8 @@ export default {
       edit: false,
       buttonAdd: "Thêm",
       contentForm: "Thêm sản phẩm mới",
+      isOpacity: 0,
+      isDisplay: 'none'
     };
   },
   created() {
@@ -329,7 +329,15 @@ export default {
       axios.delete('https://api-gilo.herokuapp.com/api/products/' + id);
       this.getData();
     },
-
+    openFormAddPro(){
+      this.isEdit();
+      this.isDisplay = 'block';
+      this.isOpacity = 1;
+    },
+    closeFrom(){
+      this.isOpacity = 0;
+      this.isDisplay = 'none';
+    },
     addProduct() {
       if (this.edit === false) {
         axios.post('https://api-gilo.herokuapp.com/api/products', this.newproduct);
@@ -338,11 +346,13 @@ export default {
       } else {
         axios.put('https://api-gilo.herokuapp.com/api/products/' + this.newproduct.id, this.newproduct);
         alert(" Update product success");
-        this.getData();
         this.edit = false;
+        this.getData();
       }
     },
     editProduct(product) {
+      this.isDisplay = 'block';
+      this.isOpacity = 1;
       this.edit = true;
       this.buttonAdd = "Cập nhật";
       this.contentForm = "Cập nhật sản phẩm";
@@ -361,6 +371,9 @@ export default {
       for (let index = 1; index <= numberOfPages; index++) {
         this.pages.push(index);
       }
+    },
+    isEdit(){
+      this.edit = false;
     },
     clearData() {
       this.newproduct.name = "";
@@ -531,9 +544,8 @@ form{
   bottom: 0;
   left: 0;
   z-index: 999;
-  visibility: hidden;
-  opacity: 0;
-  pointer-events: none;
+  visibility: visible;
+  pointer-events: auto;
   transition: all 0.3s;
 
   &:target {
