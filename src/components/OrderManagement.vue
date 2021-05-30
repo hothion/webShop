@@ -24,7 +24,7 @@
           <button @click.prevent="compeleteOrder()">Đơn đã giao</button>
         </div>
         <div class="content table_title">
-          <p>Id</p>
+          <p>STT</p>
           <p>Tên khách hàng </p>
           <p>Địa chỉ</p>
           <p>Ngày đặt hàng</p>
@@ -34,67 +34,57 @@
           <p>Hủy đơn</p>
         </div>
         <div v-if="statusOrder === 0">
-          <div v-for="result in results" :key="result.payment_id">
-            <div v-for="order in result.orders" :key="order.id">
+          <div v-for="(result, index) in results" :key="result.payment_id">
+<!--            <div v-for="order in result.orders[0]" :key="order.id">-->
             <div class="content table_content">
-              <p>{{ order.payment_id }}</p>
-              <p>{{ order.name_recive }}</p>
-              <p>{{ order.address }}</p>
+              <p>{{ index + 1 }}</p>
+              <p>{{ result.orders[0].name_recive }}</p>
+              <p>{{ result.orders[0].address }}</p>
               <p class="create_at1">
-                {{ $date(order.created_at).format('DD/MM/YYYY') }}
+                {{ $date(result.orders[0].created_at).format('DD/MM/YYYY') }}
               </p>
-              <p>{{ order.total }}</p>
+              <p>{{ result.orders[0].total }}</p>
               <p>
-                <button type="submit" class="order_status" @click.prevent="editOrder(order.order_id)">
-                  {{ order.content }}
+                <button type="submit" class="order_status" @click.prevent="editOrder(result.orders[0].order_id)">
+                  {{ result.orders[0].content }}
                 </button>
               </p>
               <p>
-                <a class="btn btn-danger" href="#detailOrder">
-                  <button @click.prevent="getOrderDetail(order.id)"><i class="fas fa-eye"></i></button>
+                <a class="btn btn-danger" href="#detailOrder" style="padding: 7px 7px!important;">
+                  <button style="padding: 3px!important;" @click.prevent="getOrderDetail(result.orders[0].id)"><i class="fas fa-eye"></i></button>
                 </a>
               </p>
               <p>
-                <button @click.prevent="deleteOrder(order.id)"><i class="fas fa-minus-circle"></i></button>
+                <button style="padding: 13px 9px!important;" @click.prevent="deleteOrder(result.orders[0].id)"><i class="fas fa-minus-circle"></i></button>
               </p>
             </div>
-          </div>
+<!--          </div>-->
         </div>
         </div>
         <div v-else-if="statusOrder > 0">
-          <div v-for="result in results" :key="result.payment_id">
-            <div v-for="order in result.orders" :key="order.id">
-            <div class="content table_content" v-show="order.id_status === statusOrder">
-              <p>
-                {{ order.id }}
-              </p>
-              <p>
-                {{ order.name_recive}}
-              </p>
-              <p>
-                {{ order.address }}
-              </p>
+          <div v-for="(result, index) in results" :key="result.payment_id">
+            <div class="content table_content" v-show="result.orders[0].id_status === statusOrder">
+              <p>{{ index + 1 }}</p>
+              <p>{{ result.orders[0].name_recive }}</p>
+              <p>{{ result.orders[0].address }}</p>
               <p class="create_at1">
-                {{ $date(order.created_at).format('DD/MM/YYYY') }}
+                {{ $date(result.orders[0].created_at).format('DD/MM/YYYY') }}
               </p>
+              <p>{{ result.orders[0].total }}</p>
               <p>
-                {{ order.total }}
-              </p>
-              <p>
-                <button type="submit" class="order_status" @click.prevent="editOrder(order.order_id)">
-                  {{ order.content }}
+                <button type="submit" class="order_status" @click.prevent="editOrder(result.orders[0].order_id)">
+                  {{ result.orders[0].content }}
                 </button>
               </p>
               <p>
-                <a class="btn btn-danger" href="#detailOrder">
-                  <button @click.prevent="getOrderDetail(order.id_product)"><i class="fas fa-eye"></i></button>
+                <a class="btn btn-danger" href="#detailOrder" style="padding: 7px 7px!important;">
+                  <button style="padding: 3px!important;" @click.prevent="getOrderDetail(result.orders[0].id)"><i class="fas fa-eye"></i></button>
                 </a>
               </p>
               <p>
-                <button @click.prevent="deleteOrder(order.id)"><i class="fas fa-minus-circle"></i></button>
+                <button style="padding: 13px 9px!important;" @click.prevent="deleteOrder(result.orders[0].id)"><i class="fas fa-minus-circle"></i></button>
               </p>
             </div>
-          </div>
         </div>
       </div>
       </div>
@@ -166,7 +156,8 @@ export default {
       pages: [],
       statusOrder: 0,
       formattedDate: '',
-      results: []
+      results: [],
+      stt: 0
     };
   },
   created() {

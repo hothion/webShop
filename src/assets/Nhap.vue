@@ -324,6 +324,7 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 import VueAxios from 'vue-axios';
 import axios from 'axios';
+import moment from "moment";
 Vue.use(VueAxios, axios);
 export default {
   data() {
@@ -348,6 +349,34 @@ export default {
     this.getData();
   },
   methods: {
+    async getCurrentDay() {
+      if (this.numberWeek !== 0) {
+        await this.axios.get('https://api-gilo.herokuapp.com/api/getWeek/' + 0).then((response) => {
+          this.getWeek = response.data;
+          var arr = [];
+          if(this.dateCurrent.length>0) {
+            this.dateCurrent = [];
+          }
+          for (let i = this.getWeek; i < this.getWeek + 7; i++) {
+            let numberYear = new Date(Date.UTC(this.currentYear, 0, i));
+            let formattedDate = moment(numberYear).format("DD-MM-YYYY");
+            console.log(typeof formattedDate);
+            this.date = formattedDate;
+            arr.push(formattedDate);
+          }
+          this.setCurrentDayLocal(this.dateCurrent)
+          this.date = arr;
+
+          this.dateCurrent.push({ "arr" : arr })
+          // JSON.parse(JSON.stringify(this.dateCurrent))
+          console.log(this.dateCurrent)
+          // console.log(JSON.parse(JSON.stringify(this.dateCurrent[0])).arr)
+          console.log(this.dateCurrent[0])
+          return JSON.parse(JSON.stringify(this.dateCurrent[0])).arr;
+          console.log(JSON.parse(JSON.stringify(this.dateCurrent[0])).arr)
+        });
+      }
+    },
     getData() {
       fetch('https://api-gilo.herokuapp.com/api/products')
           .then((response) => response.json())

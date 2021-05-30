@@ -99,7 +99,7 @@
                 <img alt="Image placeholder" src="assets/img/theme/team-4.jpg">
               </span>
                   <div class="media-body  ml-2  d-none d-lg-block">
-                    <span class="mb-0 text-sm  font-weight-bold">John Snow</span>
+                    <span style="color: white!important;" class="mb-0 text-sm  font-weight-bold">John Snow</span>
                   </div>
                 </div>
               </a>
@@ -156,14 +156,14 @@
           <p>Sửa</p>
           <p>Xóa </p>
         </div>
-          <div v-for="product in showProducts" :key="product.id">
+          <div v-for="(product, index) in showProducts" :key="product.id">
             <div class="content table_contentProduct">
-              <p>{{ stt ++ }}</p>
+              <p>{{ index+1 }}</p>
               <p> <img :src="product.img" id="img1" alt="image"/></p>
               <p>{{ product.name }}</p>
               <p style="text-align: left">
                 {{ product.description }}
-              </p>
+            </p>
               <p>{{ product.price }}</p>
               <p>
                 <a class="btn btn-danger" href="#open-modal">
@@ -198,7 +198,7 @@
       </div>
       <div id="open-modal" class="modal-window-product">
         <div class="form">
-          <a href="#" title="Close" class="modal-close"><i class="fas fa-times"></i></a>
+          <a href="#" title="Close" class="modal-close" v-on ="clearData"><i class="fas fa-times"></i></a>
           <center>
             <h1 style="font-weight: bold; font-size: 1.8rem; margin-bottom: 30px">{{ contentForm }}</h1>
           </center>
@@ -313,7 +313,6 @@ export default {
       edit: false,
       buttonAdd: "Thêm",
       contentForm: "Thêm sản phẩm mới",
-      stt: 0
     };
   },
   created() {
@@ -606,12 +605,10 @@ ul li {
 }
 
 .pagination {
-  margin-top: 5%;
   width: 50%;
   transform: translate(-50%, -50%);
-  margin-left: 50px;
   padding: 10px;
-
+  margin: 5% auto;
   li {
     display: flex;
     justify-content: center;

@@ -121,7 +121,7 @@
       </div>
       <div class="content table">
         <div class="content table_title">
-          <p>Id</p>
+          <p>STT</p>
           <p>Hình ảnh</p>
           <p>Tên người dùng </p>
           <p>Ngày sinh</p>
@@ -131,9 +131,9 @@
           <p>Xóa</p>
         </div>
         <div>
-          <div class="content table_content" v-for="user in showUsers" :key="user.id">
+          <div class="content table_content" v-for="(user, index) in showUsers" :key="user.id">
             <p>
-              {{ user.id }}
+              {{ index + 1 }}
             </p>
             <p>
               <img :src="user.img" id="img" >

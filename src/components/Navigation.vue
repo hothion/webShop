@@ -14,13 +14,13 @@
             <!-- Nav items -->
             <ul class="navbar-nav">
               <li class="nav-item">
-                <router-link to="/" class="nav-link active">
+                <router-link to="/" class="nav-link">
                   <i class="fa fa-home"></i>
                   <span class="nav-link-text">Trang quản lý</span>
                 </router-link>
               </li>
               <li class="nav-item">
-                <router-link class="nav-link" to="/product">
+                <router-link class="nav-link" to="/product" >
                   <i class="fas fa-gift"></i>
                   <span class="nav-link-text">Quản lý sản phẩm</span>
                 </router-link>
@@ -44,19 +44,19 @@
                 </router-link>
               </li>
               <li class="nav-item">
-                <router-link class="nav-link" to="/notification">
+                <router-link class="nav-link" to="/notification" href='#target2' id='target2'>
                   <i class="fas fa-bell"></i>
                   <span class="nav-link-text">Thông báo</span>
                 </router-link>
               </li>
               <li class="nav-item">
-                <router-link class="nav-link" to="/profile">
+                <router-link class="nav-link" to="/profile"  href='#target1' id='target1'>
                   <i class="fas fa-address-card"></i>
                   <span class="nav-link-text">Thông tin cá nhân</span>
                 </router-link>
               </li>
               <li class="nav-item">
-                <a class="nav-link" @click="logOut()">
+                <a class="nav-link" v-on:style="styleObject" @click="logOut()">
                   <i class="fas fa-sign-in-alt"></i>
                   <span class="nav-link-text">Đăng xuất</span>
                 </a>
@@ -75,6 +75,10 @@ export default {
   data() {
     return {
       data: localStorage.getItem('data'),
+      styleObject:{
+        color: 'red',
+        fontSize: '13px'
+      }
     };
   },
   methods: {
