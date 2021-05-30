@@ -121,7 +121,7 @@
       </div>
       <div class="contentShop table">
         <div class="contentShop table_title">
-          <p>Id</p>
+          <p>STT</p>
           <p>Hình ảnh</p>
           <p>Tên shop </p>
           <p>Địa chỉ</p>
@@ -130,9 +130,9 @@
           <p>Xóa</p>
         </div>
         <div>
-          <div class="contentShop table_content" v-for="shop in shops" :key="shop.id">
+          <div class="contentShop table_content" v-for="(shop, index) in shops" :key="shop.id">
             <p>
-              {{ shop.id }}
+              {{ index + 1 }}
             </p>
             <p>
               <img :src="shop.image" id="img">

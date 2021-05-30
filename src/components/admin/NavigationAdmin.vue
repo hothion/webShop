@@ -45,15 +45,15 @@
               <li class="nav-item">
                 <router-link class="nav-link" to="/profile">
                   <i class="fas fa-address-card"></i>
-                  <span class="nav-link-text">Tôi</span>
+                  <span class="nav-link-text" >Tôi</span>
                 </router-link>
               </li>
               <li class="nav-item">
                 <a class="nav-link" @click="logOut()">
                   <i class="fas fa-sign-in-alt"></i>
-                  <span class="nav-link-text">Đăng xuất</span>
                 </a>
               </li>
+
             </ul>
           </div>
         </div>
@@ -83,4 +83,5 @@ export default {
   max-width: 100%;
   max-height: 4rem;
 }
+
 </style>

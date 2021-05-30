@@ -99,7 +99,7 @@
                 <img alt="Image placeholder" src="assets/img/theme/team-4.jpg">
               </span>
                   <div class="media-body  ml-2  d-none d-lg-block">
-                    <span class="mb-0 text-sm  font-weight-bold">John Snow</span>
+                    <span style="color: white!important;" class="mb-0 text-sm  font-weight-bold">John Snow</span>
                   </div>
                 </div>
               </a>
@@ -141,14 +141,12 @@
       </div>
     </div>
     <div class="product">
-      <div class="header_pro" style="float: right">
-        <a href="#open-modal"
-        >Thêm sản phẩm</a
-        >
+      <div class="header_pro" style="float: right" >
+        <a @click="openFormAddPro()" style="color: white; font-size: 1.1rem">Thêm sản phẩm</a>
       </div>
       <div class="content tableProduct" style="width: 97%!important;">
         <div class="content table_titleProduct">
-          <p>Id</p>
+          <p>STT</p>
           <p>Hình ảnh</p>
           <p>Tên Sản phẩm </p>
           <p>Mô tả</p>
@@ -156,18 +154,18 @@
           <p>Sửa</p>
           <p>Xóa </p>
         </div>
-          <div v-for="product in showProducts" :key="product.id">
+          <div v-for="(product, index) in showProducts" :key="product.id">
             <div class="content table_contentProduct">
-              <p>{{ product.id }}</p>
-              <p> <img :src="product.img" id="img1" alt="image"/></p>
+              <p>{{ index+1 }}</p>
+              <p> <img :src="product.img" id="img1" alt="image"/> <a>{{product.dis}}</a></p>
               <p>{{ product.name }}</p>
               <p style="text-align: left">
                 {{ product.description }}
-              </p>
+            </p>
               <p>{{ product.price }}</p>
               <p>
-                <a class="btn btn-danger" href="#open-modal">
-                  <button style="padding: 3px!important;" @click.prevent="editProduct(product)"><i class="fas fa-edit"> </i></button>
+                <a class="btn btn-danger" style="padding: 3px!important;">
+                  <button style="padding: 7px!important;" @click.prevent="editProduct(product)"><i class="fas fa-edit"> </i></button>
                 </a>
               </p>
               <p>
@@ -196,9 +194,9 @@
           </li>
         </ul>
       </div>
-      <div id="open-modal" class="modal-window-product">
+      <div id="open-modal" class="modal-window-product" v-bind:style="{ opacity: isOpacity, display: isDisplay}">
         <div class="form">
-          <a href="#" title="Close" class="modal-close"><i class="fas fa-times"></i></a>
+          <a href="#" title="Close" style="float: right" @click.prevent="closeFrom()"><i class="fas fa-times"></i></a>
           <center>
             <h1 style="font-weight: bold; font-size: 1.8rem; margin-bottom: 30px">{{ contentForm }}</h1>
           </center>
@@ -313,6 +311,8 @@ export default {
       edit: false,
       buttonAdd: "Thêm",
       contentForm: "Thêm sản phẩm mới",
+      isOpacity: 0,
+      isDisplay: 'none'
     };
   },
   created() {
@@ -329,7 +329,15 @@ export default {
       axios.delete('https://api-gilo.herokuapp.com/api/products/' + id);
       this.getData();
     },
-
+    openFormAddPro(){
+      this.isEdit();
+      this.isDisplay = 'block';
+      this.isOpacity = 1;
+    },
+    closeFrom(){
+      this.isOpacity = 0;
+      this.isDisplay = 'none';
+    },
     addProduct() {
       if (this.edit === false) {
         axios.post('https://api-gilo.herokuapp.com/api/products', this.newproduct);
@@ -338,11 +346,13 @@ export default {
       } else {
         axios.put('https://api-gilo.herokuapp.com/api/products/' + this.newproduct.id, this.newproduct);
         alert(" Update product success");
-        this.getData();
         this.edit = false;
+        this.getData();
       }
     },
     editProduct(product) {
+      this.isDisplay = 'block';
+      this.isOpacity = 1;
       this.edit = true;
       this.buttonAdd = "Cập nhật";
       this.contentForm = "Cập nhật sản phẩm";
@@ -361,6 +371,9 @@ export default {
       for (let index = 1; index <= numberOfPages; index++) {
         this.pages.push(index);
       }
+    },
+    isEdit(){
+      this.edit = false;
     },
     clearData() {
       this.newproduct.name = "";
@@ -531,9 +544,8 @@ form{
   bottom: 0;
   left: 0;
   z-index: 999;
-  visibility: hidden;
-  opacity: 0;
-  pointer-events: none;
+  visibility: visible;
+  pointer-events: auto;
   transition: all 0.3s;
 
   &:target {
@@ -605,12 +617,10 @@ ul li {
 }
 
 .pagination {
-  margin-top: 5%;
   width: 50%;
   transform: translate(-50%, -50%);
-  margin-left: 50px;
   padding: 10px;
-
+  margin: 5% auto;
   li {
     display: flex;
     justify-content: center;
