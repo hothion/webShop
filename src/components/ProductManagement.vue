@@ -157,7 +157,10 @@
           <div v-for="(product, index) in showProducts" :key="product.id">
             <div class="content table_contentProduct">
               <p>{{ index+1 }}</p>
-              <p> <img :src="product.img" id="img1" alt="image"/> <a>{{product.dis}}</a></p>
+              <p>
+                <a style="position: absolute; padding: 5px 5px 5px 7px; border-radius: 4px; background-color: red!important; margin-left: 0px"><span>-{{product.discount}}%</span></a>
+                <img :src="product.img" id="img1" alt="image"/>
+              </p>
               <p>{{ product.name }}</p>
               <p style="text-align: left">
                 {{ product.description }}
