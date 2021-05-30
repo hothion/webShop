@@ -4,7 +4,7 @@
                 <!-- Dropdown header -->
                 <div class="px-3 py-3">
                   <!-- <h6 class="text-sm text-muted m-0">Bạn có<strong class="text-primary"> 13</strong> thông báo.</h6> -->
-                  <h6 class="text-sm text-muted m-0">Thông báo về thông tin đặt hàng</h6>
+                  <h6 class="text-sm text-muted m-0">Thông báo bạn có <span class="nontilength">{{ nontifications.length }} </span> thông báo</h6>
 
                 </div>
                 <!-- List group -->
@@ -47,13 +47,13 @@ export default {
   },
   created(){
       this.getNonti();
+      this.DeleteNonti();
   },
    methods: {
       getNonti(){
-        // this.id=this.$route.params.id;
-        const id_shop = JSON.parse(localStorage.getItem("data"));
-        axios.get("https://api-gilo.herokuapp.com/api/noficationShop/" + id_shop).then((response) => {
+        axios.get("https://api-gilo.herokuapp.com/api/noficationshop").then((response) => {
         this.nontifications = response.data;
+        this.DeleteNonti();
       }) ;  
        },
        DeleteNonti(id){
@@ -69,7 +69,7 @@ export default {
 </script>
 <style>
 .text-muted {
-    height: 50px;
+    height: 30px;
     font-weight: bold;
 }
 .col{
@@ -84,4 +84,16 @@ export default {
   border: none;
   margin-top: -18px;
 }
+.pl-3, .px-3 {
+    padding-left: 1rem!important;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}
+.nontilength{
+  color: red;
+}
+.list-group-flush {
+    border-radius: 0;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}
+
 </style>

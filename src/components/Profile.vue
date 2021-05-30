@@ -235,11 +235,9 @@ export default {
     axios.get('https://api-gilo.herokuapp.com/api/profileAdmin/'+  idShop)
     .then(response =>(
         console.log(response),
-         this.itemDatas = response.data
-         
+         this.itemDatas = response.data 
     ))
     },
-
     onUpload(){
         this.img1=null;
         const storageRef=firebase.storage().ref(`${this.imageData.name}`).put(this.imageData);
@@ -317,5 +315,10 @@ export default {
 }
 .container-fluid .mt--6{
   margin-top: -20px  !important;
+}
+.display-2 {
+  font-size: 4.8rem !important;
+    font-weight: 300 !important;
+    line-height: 1.2 !important;
 }
 </style>
