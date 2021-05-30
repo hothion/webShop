@@ -57,6 +57,7 @@ export default {
                         "Tháng 11",
                         "Tháng 12",
                       ],
+
                       datasets: [
                         {
                           label: "Sản phẩm",

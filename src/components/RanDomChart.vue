@@ -126,7 +126,7 @@ export default {
       console.log(this.dateCurrent)
       if (dateLocal != null) {
         this.datacollection = {
-          labels: this.dateCurrent,
+          labels: dateLocal,
           datasets: [
             {
               label: 'Đơn hàng',
@@ -135,8 +135,6 @@ export default {
             }
           ]
         }
-        console.log("yeu");
-        console.log(dateLocal);
       } else {
         this.datacollection = {
           labels: this.getCurrentDayLocal(),
@@ -175,15 +173,12 @@ export default {
           this.$store.commit('setNewDate', this.listDay);
           this.dateStore = this.$store.state.dateWeek;
         });
-        console.log(this.dateStore)
-
         await this.fillData();
         // console.log(this.getDataLocal())
         // this.dateCurrent=this.getDataLocal();
       }
     },
     async nextWeek() {
-      localStorage.removeItem('currentDate');
       if (this.numberWeek !== 0) {
         this.listDay.splice(-7);
         this.numberWeek += 1;

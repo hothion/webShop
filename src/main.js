@@ -127,19 +127,20 @@ const routes = [{
         component: StatisticAdmin
     }
 ]
-// let yeu = 0;
-// if(yeu==0) {
-//     const router = new VueRouter({mode: 'history', routes: routes});
-  //  new Vue(Vue.util.extend({router}, Navigation)).$mount('#app');
-//}
-    // }else{
-//     // const router = new VueRouter({ mode: 'history', routes: routes });
-//     // new Vue(Vue.util.extend({ router }, LoginAdmin)).$mount('#app');
-// }
-const router = new VueRouter({mode: 'history', routes: routes});
+const dataUser = JSON.parse(localStorage.getItem('data'));
+if(dataUser === 1){
+    const router = new VueRouter({mode: 'history', routes: routes});
+    new Vue({
+        render: h => h(Navigation),
+        router,
+        store
+    }).$mount('#app')
+}else {
+    const router = new VueRouter({mode: 'history', routes: routes});
+    new Vue({
+        render: h => h(LoginAdmin),
+        router,
+        store
+    }).$mount('#app')
+}
 
-new Vue({
-    render: h => h(Navigation),
-    router,
-    store
-}).$mount('#app')
