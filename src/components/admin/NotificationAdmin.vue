@@ -1,6 +1,6 @@
 <template>
   <div class="main-content" id="panel">
-    <HeaderAdmin />
+    <Header />
     <div class="dropdown-menu dropdown-menu-xl show">
       <!-- Dropdown header -->
       <div class="px-3 py-3">
@@ -40,10 +40,10 @@
 
 <script>
 import axios from 'axios'
-import HeaderAdmin from './HeaderAdmin';
+import Header from "../Header";
 export default {
   components:{
-    HeaderAdmin
+    Header
   },
   data() {
     return {

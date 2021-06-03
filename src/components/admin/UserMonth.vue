@@ -1,6 +1,6 @@
 <template>
   <div class="main-content" id="panel">
-    <HeaderAdmin></HeaderAdmin>
+    <Header></Header>
     <div class="row align-items-center py-4">
       <div class="col-lg-6 col-7">
         <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
@@ -27,13 +27,13 @@
 </template>
 
 <script>
-import HeaderAdmin from './HeaderAdmin';
 import UserChart from "./UserChart";
+import Header from "../Header";
 export default {
   name: "OrderMonth",
   components: {
     UserChart,
-    HeaderAdmin
+    Header
   }
 }
 </script>

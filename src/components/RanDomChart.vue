@@ -23,13 +23,13 @@
       <div class="col1">
         <div class="BarChart">
           <span>
-          <button @click="PreviousWeek()">Tuần trước</button>
+          <button @click="PreviousWeek()"> <i class="fas fa-chevron-circle-left"></i> </button>
           <h3>{{
               numberWeek
             }}</h3>
-           <button @click="nextWeek()">Tuần kế tiếp</button>
-            <p>{{ listDay }}</p>
-            <p>rrr{{ dateCurrent }}</p>
+           <button @click="nextWeek()"> <i class="fas fa-chevron-circle-right"></i> </button>
+<!--            <p>{{ listDay }}</p>-->
+<!--            <p>rrr{{ dateCurrent }}</p>-->
          </span>
           <line-chart :chartData="datacollection"></line-chart>
           <!--          <OrderWeek />-->
@@ -197,8 +197,6 @@ export default {
           this.dateStore = this.$store.state.dateWeek;
         });
         await this.fillData();
-        // console.log(this.dateCurrent)
-        this.dateCurrent = this.getDataLocal();
       }
     },
   }
@@ -212,7 +210,7 @@ export default {
 }
 
 #bar-chart {
-  height: 80% !important;
+  height: 600px !important;
   width: 90% !important;
 }
 </style>

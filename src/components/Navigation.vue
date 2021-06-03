@@ -43,20 +43,20 @@
                   <span class="nav-link-text">Tin nhắn</span>
                 </router-link>
               </li>
-              <li class="nav-item">
+              <li class="nav-item" v-bind:style="{background: colorBackground}" @click="changeBackground()">
                 <router-link class="nav-link" to="/notification" href='#target2' id='target2'>
                   <i class="fas fa-bell"></i>
                   <span class="nav-link-text">Thông báo</span>
                 </router-link>
               </li>
-              <li class="nav-item">
-                <router-link class="nav-link" to="/profile"  href='#target1' id='target1'>
+              <li class="nav-item" @click="changeBackground()">
+                <router-link class="nav-link" to="/profile" >
                   <i class="fas fa-address-card"></i>
-                  <span class="nav-link-text">Thông tin cá nhân</span>
+                  <span class="nav-link-text">Tôi</span>
                 </router-link>
               </li>
               <li class="nav-item">
-                <a class="nav-link" v-on:style="styleObject" @click="logOut()">
+                <a class="nav-link" @click="logOut()">
                   <i class="fas fa-sign-in-alt"></i>
                   <span class="nav-link-text">Đăng xuất</span>
                 </a>
@@ -75,6 +75,8 @@ export default {
   data() {
     return {
       data: localStorage.getItem('data'),
+      colorBackground: null,
+      onclick: false,
       styleObject:{
         color: 'red',
         fontSize: '13px'
@@ -85,7 +87,17 @@ export default {
     logOut() {
       localStorage.removeItem('data')
       this.$router.push('/login')
+    },
+    changeBackground(){
+      // this.onclick = !this.onclick;
+      // if(this.onclick === true){
+      //   this.colorBackground = "red";
+      // }else {
+      //   this.colorBackground = null;
+      // }
+      // this.onclick = false;
     }
+
   }
 };
 </script>
@@ -105,4 +117,8 @@ export default {
   transition: 0.4s all!important;
   background-color: #bee6e3!important;
 }
+.nav-item.active{
+  background: red!important;
+}
+
 </style>

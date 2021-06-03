@@ -10,99 +10,76 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fas fa-search"></i></span>
                 </div>
-                <input class="form-control" placeholder="Tìm kiếm ..." v-model="search" type="text">
+                <input class="form-control" placeholder="Tìm kiếm..." type="text" v-model="search">
               </div>
             </div>
-            <button type="button" class="close" data-action="search-close" data-target="#navbar-search-main"
-                    aria-label="Close">
-              <span aria-hidden="true"> u </span>
+            <button type="button" class="close" data-action="search-close" data-target="#navbar-search-main" aria-label="Close">
+              <span aria-hidden="true">×</span>
             </button>
           </form>
-          <!-- Navbar links -->
-          <ul class="navbar-nav align-items-center  ml-md-auto ">
-            <li class="nav-item d-xl-none">
-              <!-- Sidenav toggler -->
-              <div class="pr-3 sidenav-toggler sidenav-toggler-dark" data-action="sidenav-pin"
-                   data-target="#sidenav-main">
-                <div class="sidenav-toggler-inner">
-                  <i class="sidenav-toggler-line"></i>
-                  <i class="sidenav-toggler-line"></i>
-                  <i class="sidenav-toggler-line"></i>
-                </div>
-              </div>
-            </li>
-            <li class="nav-item d-sm-none">
-              <a class="nav-link" href="#" data-action="search-show" data-target="#navbar-search-main">
-                <i style="color: white!important;" class="ni ni-zoom-split-in"></i>
-              </a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-                 aria-expanded="false">
-                <i style="color: white!important;" class="fas fa-bell"></i>
-              </a>
-              <div class="dropdown-menu dropdown-menu-xl  dropdown-menu-right  py-0 overflow-hidden">
+          <div class=" ml-md-auto">
+            <button @click="show" class="btnbell"> <i class="fas fa-bell"></i></button>
+            <transition name="drop-down">
+              <div class="dropdown-menu dropdown-menu-xl show" v-show="showBox">
                 <!-- Dropdown header -->
                 <div class="px-3 py-3">
-                  <h6 class="text-sm text-muted m-0">You have <strong class="text-primary">13</strong> notifications.
-                  </h6>
+                  <!-- <h6 class="text-sm text-muted m-0">Bạn có<strong class="text-primary"> 13</strong> thông báo.</h6> -->
+                  <h6 class="text-sm text-muted m-0">Thông báo <span>{{nontifications.length}}</span> thông báo</h6>
                 </div>
                 <!-- List group -->
-                <div class="list-group list-group-flush">
+                <div class="list-group list-group-flush" v-for="(nontification, i) in nontifications" :key="i">
                   <a href="#!" class="list-group-item list-group-item-action">
                     <div class="row align-items-center">
                       <div class="col-auto">
                         <!-- Avatar -->
-                        <img alt="Image placeholder" src="assets/img/theme/team-5.jpg" class="avatar rounded-circle">
+                        <img :src="nontification.img" class="avatar rounded-circle">
                       </div>
                       <div class="col ml--2">
                         <div class="d-flex justify-content-between align-items-center">
                           <div>
-                            <h4 style="color: white!important;" class="mb-0 text-sm">John Snow</h4>
+                            <h4 class="mb-0 text-sm">{{nontification.account}}</h4>
                           </div>
                           <div class="text-right text-muted">
-                            <small>3 hrs ago</small>
+                            <small>{{$date(nontification.time).format('DD/MM/YYYY')}}</small>
                           </div>
                         </div>
-                        <p class="text-sm mb-0">A new issue has been reported for Argon.</p>
+                        <p class="text-sm mb-0">{{nontification.content}}</p>
                       </div>
+                      <button  class="btnDele" v-on:submit.prevent="DeleteNonti(i)" @click="DeleteNonti(nontification.id)"> <i class="fa fa-remove"></i></button>
                     </div>
                   </a>
                 </div>
                 <!-- View all -->
-                <a href="#!" class="dropdown-item text-center text-primary font-weight-bold py-3">View all</a>
+                <a href="#!" class="dropdown-item text-center text-primary font-weight-bold py-3">Xem tất cả</a>
               </div>
-            </li>
-          </ul>
-          <ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
-            <li class="nav-item dropdown">
-              <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-                 aria-expanded="false">
-                <div class="media align-items-center">
-              <span class="avatar avatar-sm rounded-circle">
-                <img alt="Image placeholder" src="assets/img/theme/team-4.jpg">
-              </span>
-                  <div class="media-body  ml-2  d-none d-lg-block">
-                    <span style="color: white!important;" class="mb-0 text-sm  font-weight-bold">Lao yeu</span>
-                  </div>
+            </transition>
+          </div>
+
+          <div class="action ml-auto ml-md-0" >
+            <button class="btnprofile" @click="show2">
+              <div class="media align-items-center">
+                  <span class="avatar avatar-sm rounded-circle">
+                    <img alt="Image placeholder" :src="profiles.img">
+                  </span>
+                <div class="media-body  ml-2  d-none d-lg-block">
+                  <span class="mb-0 text-sm  font-weight-bold">{{profiles.account}}</span>
                 </div>
-              </a>
-              <div class="dropdown-menu  dropdown-menu-right ">
-                <div class="dropdown-header noti-title">
-                  <h6 class="text-overflow m-0">Chào mừng bạn đã trở lại!</h6>
-                </div>
-                <a href="#!" class="dropdown-item">
-                  <i class="ni ni-single-02"></i>
-                  <span>Tôi</span>
-                </a>
-                <div class="dropdown-divider"></div>
-                <a href="#!" class="dropdown-item">
-                  <i class="ni ni-user-run"></i>
-                  <span>Đăng xuất</span>
-                </a>
               </div>
-            </li>
-          </ul>
+            </button>
+            <transition name="slide-fade">
+              <div class="menu show" v-show="Dropit">
+                <h3> xin chào </h3>
+                <ul>
+                  <router-link to="/profile">
+                    <li><i class="fas fa-user"></i><h6>Thông tin cá nhân</h6></li>
+                  </router-link>
+                  <li><i class="fas fa-user-edit"></i><h6>Sửa thông tin</h6></li>
+                  <li><i class="fas fa-user-cog"></i><h6>Cài đặt</h6></li>
+                  <a @click="logOut()"><li><i class="fas fa-running"></i><h6>Đăng xuất</h6></li></a>
+                </ul>
+              </div>
+            </transition>
+          </div>
         </div>
       </div>
     </nav>
@@ -130,7 +107,7 @@
           <p>Xóa</p>
         </div>
         <div>
-          <div class="contentShop table_content" v-for="(shop, index) in shops" :key="shop.id">
+          <div class="contentShop table_content" v-for="(shop, index) in showShops" :key="shop.id">
             <p>
               {{ index + 1 }}
             </p>
@@ -193,13 +170,50 @@ export default {
       page: 3,
       perPage: 5,
       pages: [],
-      search: null
+      search: null,
+      showBox: false,
+      Dropit:false,
+      nontifications:[],
+      profiles:{},
+      data: localStorage.getItem('data')
     };
   },
   created() {
     this.getData();
+    this.getDataPro();
+    this.getNonti();
   },
   methods: {
+    getDataPro(){
+      const idShop = JSON.parse(localStorage.getItem("data"));
+      axios.get('https://api-gilo.herokuapp.com/api/profileAdmin/'+  idShop)
+          .then(response =>(
+              console.log(response),
+                  this.profiles = response.data
+          ))
+    },
+    getNonti(){
+      axios.get("https://api-gilo.herokuapp.com/api/noficationshop").then((response) => {
+        this.nontifications = response.data;
+      }) ;
+    },
+    DeleteNonti(id){
+      // const id_shop = JSON.parse(localStorage.getItem("data"));
+      axios.delete("https://api-gilo.herokuapp.com/api/nontification/" + id).
+      then(() => {
+        this.nontifications.splice(id, 1);
+      }) ;
+    },
+    show() {
+      this.showBox = !this.showBox
+    },
+    show2() {
+      this.Dropit = !this.Dropit
+    },
+    logOut() {
+      localStorage.removeItem('data')
+      this.$router.push('/login')
+    },
     deleteShop(id) {
       axios.delete(
           'https://api-gilo.herokuapp.com/api/shop/' + id
@@ -236,7 +250,7 @@ export default {
               .every((v) => item.name.toLowerCase().includes(v));
         });
       } else {
-        return this.paginate(this.shops);
+        return this.shops;
       }
     }
   },
@@ -254,6 +268,111 @@ export default {
 };
 </script>
 <style lang="scss">
+///header
+.fa-bell, .font-weight-bold{
+  color: #fff;
+}
+.btnbell,.btnprofile{
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  outline:none;
+}
+@keyframes drop-down {
+  from {
+    transform: scaley(0) translate3d(0, -100%, 0);
+    height: 0;
+  }
+  to {
+    transform: scaley(1) translate3d(0, 0, 0);
+  }
+}
+.nav-item .dropdown-menu {
+  position: absolute;
+}
+@keyframes slide-fade {
+  from {
+    transform: scaley(0) translate3d(0, -100%, 0);
+    height: 0;
+  }
+  to {
+    transform: scaley(1) translate3d(0, 0, 0);
+  }
+}
+.action .profile{
+  position: relative;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+}
+.navbar:not(.navbar-nav-hover) .menu.show {
+  animation: show-navbar-dropdown .25s ease forwards;
+  pointer-events: auto;
+  opacity: 1;
+}
+.menu.show {
+  display: block;
+}
+.action .menu{
+  position: absolute;
+  z-index: 1000;
+  top: 48px;
+  right: 5px;
+  padding: 10px 20px;
+  background: #fff;
+  width: 200px;
+  border-radius: 8px;
+  transition: 0.5s;
+}
+.action .menu::before{
+  content: '';
+  position: absolute;
+  right: 28px;
+  width: 20px;
+  height: 20px;
+}
+.action .menu h3{
+  width: 100%;
+  text-align:center ;
+  font-size: 18px;
+  padding: 20px 0;
+  font-weight:500;
+  color: #555;
+  line-height: 1.2em;
+}
+.action .menu ul li{
+  list-style: none;
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+}
+.action .menu ul li i{
+  max-width: 20px;
+  margin-right: 10px;
+  opacity: 0.5;
+  transition: 0.5s;
+}
+.action .menu ul li:hover i{
+  opacity: 1;
+}
+.action .menu ul li h6{
+  float: left;
+}
+.action .menu ul li a{
+  display: inline-block;
+  text-decoration: none;
+  color: #555;
+  font-weight:500;
+  transition: 0.5s;
+}
+.action .menu ul li:hover a{
+  color: #ff5d94;
+}
+
 #img_order_detail {
   width: 150px;
   height: 150px;

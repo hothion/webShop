@@ -115,13 +115,13 @@
     <!-- Page content -->
     <div class="container-fluid mt--6">
       <div class="row">
-        <div class="col-xl-8">
+        <div class="col-xl-6">
           <div class="card bg-default">
             <div class="card-header bg-transparent">
               <div class="row align-items-center">
                 <div class="col">
                   <h6 class="text-light text-uppercase ls-1 mb-1">Tổng Quan</h6>
-                  <h5 class="h3 text-white mb-0">Giá trị bán hàng</h5>
+                  <h5 class="h3 text-white mb-0">Lượng người đăng ký</h5>
                 </div>
                 <div class="col">
                   <ul class="nav nav-pills justify-content-end">
@@ -153,20 +153,20 @@
             </div>
           </div>
         </div>
-        <div class="col-xl-4">
+        <div class="col-xl-6">
           <div class="card">
             <div class="card-header bg-transparent">
               <div class="row align-items-center">
                 <div class="col">
                   <h6 class="text-uppercase text-muted ls-1 mb-1">Biểu diễn</h6>
-                  <h5 class="h3 mb-0">Sản phẩm bán chạy trong ngày</h5>
+                  <h5 class="h3 mb-0">Số lượng cửa hàng</h5>
                 </div>
               </div>
             </div>
             <div class="card-body">
               <!-- Chart -->
               <div class="chart">
-                <UserChart/>
+                <UserChart />
               </div>
             </div>
           </div>

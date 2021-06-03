@@ -115,7 +115,7 @@
       </div>
     </div>
     <!-- Page content -->
-    <div class="container-fluid mt--6">
+    <div class="container-fluid mt--6" v-if="dataUser === 1">
       <div class="row">
         <div class="col-xl-8">
           <div class="card bg-default">
@@ -175,18 +175,64 @@
         </div>
       </div>
     </div>
+    <div class="container-fluid mt--6" v-if="dataUser === null">
+      <div class="row">
+        <div class="col-xl-6">
+          <div class="card bg-default">
+            <div class="card-header bg-transparent">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h6 class="text-light text-uppercase ls-1 mb-1">Tổng Quan</h6>
+                  <h5 class="h3 text-white mb-0">Lượng người đăng ký</h5>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <!-- Chart -->
+              <div class="chart">
+                <UserChart/>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-6">
+          <div class="card bg-default">
+            <div class="card-header bg-transparent">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h6 class="text-light text-uppercase ls-1 mb-1">Tổng Quan</h6>
+                  <h5 class="h3 text-white mb-0">Lượng cửa hàng</h5>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <!-- Chart -->
+              <div class="chart">
+                <UserChart/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
 import Header from './Header.vue';
 import orderBar from "./OrderBar.vue";
 import orderPie from "./OrderPie.vue";
-
+import UserChart from "./admin/UserChart";
 export default {
   components: {
     Header,
     orderBar,
-    orderPie
+    orderPie,
+    UserChart
+  },
+  data(){
+    return{
+     dataUser: JSON.parse(localStorage.getItem('data')),
+    }
   }
 }
 </script>

@@ -38,7 +38,7 @@
               </li>
               <li class="nav-item">
                 <router-link class="nav-link" to="/notificationAdmin">
-                  <i class="fas fa-bell"></i>
+                  <i style="color: rgba(0,0,0,.5)!important;" class="fas fa-bell"></i>
                   <span class="nav-link-text">Thông báo</span>
                 </router-link>
               </li>
@@ -51,6 +51,7 @@
               <li class="nav-item">
                 <a class="nav-link" @click="logOut()">
                   <i class="fas fa-sign-in-alt"></i>
+                  <span class="nav-link-text" >Đăng xuất</span>
                 </a>
               </li>
 
