@@ -28,11 +28,8 @@
               numberWeek
             }}</h3>
            <button @click="nextWeek()"> <i class="fas fa-chevron-circle-right"></i> </button>
-<!--            <p>{{ listDay }}</p>-->
-<!--            <p>rrr{{ dateCurrent }}</p>-->
          </span>
           <line-chart :chartData="datacollection"></line-chart>
-          <!--          <OrderWeek />-->
           <h3 style="text-align: center; font-weight: bold; margin-top: 10px; font-size: 1.2rem">
             Biểu đồ 2: Đơn đặt hàng qua các tuần
           </h3>
@@ -45,12 +42,10 @@
 import LineChart from './LineChart';
 import Header from './Header';
 import moment from "moment";
-//import OrderWeek from "./OrderWeek";
 export default {
   components: {
     LineChart,
     Header,
-    // OrderWeek
   },
   data() {
     return {
@@ -64,16 +59,23 @@ export default {
       dateStore: [],
       quantity: [1, 2, 3, 2, 1, 2, 1],
       dateCurrent: [],
+      qty: []
     }
   },
   created() {
     this.getNumberWeek();
     this.getCurrentDay();
+    this.getQuantity();
   },
+
   mounted() {
     this.fillData();
   },
   methods: {
+    loadOnce:function(){
+      location.reload();
+      console.log("yeu")
+    },
     getNumberWeek() {
       this.axios.get('https://api-gilo.herokuapp.com/api/getNumber').then((response) => {
         this.numberWeek = response.data;
@@ -83,26 +85,15 @@ export default {
       if (this.numberWeek !== 0) {
         await this.axios.get('https://api-gilo.herokuapp.com/api/getWeek/' + 0).then((response) => {
           this.getWeek = response.data;
-          // var arr = [];
           if (this.dateCurrent.length > 0) {
             this.dateCurrent = [];
           }
           for (let i = this.getWeek; i < this.getWeek + 7; i++) {
             let numberYear = new Date(Date.UTC(this.currentYear, 0, i));
-            let formattedDate = moment(numberYear).format("DD-MM-YYYY");
+            let formattedDate = moment(numberYear).format("YYYY-MM-DD"); // DD-MM-YYYY
             this.dateCurrent.push(formattedDate);
-            // console.log(typeof formattedDate);
-            // this.date = formattedDate;
-            // arr.push(formattedDate);
           }
           this.setCurrentDayLocal(this.dateCurrent)
-          // this.date = arr;
-          // this.dateCurrent.push(arr)
-          // // JSON.parse(JSON.stringify(this.dateCurrent))
-          // console.log(this.dateCurrent)
-          // // console.log(JSON.parse(JSON.stringify(this.dateCurrent[0])).arr)
-          // console.log(this.dateCurrent[0])
-          // console.log(JSON.parse(JSON.stringify(this.dateCurrent)));
           return JSON.parse(JSON.stringify(this.dateCurrent));
 
         });
@@ -122,43 +113,37 @@ export default {
     },
     ////
     async fillData() {
-      const dateLocal = this.getDataLocal();
-      console.log(this.dateCurrent)
-      if (dateLocal != null) {
-        this.datacollection = {
-          labels: dateLocal,
-          datasets: [
-            {
-              label: 'Đơn hàng',
-              backgroundColor: '#f87979',
-              data: this.quantity
+      const dayInLocal = this.getCurrentDayLocal();
+      await fetch('https://api-gilo.herokuapp.com/api/weekChart')
+          .then((response) => response.json())
+          .then((data) => {
+            const order_week = data;
+            for (let i = 0; i < order_week.length; i++) {
+              if (dayInLocal.indexOf(order_week[i].date) !== -1) {
+                this.qty.push(order_week[i].total_quantity);
+              }
             }
-          ]
-        }
-      } else {
-        this.datacollection = {
-          labels: this.getCurrentDayLocal(),
-          datasets: [
-            {
-              label: 'Đơn hàng',
-              backgroundColor: '#f87979',
-              data: this.quantity
-            }
-          ]
-        }
-        console.log("kaaa");
-        // console.log(JSON.parse(JSON.stringify(this.dateCurrent)));
-        // console.log(lao);
-        //console.log(this.getCurrentDayLocal());
-        // var parsedobj = JSON.parse(JSON.stringify(this.dateCurrent))
-
+          });
+      if(this.qty.length>0){
+        console.log(this.qty);
+      }else {
+        console.log("Quantity = 0")
       }
-      // console.log(JSON.parse(JSON.stringify(this.dateCurrent[0])).arr)
+      this.datacollection = {
+        labels: this.getCurrentDayLocal(),
+        datasets: [
+          {
+            label: 'Đơn hàng',
+            backgroundColor: '#f87979',
+            data: this.qty
+          }
+        ]
+      }
     },
     async PreviousWeek() {
-      // localStorage.removeItem('currentDate');
       if (this.numberWeek !== 0) {
         this.listDay.splice(-7);
+        this.dateCurrent.splice(-7);
         this.numberWeek -= 1;
         this.counter += 1;
         let uri = 'https://api-gilo.herokuapp.com/api/getWeek/' + this.counter;
@@ -166,21 +151,22 @@ export default {
           this.getWeek = response.data;
           for (let i = this.getWeek; i < this.getWeek + 7; i++) {
             let numberYear = new Date(Date.UTC(this.currentYear, 0, i));
-            let formattedDate = moment(numberYear).format("DD-MM-YYYY");
+            let formattedDate = moment(numberYear).format("YYYY-MM-DD"); // DD-MM-YYYY
             this.listDay.push(formattedDate);
           }
-          this.setDataLocal(this.listDay);
-          this.$store.commit('setNewDate', this.listDay);
+          this.setCurrentDayLocal(this.listDay);
+          this.$store.commit('setNewDate', this.getDataLocal());
           this.dateStore = this.$store.state.dateWeek;
         });
+        //await this.getQuantity();
         await this.fillData();
-        // console.log(this.getDataLocal())
-        // this.dateCurrent=this.getDataLocal();
       }
     },
     async nextWeek() {
       if (this.numberWeek !== 0) {
         this.listDay.splice(-7);
+        this.dateCurrent.splice(-7);
+
         this.numberWeek += 1;
         this.counter -= 1;
 
@@ -189,16 +175,37 @@ export default {
           this.getWeek = response.data;
           for (let i = this.getWeek; i < this.getWeek + 7; i++) {
             let numberYear = new Date(Date.UTC(this.currentYear, 0, i));
-            let formattedDate = moment(numberYear).format("DD-MM-YYYY");
+            let formattedDate = moment(numberYear).format("YYYY-MM-DD"); // DD-MM-YYYY
             this.listDay.push(formattedDate);
           }
-          this.setDataLocal(this.listDay);
-          this.$store.commit('setNewDate', this.listDay);
+          this.setCurrentDayLocal(this.listDay);
+          this.$store.commit('setNewDate', this.getDataLocal());
           this.dateStore = this.$store.state.dateWeek;
         });
+        //await this.getQuantity();
         await this.fillData();
       }
     },
+   async getQuantity(){
+      const dayInLocal = this.getCurrentDayLocal();
+      await fetch('https://api-gilo.herokuapp.com/api/weekChart')
+          .then((response) => response.json())
+          .then((data) => {
+            const order_week = data;
+            for (let i = 0; i < order_week.length; i++) {
+              if (dayInLocal.indexOf(order_week[i].date) !== -1) {
+                this.qty.push(order_week[i].date);
+              }
+            }
+          });
+     console.log(this.qty.length);
+      if(this.qty.length>0){
+
+        console.log(this.qty);
+      }else {
+        console.log("No have")
+      }
+    }
   }
 }
 </script>

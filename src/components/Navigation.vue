@@ -45,7 +45,7 @@
               </li>
               <li class="nav-item" v-bind:style="{background: colorBackground}" @click="changeBackground()">
                 <router-link class="nav-link" to="/notification" href='#target2' id='target2'>
-                  <i class="fas fa-bell"></i>
+                  <i style="color: rgba(0,0,0,.5)!important;" class="fas fa-bell"></i>
                   <span class="nav-link-text">Thông báo</span>
                 </router-link>
               </li>
@@ -88,16 +88,6 @@ export default {
       localStorage.removeItem('data')
       this.$router.push('/login')
     },
-    changeBackground(){
-      // this.onclick = !this.onclick;
-      // if(this.onclick === true){
-      //   this.colorBackground = "red";
-      // }else {
-      //   this.colorBackground = null;
-      // }
-      // this.onclick = false;
-    }
-
   }
 };
 </script>

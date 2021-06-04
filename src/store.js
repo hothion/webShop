@@ -5,7 +5,7 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
     debug: true,
     state: {
-        dateWeek: JSON.parse(localStorage.getItem("date")),
+        dateWeek: JSON.parse(localStorage.getItem("currentDate")),
         count: 0
     },
     mutations: {
