@@ -2,6 +2,7 @@
   <div class="main-content" id="panel">
     <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
       <div class="container-fluid">
+        <MenuAdmin></MenuAdmin>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <!-- Search form -->
           <form class="navbar-search navbar-search-light form-inline mr-sm-3" id="navbar-search-main">
@@ -13,18 +14,19 @@
                 <input class="form-control" placeholder="Tìm kiếm..." type="text" v-model="search">
               </div>
             </div>
-            <button type="button" class="close" data-action="search-close" data-target="#navbar-search-main" aria-label="Close">
+            <button type="button" class="close" data-action="search-close" data-target="#navbar-search-main"
+                    aria-label="Close">
               <span aria-hidden="true">×</span>
             </button>
           </form>
           <div class=" ml-md-auto">
-            <button @click="show" class="btnbell"> <i class="fas fa-bell"></i></button>
+            <button @click="show" class="btnbell"><i class="fas fa-bell"></i></button>
             <transition name="drop-down">
               <div class="dropdown-menu dropdown-menu-xl show" v-show="showBox">
                 <!-- Dropdown header -->
                 <div class="px-3 py-3">
                   <!-- <h6 class="text-sm text-muted m-0">Bạn có<strong class="text-primary"> 13</strong> thông báo.</h6> -->
-                  <h6 class="text-sm text-muted m-0">Thông báo <span>{{nontifications.length}}</span> thông báo</h6>
+                  <h6 class="text-sm text-muted m-0">Thông báo <span>{{ nontifications.length }}</span> thông báo</h6>
                 </div>
                 <!-- List group -->
                 <div class="list-group list-group-flush" v-for="(nontification, i) in nontifications" :key="i">
@@ -37,15 +39,16 @@
                       <div class="col ml--2">
                         <div class="d-flex justify-content-between align-items-center">
                           <div>
-                            <h4 class="mb-0 text-sm">{{nontification.account}}</h4>
+                            <h4 class="mb-0 text-sm">{{ nontification.account }}</h4>
                           </div>
                           <div class="text-right text-muted">
-                            <small>{{$date(nontification.time).format('DD/MM/YYYY')}}</small>
+                            <small>{{ $date(nontification.time).format('DD/MM/YYYY') }}</small>
                           </div>
                         </div>
-                        <p class="text-sm mb-0">{{nontification.content}}</p>
+                        <p class="text-sm mb-0">{{ nontification.content }}</p>
                       </div>
-                      <button  class="btnDele" v-on:submit.prevent="DeleteNonti(i)" @click="DeleteNonti(nontification.id)"> <i class="fa fa-remove"></i></button>
+                      <button class="btnDele" v-on:submit.prevent="DeleteNonti(i)"
+                              @click="DeleteNonti(nontification.id)"><i class="fa fa-remove"></i></button>
                     </div>
                   </a>
                 </div>
@@ -55,14 +58,14 @@
             </transition>
           </div>
 
-          <div class="action ml-auto ml-md-0" >
+          <div class="action ml-auto ml-md-0">
             <button class="btnprofile" @click="show2">
               <div class="media align-items-center">
                   <span class="avatar avatar-sm rounded-circle">
                     <img alt="Image placeholder" :src="profiles.img">
                   </span>
                 <div class="media-body  ml-2  d-none d-lg-block">
-                  <span class="mb-0 text-sm  font-weight-bold">{{profiles.account}}</span>
+                  <span class="mb-0 text-sm  font-weight-bold">{{ profiles.account }}</span>
                 </div>
               </div>
             </button>
@@ -75,7 +78,9 @@
                   </router-link>
                   <li><i class="fas fa-user-edit"></i><h6>Sửa thông tin</h6></li>
                   <li><i class="fas fa-user-cog"></i><h6>Cài đặt</h6></li>
-                  <a @click="logOut()"><li><i class="fas fa-running"></i><h6>Đăng xuất</h6></li></a>
+                  <a @click="logOut()">
+                    <li><i class="fas fa-running"></i><h6>Đăng xuất</h6></li>
+                  </a>
                 </ul>
               </div>
             </transition>
@@ -158,10 +163,12 @@
 import Vue from 'vue';
 import VueAxios from 'vue-axios';
 import axios from 'axios';
+import MenuAdmin from "../MenuAdmin";
 
 Vue.use(VueAxios, axios);
 
 export default {
+  components: {MenuAdmin},
   data() {
     return {
       shops: [],
@@ -172,9 +179,9 @@ export default {
       pages: [],
       search: null,
       showBox: false,
-      Dropit:false,
-      nontifications:[],
-      profiles:{},
+      Dropit: false,
+      nontifications: [],
+      profiles: {},
       data: localStorage.getItem('data')
     };
   },
@@ -184,25 +191,24 @@ export default {
     this.getNonti();
   },
   methods: {
-    getDataPro(){
+    getDataPro() {
       const idShop = JSON.parse(localStorage.getItem("data"));
-      axios.get('https://api-gilo.herokuapp.com/api/profileAdmin/'+  idShop)
-          .then(response =>(
+      axios.get('https://api-gilo.herokuapp.com/api/profileAdmin/' + idShop)
+          .then(response => (
               console.log(response),
                   this.profiles = response.data
           ))
     },
-    getNonti(){
+    getNonti() {
       axios.get("https://api-gilo.herokuapp.com/api/noficationshop").then((response) => {
         this.nontifications = response.data;
-      }) ;
+      });
     },
-    DeleteNonti(id){
+    DeleteNonti(id) {
       // const id_shop = JSON.parse(localStorage.getItem("data"));
-      axios.delete("https://api-gilo.herokuapp.com/api/nontification/" + id).
-      then(() => {
+      axios.delete("https://api-gilo.herokuapp.com/api/nontification/" + id).then(() => {
         this.nontifications.splice(id, 1);
-      }) ;
+      });
     },
     show() {
       this.showBox = !this.showBox
@@ -269,17 +275,19 @@ export default {
 </script>
 <style lang="scss">
 ///header
-.fa-bell, .font-weight-bold{
+.fa-bell, .font-weight-bold {
   color: #fff;
 }
-.btnbell,.btnprofile{
+
+.btnbell, .btnprofile {
   background-color: Transparent;
-  background-repeat:no-repeat;
+  background-repeat: no-repeat;
   border: none;
-  cursor:pointer;
+  cursor: pointer;
   overflow: hidden;
-  outline:none;
+  outline: none;
 }
+
 @keyframes drop-down {
   from {
     transform: scaley(0) translate3d(0, -100%, 0);
@@ -289,9 +297,11 @@ export default {
     transform: scaley(1) translate3d(0, 0, 0);
   }
 }
+
 .nav-item .dropdown-menu {
   position: absolute;
 }
+
 @keyframes slide-fade {
   from {
     transform: scaley(0) translate3d(0, -100%, 0);
@@ -301,7 +311,8 @@ export default {
     transform: scaley(1) translate3d(0, 0, 0);
   }
 }
-.action .profile{
+
+.action .profile {
   position: relative;
   width: 60px;
   height: 60px;
@@ -309,15 +320,18 @@ export default {
   overflow: hidden;
   cursor: pointer;
 }
+
 .navbar:not(.navbar-nav-hover) .menu.show {
   animation: show-navbar-dropdown .25s ease forwards;
   pointer-events: auto;
   opacity: 1;
 }
+
 .menu.show {
   display: block;
 }
-.action .menu{
+
+.action .menu {
   position: absolute;
   z-index: 1000;
   top: 48px;
@@ -328,48 +342,56 @@ export default {
   border-radius: 8px;
   transition: 0.5s;
 }
-.action .menu::before{
+
+.action .menu::before {
   content: '';
   position: absolute;
   right: 28px;
   width: 20px;
   height: 20px;
 }
-.action .menu h3{
+
+.action .menu h3 {
   width: 100%;
-  text-align:center ;
+  text-align: center;
   font-size: 18px;
   padding: 20px 0;
-  font-weight:500;
+  font-weight: 500;
   color: #555;
   line-height: 1.2em;
 }
-.action .menu ul li{
+
+.action .menu ul li {
   list-style: none;
   padding: 10px 0;
   display: flex;
   align-items: center;
 }
-.action .menu ul li i{
+
+.action .menu ul li i {
   max-width: 20px;
   margin-right: 10px;
   opacity: 0.5;
   transition: 0.5s;
 }
-.action .menu ul li:hover i{
+
+.action .menu ul li:hover i {
   opacity: 1;
 }
-.action .menu ul li h6{
+
+.action .menu ul li h6 {
   float: left;
 }
-.action .menu ul li a{
+
+.action .menu ul li a {
   display: inline-block;
   text-decoration: none;
   color: #555;
-  font-weight:500;
+  font-weight: 500;
   transition: 0.5s;
 }
-.action .menu ul li:hover a{
+
+.action .menu ul li:hover a {
   color: #ff5d94;
 }
 
@@ -382,10 +404,12 @@ export default {
   display: flex;
 
 }
-#img{
+
+#img {
   width: 100px;
   height: 100px;
 }
+
 .create_at {
   white-space: nowrap !important;
   width: 98px !important;

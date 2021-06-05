@@ -5,7 +5,7 @@
         <!-- Brand -->
         <div class="sidenav-header  align-items-center">
           <a class="navbar-brand" href="javascript:void(0)">
-            <img src="https://www.enic.it/wp-content/uploads/2019/11/gilo-Logo.png" class="navbar-brand-img" alt="...">
+            <img src="./gilo.png" class="navbar-brand-img" alt="...">
           </a>
         </div>
         <div class="navbar-inner">
@@ -72,6 +72,7 @@
 <script>
 export default {
   name: "navigation",
+  props: ['dis'],
   data() {
     return {
       data: localStorage.getItem('data'),
@@ -92,6 +93,15 @@ export default {
 };
 </script>
 <style lang="scss">
+//LOGO
+.navbar-brand{
+  padding: 0!important;
+}
+.navbar-brand-img{
+  padding: 0!important;
+  max-width: 110px!important;
+  max-height: 100px!important;
+}
 .nav-link:hover{
   transition: 0.4s all;
   background-color: #bee6e3;
@@ -110,5 +120,7 @@ export default {
 .nav-item.active{
   background: red!important;
 }
-
+.nav-item span{
+  display: block!important;
+}
 </style>

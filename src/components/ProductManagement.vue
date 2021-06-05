@@ -2,6 +2,7 @@
   <div class="main-content" id="panel">
     <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
       <div class="container-fluid">
+       <Menu></Menu>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <!-- Search form -->
           <form class="navbar-search navbar-search-light form-inline mr-sm-3" id="navbar-search-main">
@@ -252,8 +253,10 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 import VueAxios from 'vue-axios';
 import axios from 'axios';
+import Menu from "./Menu";
 Vue.use(VueAxios, axios);
 export default {
+  components: {Menu},
   data() {
     return {
       products: [],

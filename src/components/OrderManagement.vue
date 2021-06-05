@@ -3,6 +3,7 @@
     <!-- Topnav -->
     <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
       <div class="container-fluid">
+        <Menu></Menu>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <!-- Search form -->
           <form class="navbar-search navbar-search-light form-inline mr-sm-3" id="navbar-search-main">
@@ -125,7 +126,7 @@
               </p>
               <p>{{ result.orders[0].total }}</p>
               <p>
-                <button type="submit" class="order_status" @click.prevent="editOrder(result.orders[0].payment_id)">
+                <button type="submit" class="order_status" @click.prevent="editOrder(result.orders[0].payment_id, result.orders[0].id_status)">
                   {{ result.orders[0].content }}
                 </button>
               </p>
@@ -251,8 +252,10 @@ import axios from 'axios';
 
 Vue.use(VueAxios, axios);
 import _ from 'lodash';
+import Menu from "./Menu";
 
 export default {
+  components: {Menu},
   data() {
     return {
       orders: [],
@@ -277,6 +280,7 @@ export default {
       Dropit:false,
       nontifications:[],
       profiles:{},
+      search: null,
       data: localStorage.getItem('data')
     };
   },
@@ -335,10 +339,13 @@ export default {
     unConfirmOrder() {
       this.statusOrder = 1;
       this.marginDetail = '-4% 5% 0% 5%';
+      console.log(this.statusOrder)
     },
+
     compeleteOrder() {
       this.statusOrder = 5;
       this.marginDetail = '-4% 5% 0% 5%';
+      console.log(this.statusOrder)
     },
     deleteOrder(id) {
       axios.delete(
@@ -378,7 +385,7 @@ export default {
           });
     },
     editOrder(id, id_status) {
-      if(id_status != 1){
+      if(id_status == 1){
         this.openNotify = "block";
         this.payment_id = id;
       }else {
@@ -530,7 +537,7 @@ export default {
 ///// Notify
 .notification{
   position: fixed;
-  margin-top: -17% !important;
+  margin-top: -29% !important;
   margin-left: 20%!important;
   margin-right: 20%!important;
   width: 40%;
@@ -551,7 +558,7 @@ export default {
     text-align: center;
     h2{
       font-weight: bold;
-      font-size: 1.3rem;
+      font-size: 1.4rem;
     }
   }
   .footerNotify{
@@ -565,6 +572,7 @@ export default {
       border-radius: 4px;
       outline: none;
       border: none;
+      font-size: 1.3rem;
       &:hover{
         transition: 1s all;
         background-color: #13c6e0;
@@ -914,4 +922,29 @@ ul li {
     }
   }
 }
+/*REPSONSIVE*/
+
+@media screen and (min-width: 600px) {
+  .collapse.navbar-collapse a span {
+    display: none;
+    padding: 0!important;
+  }
+  #navbarSupportedContent{
+    padding-left: 0!important; ;
+  }
+  #navbar-search-main{
+    margin-left: 25px!important;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  label[for="ham-menu"] {
+    display: none!important;
+    padding: 0!important;
+  }
+  #navbar-search-main{
+    margin-left: 0px!important;
+  }
+}
+
 </style>
