@@ -76,6 +76,7 @@
              <li><i class="fas fa-user-cog"></i><h6>Cài đặt</h6></li>
              <a @click="logOut()"><li><i class="fas fa-running"></i><h6>Đăng xuất</h6></li></a>
            </ul>
+           
           </div>
           </transition>
         </div>

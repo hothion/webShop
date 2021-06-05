@@ -8,6 +8,11 @@
             <img src="https://www.enic.it/wp-content/uploads/2019/11/gilo-Logo.png" class="navbar-brand-img" alt="...">
           </a>
         </div>
+        <div class="menu-mobile">
+          <span class="bm-burger-bars line-style" style="top: 0%;"></span>
+          <span class="bm-burger-bars line-style" style="top: 40%;"></span>
+          <span class="bm-burger-bars line-style" style="top: 80%;"></span>
+        </div>
         <div class="navbar-inner">
           <!-- Collapse -->
           <div class="collapse navbar-collapse" id="sidenav-collapse-main">
@@ -105,4 +110,19 @@ export default {
   transition: 0.4s all!important;
   background-color: #bee6e3!important;
 }
+@media (min-width: 576px){
+.menu-mobile{
+  display: block;
+  height: 30px;
+  left: 36px;
+  position: absolute;
+  top: 36px;
+  width: 36px;
+  cursor: pointer;
+}
+.nav-link{
+  display: none;
+}
+}
+
 </style>
