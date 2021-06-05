@@ -58,10 +58,10 @@
           <div class="card">
             <div class="card-header">
               <div class="row align-items-center">
-                <div class="col-8">
+                <!-- <div class="col-8">
                   <router-link class="btn btn-neutral" to="/profile" >Sửa</router-link>
-                </div>
-                <div class="col-4 text-right">
+                </div> -->
+                <div class="col-12 text-right">
                   <button type="submit" class="btn btn-sm btn-primary">Lưu</button>
                 </div>
               </div>
@@ -78,7 +78,7 @@
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <label class="form-control-label" for="input-email"> Địa chỉ Email</label>
+                        <label class="form-control-label" for="input-email"> Địa chỉ email</label>
                         <input type="email" id="input-email" class="form-control" v-model="itemDatas.email" placeholder="Tên email">
                       </div>
                     </div>
@@ -106,7 +106,7 @@
                     </div>
                      <div class="col-lg-6">
                         <div class="form-group">
-                           <label class="form-control-label" for="input-last-name">Cập nhật Avatar</label>
+                           <label class="form-control-label" for="input-last-name">Cập nhật ảnh</label>
                 <div class="image-upload-wrap">
                     <input class="file-upload-input" type='file'  @change="updateProfile" accept="image/*" />
                     <div class="drag-text">
@@ -320,5 +320,8 @@ export default {
   font-size: 4.8rem !important;
     font-weight: 300 !important;
     line-height: 1.2 !important;
+}
+.mb-4{
+    margin-bottom: 0rem !important;
 }
 </style>
