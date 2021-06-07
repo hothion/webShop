@@ -1,6 +1,6 @@
 <template>
   <div class="main-content" id="panel">
-
+    <Header></Header>
     <div id="frame">
       <div id="sidepanel">
         <div id="profile">
@@ -8,7 +8,7 @@
         </div>
         <div id="search">
           <label for="search1"><i class="fa fa-search" aria-hidden="true"></i></label>
-          <input type="text" v-model="searchChat" @keyup="search()" id="search1" placeholder="Tìm kiếm trên chat..." />
+          <input type="text" v-model="searchChat" @keyup="search()" id="search1" placeholder="Tìm kiếm..." />
         </div>
         <div id="contacts" v-for="(user, i) in results" :key="i" v-on:click="sendselect(user.users[0].id_user)">
           <ul v-if="user.users[0].id_user !=1">
@@ -56,7 +56,7 @@
           <form @submit.prevent="sendMessage">
             <div class="wrap">
               <input type="text" v-model="content" placeholder="Nhập tin nhắn..." />
-              <i class="fa fa-paperclip attachment" aria-hidden="true"></i>
+              <!-- <i class="fa fa-paperclip attachment" aria-hidden="true"></i> -->
               <button class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
             </div>
           </form>
@@ -68,8 +68,11 @@
 </template>
 <script>
   import axios from "axios";
-
+import Header from './Header.vue';
   export default {
+     components:{
+      Header
+    },
     data() {
       return {
         messages: [],
@@ -189,7 +192,7 @@
     height: 92vh;
     min-height: 300px;
     max-height: 720px;
-    background: #E6EAEA;
+    background: #fff;
     margin-right: 0px;
 }
 @media screen and (max-width: 360px) {
@@ -209,10 +212,13 @@
   overflow: hidden;
   position: relative;
 }
+input:-internal-autofill-selected {
+    background: #32465a !important;
+}
 @media screen and (max-width: 735px) {
   #frame #sidepanel {
-    width: 58px;
-    min-width: 58px;
+    width: 80px;
+    min-width: 80px;
   }
 }
 #frame #sidepanel #profile {
@@ -222,7 +228,7 @@
 @media screen and (max-width: 735px) {
   #frame #sidepanel #profile {
     width: 100%;
-    margin: 0 auto;
+    margin: 0 0 0 18px;
     padding: 5px 0 0 0;
     background: #32465a;
   }
@@ -470,7 +476,19 @@
   position: absolute;
   margin: 10px 0 0 20px;
 }
+input#search1{
+  background: #32465a;
+  color: #fff;
+}
 #frame #sidepanel #search input {
+  font-family: "proxima-nova",  "Source Sans Pro", sans-serif;
+  padding: 10px 0 10px 46px;
+  width: calc(100% - 0px);
+  border: none;
+  background: #32465a;
+  color: #f5f5f5;
+}
+#frame #sidepanel #search input:active {
   font-family: "proxima-nova",  "Source Sans Pro", sans-serif;
   padding: 10px 0 10px 46px;
   width: calc(100% - 0px);
@@ -495,15 +513,16 @@
   color: #f5f5f5;
 }
 #frame #sidepanel #contacts {
-  height: calc(100% - 1778x);
   overflow-y: scroll;
   overflow-x: hidden;
   padding-top: 10px;
+  height: 15%;
 }
 @media screen and (max-width: 735px) {
   #frame #sidepanel #contacts {
-    height: calc(100% - 149px);
+    height: calc(100% - 215px);
     overflow-y: scroll;
+    padding-bottom: 10px;
     overflow-x: hidden;
   }
   #frame #sidepanel #contacts::-webkit-scrollbar {
@@ -674,9 +693,12 @@ height: 23vh;
 }
 #frame .content {
   float: right;
-  width: 60%;
   height: 100%;
+  background: #E6EAEA;
   overflow: hidden;
+   width: 100% !important;
+  margin-left: auto !important;
+  margin-right: 0px!important;
   position: relative;
 }
 @media screen and (max-width: 735px) {
@@ -793,7 +815,8 @@ height: 23vh;
   font-family: "proxima-nova",  "Source Sans Pro", sans-serif;
   float: left;
   border: none;
-  width: calc(100% - 90px);
+  margin-left: -25px  !important;
+  width: calc(100% - 48px);
   padding: 11px 32px 14px 8px;
   font-size: 0.8em;
   color: #32465a;
@@ -829,7 +852,6 @@ height: 23vh;
   opacity: 1;
 }
 #frame .content .message-input .wrap button {
-  float: right;
   border: none;
   width: 50px;
   padding: 12px 0;

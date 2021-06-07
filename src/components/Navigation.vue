@@ -8,6 +8,11 @@
             <img src="./gilo.png" class="navbar-brand-img" alt="...">
           </a>
         </div>
+        <div class="menu-mobile">
+          <span class="bm-burger-bars line-style" style="top: 0%;"></span>
+          <span class="bm-burger-bars line-style" style="top: 40%;"></span>
+          <span class="bm-burger-bars line-style" style="top: 80%;"></span>
+        </div>
         <div class="navbar-inner">
           <!-- Collapse -->
           <div class="collapse navbar-collapse" id="sidenav-collapse-main">
@@ -123,4 +128,19 @@ export default {
 .nav-item span{
   display: block!important;
 }
+@media (min-width: 576px){
+.menu-mobile{
+  display: block;
+  height: 30px;
+  left: 36px;
+  position: absolute;
+  top: 36px;
+  width: 36px;
+  cursor: pointer;
+}
+.nav-link{
+  display: none;
+}
+}
+
 </style>

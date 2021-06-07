@@ -127,6 +127,7 @@ const routes = [{
         component: StatisticAdmin
     }
 ]
+
 const dataUser = JSON.parse(localStorage.getItem('data'));
 if(dataUser === 1){
     const router = new VueRouter({mode: 'history', routes: routes});
@@ -143,4 +144,3 @@ if(dataUser === 1){
         store
     }).$mount('#app')
 }
-
