@@ -115,7 +115,7 @@
       </div>
     </div>
     <!-- Page content -->
-    <div class="container-fluid mt--6" v-if="dataUser === 1">
+    <div class="container-fluid mt--6" v-if="dataUser === 2">
       <div class="row">
         <div class="col-xl-8">
           <div class="card bg-default">
@@ -175,7 +175,7 @@
         </div>
       </div>
     </div>
-    <div class="container-fluid mt--6" v-if="dataUser === null">
+    <div class="container-fluid mt--6" v-if="dataUser === 1">
       <div class="row">
         <div class="col-xl-6">
           <div class="card bg-default">
@@ -208,7 +208,7 @@
             <div class="card-body">
               <!-- Chart -->
               <div class="chart">
-                <UserChart/>
+                <ShopChart/>
               </div>
             </div>
           </div>
@@ -222,12 +222,14 @@ import Header from './Header.vue';
 import orderBar from "./OrderBar.vue";
 import orderPie from "./OrderPie.vue";
 import UserChart from "./admin/UserChart";
+import ShopChart from "./admin/ShopChart.vue";
 export default {
   components: {
     Header,
     orderBar,
     orderPie,
-    UserChart
+    UserChart,
+    ShopChart
   },
   data(){
     return{

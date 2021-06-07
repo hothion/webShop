@@ -66,7 +66,8 @@ export default {
 };
 </script>
 <style lang="scss">
-#line-chart {
-  width: 400px;
+#bar-chart {
+  height: 400px !important;
+  width: 90% !important;
 }
 </style>

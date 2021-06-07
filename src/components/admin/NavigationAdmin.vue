@@ -4,7 +4,7 @@
       <div class="scrollbar-inner">
         <div class="sidenav-header  align-items-center">
           <a class="navbar-brand" href="javascript:void(0)">
-            <img src="https://www.enic.it/wp-content/uploads/2019/11/gilo-Logo.png" class="navbar-brand-img" alt="...">
+              <img src="../gilo.png" class="navbar-brand-img" alt="..." style="border-radius: 50%;margin-left: -70px; ">
           </a>
         </div>
         <div class="navbar-inner">
