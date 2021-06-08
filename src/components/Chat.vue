@@ -8,9 +8,9 @@
         </div>
         <div id="search">
           <label for="search1"><i class="fa fa-search" aria-hidden="true"></i></label>
-          <input type="text" v-model="searchChat" @keyup="search()" id="search1" placeholder="Tìm kiếm..." />
+          <input type="text" v-model="search" @keyup="search()" id="search1" placeholder="Tìm kiếm..." />
         </div>
-        <div id="contacts" v-for="(user, i) in results" :key="i" v-on:click="sendselect(user.users[0].id_user)">
+        <div id="contacts" v-for="(user, i) in showChats" :key="i" v-on:click="sendselect(user.users[0].id_user)">
           <ul v-if="user.users[0].id_user !=1">
             <li class="contact" >
               <div class="wrap">
@@ -85,7 +85,8 @@ import Header from './Header.vue';
         show: false,
         searchChat: '',
         account: '',
-        results: []
+        results: [],
+        search: null
       }
     },
     componentDidMount() {
@@ -162,15 +163,29 @@ import Header from './Header.vue';
             }
         ).catch(error => console.log(error));
       },
-      search() {
-        axios.post('https://api-gilo.herokuapp.com/api/searchchat/', {
-         account: this.searchChat
-        })
-            .then((response) => {
-              this.results.users = response.data;
-            });
-      }
+      // search() {
+      //   axios.post('https://api-gilo.herokuapp.com/api/searchchat/', {
+      //    account: this.searchChat
+      //   })
+      //       .then((response) => {
+      //         this.results.users = response.data;
+      //       });
+      // }
     },
+    computed: {
+    showChats() {
+      if (this.search) {
+        return this.results.filter((item) => {
+          return this.search
+              .toLowerCase()
+              .split(" ")
+              .every((v) => item.users[0].account.toLowerCase().includes(v));
+        });
+      }else{
+         return this.results;
+      }
+    }
+  },
     
   }
 </script>
