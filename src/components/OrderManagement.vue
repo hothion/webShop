@@ -116,7 +116,7 @@
           <p>Chi tiết </p>
         </div>
         <div v-if="statusOrder === 0">
-          <div v-for="(result, index) in results" :key="result.payment_id">
+          <div v-for="(result, index) in showOrders" :key="result.payment_id">
             <div class="content table_content">
               <p>{{ index + 1 }}</p>
               <p>{{ result.orders[0].name_recive }}</p>
@@ -140,7 +140,7 @@
           </div>
         </div>
         <div v-else-if="statusOrder > 0">
-          <div v-for="(result, index) in results" :key="result.payment_id">
+          <div v-for="(result, index) in showOrders" :key="result.payment_id">
             <div class="content table_content" v-show="result.orders[0].id_status === statusOrder">
               <p>{{ index + 1 }}</p>
               <p>{{ result.orders[0].name_recive }}</p>
@@ -213,10 +213,10 @@
               <th>Giá</th>
             </tr>
             <tr v-for="detail in detailProduct" :key="detail">
-              <td> <img :src="detail.images" id="imgDetail" alt="image"/></td>
-              <td>{{detail.name}}</td>
-              <td>{{detail.quantitycart}}</td>
-              <td>{{detail.price}}</td>
+              <td> <p><img :src="detail.image" id="imgDetail" alt="image"/></p></td>
+              <td><p style="margin-top: 40px!important">{{detail.name}}</p></td>
+              <td><p>{{detail.quantitycart}}</p></td>
+              <td><p>{{detail.price}}</p></td>
             </tr>
           </table>
         </div>
@@ -322,7 +322,7 @@ export default {
     },
     allOrder() {
       this.statusOrder = 0;
-      this.marginDetail = '-35% 5% 0% 5%';
+      this.marginDetail = '-55% 5% 0% 5%';
     },
     closeOrderDetail(){
       this.isDisplay = 'none';
@@ -338,8 +338,7 @@ export default {
     },
     unConfirmOrder() {
       this.statusOrder = 1;
-      this.marginDetail = '-4% 5% 0% 5%';
-      console.log(this.statusOrder)
+      this.marginDetail = '15% 5% 0% 5%';
     },
 
     compeleteOrder() {
@@ -370,6 +369,7 @@ export default {
           });
     },
     getData() {
+      this.marginDetail = '-55% 5% 0% 5%';
       fetch('https://api-gilo.herokuapp.com/api/progress')
           .then((response) => response.json())
           .then((data) => {
@@ -410,8 +410,17 @@ export default {
     },
   },
   computed: {
-    rolesByCategory() {
-      return _.groupBy(this.orders, 'payment_id')
+    showOrders() {
+      if (this.search) {
+        return this.results.filter((item) => {
+          return this.search
+              .toLowerCase()
+              .split(" ")
+              .every((v) => item.orders[0].name_recive.toLowerCase().includes(v));
+        });
+      }else{
+         return this.results;
+      }
     }
   },
   watch: {
@@ -537,7 +546,6 @@ export default {
 ///// Notify
 .notification{
   position: fixed;
-  margin-top: -29% !important;
   margin-left: 20%!important;
   margin-right: 20%!important;
   width: 40%;
@@ -592,7 +600,8 @@ export default {
 }
 .order-detail {
   width: 70%;
-  height: auto;
+  height: 100%;
+  overflow: scroll;
   position: fixed;
   border-radius: 4px;
   padding: 30px;
@@ -609,11 +618,7 @@ export default {
   th{
     font-weight: bold;
   }
-  th, td {
-    padding: 8px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-  }
+ 
 
   tr:hover {
     background-color: #f5f5f5;
@@ -631,13 +636,25 @@ export default {
   .info_user {
     margin-bottom: 25px;
     margin-top: 30px!important;
+    th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    margin: auto 0;
+  }
   }
 
   .info_product {
     margin-bottom: 25px;
+    tr td p{
+      margin: auto!important;
+    }
+    tr td{
+      margin: auto!important;
+    }
     #imgDetail{
-      width: 150px;
-      height: 130px;
+      width: 130px;
+      height: 100px;
     }
   }
 
@@ -664,7 +681,7 @@ export default {
 .content .table_content {
   width: 100%;
   display: grid;
-  grid-template-columns: 0.3fr 1.2fr 2fr 0.9fr 0.7fr 1.6fr 0.5fr!important;
+  grid-template-columns: 0.4fr 1.2fr 2fr 0.9fr 0.7fr 1.6fr 0.5fr!important;
   grid-column-gap: 10px;
   grid-row-gap: 20px;
   border-radius: 10px;
@@ -672,7 +689,7 @@ export default {
 .content .table_title{
   width: 100%;
   display: grid;
-  grid-template-columns: 0.3fr 1.2fr 2fr 0.9fr 0.7fr 1.6fr 0.6fr!important;
+  grid-template-columns: 0.4fr 1.2fr 2fr 0.9fr 0.7fr 1.6fr 0.6fr!important;
   grid-column-gap: 10px;
   grid-row-gap: 20px;
   border-radius: 10px;
