@@ -696,8 +696,11 @@ export default {
 }
 .table_content p {
   margin: auto 0;
+  width: 100%;
 }
-
+.table_content p .order_status{
+  width: 100%;
+}
 .content .table {
   width: 100%;
   margin-left: auto;

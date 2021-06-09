@@ -31,10 +31,6 @@ export default {
     this.gradient2.addColorStop(0.5, "rgba(0, 231, 255, 1.5)");
     this.gradient2.addColorStop(1, "rgba(0, 231, 255, 0.1)");
 
-    fetch('https://api-gilo.herokuapp.com/api/user_chart')
-        .then((response) => response.json())
-        .then((data) => {
-          const user_month = data;
           this.renderChart(
               {
                 labels: [
@@ -55,19 +51,18 @@ export default {
                   {
                     label: "Cửa hàng",
                     backgroundColor: this.gradient,
-                    data:user_month,
+                    data:[0,2,1,0,3,1,0,2,1,0,0,3],
                   },
                 ],
               },
               { responsive: true, maintainAspectRatio: false }
           );
-        });
   },
 };
 </script>
 <style lang="scss">
 #bar-chart {
-  height: 400px !important;
+  height: 550px !important;
   width: 90% !important;
 }
 </style>

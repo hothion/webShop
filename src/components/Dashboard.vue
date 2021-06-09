@@ -21,7 +21,7 @@
             </div>
           </div>
           <!-- Card stats -->
-          <div class="row">
+          <div class="row" v-if="dataUser === 1">
             <div class="col-xl-3 col-md-6">
               <div class="card card-stats">
                 <!-- Card body -->
@@ -29,7 +29,7 @@
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">Sản phẩm</h5>
-                      <span class="h2 font-weight-bold mb-0">350</span>
+                      <span class="h2 font-weight-bold mb-0" style="color: black!important">35</span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
@@ -37,10 +37,6 @@
                       </div>
                     </div>
                   </div>
-                  <p class="mt-3 mb-0 text-sm">
-                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                    <span class="text-nowrap">Kể từ tháng trước</span>
-                  </p>
                 </div>
               </div>
             </div>
@@ -51,7 +47,7 @@
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">Đơn hàng</h5>
-                      <span class="h2 font-weight-bold mb-0">2,356</span>
+                      <span class="h2 font-weight-bold mb-0" style="color: black!important">15</span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
@@ -59,10 +55,6 @@
                       </div>
                     </div>
                   </div>
-                  <p class="mt-3 mb-0 text-sm">
-                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                    <span class="text-nowrap">Kể từ tháng trước</span>
-                  </p>
                 </div>
               </div>
             </div>
@@ -73,7 +65,7 @@
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">Yêu thích</h5>
-                      <span class="h2 font-weight-bold mb-0">924</span>
+                      <span class="h2 font-weight-bold mb-0" style="color: black!important">15</span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
@@ -81,10 +73,6 @@
                       </div>
                     </div>
                   </div>
-                  <p class="mt-3 mb-0 text-sm">
-                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                    <span class="text-nowrap">Kể từ tháng trước</span>
-                  </p>
                 </div>
               </div>
             </div>
@@ -95,7 +83,7 @@
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">Đánh giá</h5>
-                      <span class="h2 font-weight-bold mb-0">49,6</span>
+                      <span class="h2 font-weight-bold mb-0" style="color: black!important">10</span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
@@ -103,10 +91,80 @@
                       </div>
                     </div>
                   </div>
-                  <p class="mt-3 mb-0 text-sm">
-                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                    <span class="text-nowrap">Kể từ tháng trước</span>
-                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row" v-if="dataUser === 2">
+            <div class="col-xl-3 col-md-6">
+              <div class="card card-stats">
+                <!-- Card body -->
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0">Sản phẩm</h5>
+                      <span class="h2 font-weight-bold mb-0" style="color: black!important">105</span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
+                        <i class="fas fa-gift"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+              <div class="card card-stats">
+                <!-- Card body -->
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0">Đơn hàng</h5>
+                      <span class="h2 font-weight-bold mb-0" style="color: black!important">35</span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
+                        <i class="fa fa-archive"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+              <div class="card card-stats">
+                <!-- Card body -->
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0">Yêu thích</h5>
+                      <span class="h2 font-weight-bold mb-0" style="color: black!important">55</span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
+                        <i class="fas fa-heart"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+              <div class="card card-stats">
+                <!-- Card body -->
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0">Đánh giá</h5>
+                      <span class="h2 font-weight-bold mb-0" style="color: black!important">40</span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
+                        <i class="fas fa-comment-alt"></i>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -115,7 +173,7 @@
       </div>
     </div>
     <!-- Page content -->
-    <div class="container-fluid mt--6" v-if="dataUser === 1">
+    <div class="container-fluid mt--6" v-if="dataUser === 2">
       <div class="row">
         <div class="col-xl-8">
           <div class="card bg-default">
@@ -161,7 +219,7 @@
               <div class="row align-items-center">
                 <div class="col">
                   <h6 class="text-uppercase text-muted ls-1 mb-1">Biểu diễn</h6>
-                  <h5 class="h3 mb-0">Sản phẩm bán chạy trong ngày</h5>
+                  <h6 class="h3 mb-0" style="font-size: 17px!important">Top 5 sản phẩm bán chạy nhất trong ngày</h6>
                 </div>
               </div>
             </div>
@@ -175,7 +233,7 @@
         </div>
       </div>
     </div>
-    <div class="container-fluid mt--6" v-if="dataUser === 2">
+    <div class="container-fluid mt--6" v-if="dataUser === 1">
       <div class="row">
         <div class="col-xl-12">
           <div class="card bg-default">
@@ -183,7 +241,7 @@
               <div class="row align-items-center">
                 <div class="col">
                   <h6 class="text-light text-uppercase ls-1 mb-1">Tổng Quan</h6>
-                  <h5 class="h3 text-white mb-0">Lượng người đăng ký và các cửa hàng</h5>
+                  <h5 class="h3 text-white mb-0">Lượng người dùng và cửa hàng</h5>
                 </div>
               </div>
             </div>
@@ -195,23 +253,6 @@
             </div>
           </div>
         </div>
-        <!-- <div class="col-xl-6">
-          <div class="card bg-default">
-            <div class="card-header bg-transparent">
-              <div class="row align-items-center">
-                <div class="col">
-                  <h6 class="text-light text-uppercase ls-1 mb-1">Tổng Quan</h6>
-                  <h5 class="h3 text-white mb-0">Lượng cửa hàng</h5>
-                </div>
-              </div>
-            </div>
-            <div class="card-body">
-              <div class="chart" style="height:400px">
-                <ShopChart/>
-              </div>
-            </div>
-          </div>
-        </div> -->
       </div>
     </div>
   </div>
@@ -239,8 +280,3 @@ export default {
   }
 }
 </script>
-<style scoped>
-#bar-chart{
-  height: 400px!important;
-}
-</style>

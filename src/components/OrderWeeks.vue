@@ -171,4 +171,8 @@ export default {
 .statistic h1 {
   box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.2), 0 0px 20px 0 rgba(0, 0, 0, 0.19);
 }
+#bar-chart {
+  height: 600px !important;
+  width: 90% !important;
+}
 </style>
