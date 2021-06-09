@@ -132,7 +132,7 @@ const dataUser = JSON.parse(localStorage.getItem('data'));
 if(dataUser === 1){
     const router = new VueRouter({mode: 'history', routes: routes});
     new Vue({
-        render: h => h(NavigationAdmin),
+        render: h => h(Navigation),
         router,
         store
     }).$mount('#app')
