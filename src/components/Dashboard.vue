@@ -177,25 +177,25 @@
     </div>
     <div class="container-fluid mt--6" v-if="dataUser === 1">
       <div class="row">
-        <div class="col-xl-6">
+        <div class="col-xl-12">
           <div class="card bg-default">
             <div class="card-header bg-transparent">
               <div class="row align-items-center">
                 <div class="col">
                   <h6 class="text-light text-uppercase ls-1 mb-1">Tổng Quan</h6>
-                  <h5 class="h3 text-white mb-0">Lượng người đăng ký</h5>
+                  <h5 class="h3 text-white mb-0">Lượng người đăng ký và các cửa hàng</h5>
                 </div>
               </div>
             </div>
             <div class="card-body">
               <!-- Chart -->
-              <div class="chart">
-                <UserChart/>
+              <div class="chart" style="height:400px">
+                <Chart/>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-xl-6">
+        <!-- <div class="col-xl-6">
           <div class="card bg-default">
             <div class="card-header bg-transparent">
               <div class="row align-items-center">
@@ -206,13 +206,12 @@
               </div>
             </div>
             <div class="card-body">
-              <!-- Chart -->
-              <div class="chart">
+              <div class="chart" style="height:400px">
                 <ShopChart/>
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -221,15 +220,17 @@
 import Header from './Header.vue';
 import orderBar from "./OrderBar.vue";
 import orderPie from "./OrderPie.vue";
-import UserChart from "./admin/UserChart";
-import ShopChart from "./admin/ShopChart.vue";
+// import UserChart from "./admin/UserChart";
+// import ShopChart from "./admin/ShopChart.vue";
+import Chart from './admin/Chart.vue';
 export default {
   components: {
     Header,
     orderBar,
     orderPie,
-    UserChart,
-    ShopChart
+    // UserChart,
+    // ShopChart,
+    Chart
   },
   data(){
     return{
@@ -238,3 +239,8 @@ export default {
   }
 }
 </script>
+<style scoped>
+#bar-chart{
+  height: 400px!important;
+}
+</style>
