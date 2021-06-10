@@ -273,7 +273,7 @@ export default {
       results: [],
       stt: 0,
       isDisplay: 'none',
-      marginDetail: '-36% 5% 0% 5%',
+      marginDetail: '-88% 5% 0% 5%',
       openNotify: 'none',
       payment_id : null,
       showBox: false,
@@ -322,7 +322,7 @@ export default {
     },
     allOrder() {
       this.statusOrder = 0;
-      this.marginDetail = '-55% 5% 0% 5%';
+      this.marginDetail = '-88% 5% 0% 5%';
     },
     closeOrderDetail(){
       this.isDisplay = 'none';
@@ -343,8 +343,7 @@ export default {
 
     compeleteOrder() {
       this.statusOrder = 5;
-      this.marginDetail = '-4% 5% 0% 5%';
-      console.log(this.statusOrder)
+      this.marginDetail = '-32% 5% 0% 5%';
     },
     deleteOrder(id) {
       axios.delete(
@@ -369,7 +368,7 @@ export default {
           });
     },
     getData() {
-      this.marginDetail = '-55% 5% 0% 5%';
+     this.marginDetail = '-86% 5% 0% 5%';
       fetch('https://api-gilo.herokuapp.com/api/progress')
           .then((response) => response.json())
           .then((data) => {
