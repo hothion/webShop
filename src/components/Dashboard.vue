@@ -21,7 +21,7 @@
             </div>
           </div>
           <!-- Card stats -->
-          <div class="row" v-if="dataUser === 1">
+          <div class="row" v-if="dataUser === 2">
             <div class="col-xl-3 col-md-6">
               <div class="card card-stats">
                 <!-- Card body -->
@@ -95,7 +95,7 @@
               </div>
             </div>
           </div>
-          <div class="row" v-if="dataUser === 2">
+          <div class="row" v-if="dataUser === 1">
             <div class="col-xl-3 col-md-6">
               <div class="card card-stats">
                 <!-- Card body -->
@@ -173,7 +173,7 @@
       </div>
     </div>
     <!-- Page content -->
-    <div class="container-fluid mt--6" v-if="dataUser === 1">
+    <div class="container-fluid mt--6" v-if="dataUser === 2">
       <div class="row">
         <div class="col-xl-8">
           <div class="card bg-default">
@@ -233,7 +233,7 @@
         </div>
       </div>
     </div>
-    <div class="container-fluid mt--6" v-if="dataUser === 2">
+    <div class="container-fluid mt--6" v-if="dataUser === 1">
       <div class="row">
         <div class="col-xl-12">
           <div class="card bg-default">
